@@ -1,48 +1,80 @@
 @import 'tailwindcss';
 
 :root {
-  /* Khadeeja Portfolio Color Palette - Inspired by portrait colors */
-  --background: 0 0% 8%; /* #141414 - Deep charcoal background */
-  --foreground: 0 0% 100%; /* #FFFFFF - White text */
-  --muted: 0 0% 12%; /* Slightly lighter dark */
-  --muted-foreground: 0 0% 75%; /* #BFBFBF - Light gray text */
-  --border: 0 0% 18%; /* Dark borders */
-  --primary: 180 45% 35%; /* #2D5A5A - Dark teal from sweater */
-  --primary-foreground: 0 0% 100%; /* White on teal */
-  --secondary: 0 0% 12%; /* Dark secondary */
-  --secondary-foreground: 0 0% 100%; /* White on secondary */
-  --accent: 180 60% 65%; /* #4DD0D0 - Light blue-green accent */
-  --accent-foreground: 0 0% 10%; /* Dark text on light accent */
+  /* Abdullah Portfolio Color Palette - Inspired by portrait colors */
+  --background: 0 0% 8%;
+  /* #141414 - Deep charcoal background */
+  --foreground: 0 0% 100%;
+  /* #FFFFFF - White text */
+  --muted: 0 0% 12%;
+  /* Slightly lighter dark */
+  --muted-foreground: 0 0% 75%;
+  /* #BFBFBF - Light gray text */
+  --border: 0 0% 18%;
+  /* Dark borders */
+  --primary: 180 45% 35%;
+  /* #2D5A5A - Dark teal from sweater */
+  --primary-foreground: 0 0% 100%;
+  /* White on teal */
+  --secondary: 0 0% 12%;
+  /* Dark secondary */
+  --secondary-foreground: 0 0% 100%;
+  /* White on secondary */
+  --accent: 180 60% 65%;
+  /* #4DD0D0 - Light blue-green accent */
+  --accent-foreground: 0 0% 10%;
+  /* Dark text on light accent */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --ring: 180 45% 35%; /* Teal ring */
+  --ring: 180 45% 35%;
+  /* Teal ring */
 
   /* Custom colors for the design */
-  --warm-beige: 30 25% 88%; /* #E0D4C0 - Lighter warm beige from portrait background */
-  --teal-dark: 180 50% 20%; /* #1A3A3A - Darker teal variant */
-  --teal-light: 180 65% 80%; /* #8FE8E8 - Lighter teal variant */
-  --teal-medium: 180 45% 40%; /* #3A6A6A - Medium teal */
-  --card-bg: 0 0% 8%; /* Card background */
-  --testimonial-teal: 180 45% 35%; /* Teal testimonial */
-  --testimonial-accent: 180 60% 65%; /* Light teal testimonial */
-  --gold-accent: 45 85% 65%; /* #E6B800 - Gold accent for highlights */
+  --warm-beige: 30 25% 88%;
+  /* #E0D4C0 - Lighter warm beige from portrait background */
+  --teal-dark: 180 50% 20%;
+  /* #1A3A3A - Darker teal variant */
+  --teal-light: 180 65% 80%;
+  /* #8FE8E8 - Lighter teal variant */
+  --teal-medium: 180 45% 40%;
+  /* #3A6A6A - Medium teal */
+  --card-bg: 0 0% 8%;
+  /* Card background */
+  --testimonial-teal: 180 45% 35%;
+  /* Teal testimonial */
+  --testimonial-accent: 180 60% 65%;
+  /* Light teal testimonial */
+  --gold-accent: 45 85% 65%;
+  /* #E6B800 - Gold accent for highlights */
 }
 
 .dark {
-  --background: 0 0% 8%; /* #141414 - Deep charcoal background */
-  --foreground: 0 0% 100%; /* #FFFFFF - White text */
-  --muted: 0 0% 12%; /* Slightly lighter dark */
-  --muted-foreground: 0 0% 75%; /* #BFBFBF - Light gray text */
-  --border: 0 0% 18%; /* Dark borders */
-  --primary: 180 45% 35%; /* #2D5A5A - Dark teal from sweater */
-  --primary-foreground: 0 0% 100%; /* White on teal */
-  --secondary: 0 0% 12%; /* Dark secondary */
-  --secondary-foreground: 0 0% 100%; /* White on secondary */
-  --accent: 180 60% 65%; /* #4DD0D0 - Light blue-green accent */
-  --accent-foreground: 0 0% 10%; /* Dark text on light accent */
+  --background: 0 0% 8%;
+  /* #141414 - Deep charcoal background */
+  --foreground: 0 0% 100%;
+  /* #FFFFFF - White text */
+  --muted: 0 0% 12%;
+  /* Slightly lighter dark */
+  --muted-foreground: 0 0% 75%;
+  /* #BFBFBF - Light gray text */
+  --border: 0 0% 18%;
+  /* Dark borders */
+  --primary: 180 45% 35%;
+  /* #2D5A5A - Dark teal from sweater */
+  --primary-foreground: 0 0% 100%;
+  /* White on teal */
+  --secondary: 0 0% 12%;
+  /* Dark secondary */
+  --secondary-foreground: 0 0% 100%;
+  /* White on secondary */
+  --accent: 180 60% 65%;
+  /* #4DD0D0 - Light blue-green accent */
+  --accent-foreground: 0 0% 10%;
+  /* Dark text on light accent */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --ring: 180 45% 35%; /* Teal ring */
+  --ring: 180 45% 35%;
+  /* Teal ring */
 }
 
 * {
@@ -186,10 +218,12 @@ html {
 
 /* Cursor animations */
 @keyframes cursorPulse {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -239,6 +273,7 @@ html {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -249,6 +284,7 @@ html {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -260,6 +296,7 @@ html {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -271,13 +308,14 @@ html {
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-/* Tamal Sen specific styles */
+/* Legacy specific styles */
 .tamal-hero-title {
   font-size: clamp(5rem, 12vw, 10rem);
   font-weight: 700;
@@ -346,11 +384,9 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(
-      45deg,
+  background-image: linear-gradient(45deg,
       rgba(255, 255, 255, 0.02) 25%,
-      transparent 25%
-    ),
+      transparent 25%),
     linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%),
     linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.02) 75%);
@@ -412,12 +448,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--primary) / 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--primary) / 0.1),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -506,10 +540,12 @@ html {
 }
 
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(-50%) translateX(0);
   }
+
   50% {
     transform: translateY(-50%) translateX(10px);
   }
@@ -552,17 +588,15 @@ html {
   border: 1px solid hsl(var(--border) / 0.5);
 }
 
-/* Khadeeja Hero Section Styles */
+/* Hero Section Styles */
 .hero-portrait-frame {
   position: relative;
   width: 420px;
   height: 520px;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--teal-dark)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent) / 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--teal-dark)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent) / 0.3) 100%);
   border-radius: 20px;
   padding: 10px;
   box-shadow: 0 30px 60px -12px hsl(var(--primary) / 0.4),
@@ -593,12 +627,10 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--warm-beige) / 0.1) 0%,
-    transparent 50%,
-    hsl(var(--accent) / 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--warm-beige) / 0.1) 0%,
+      transparent 50%,
+      hsl(var(--accent) / 0.05) 100%);
   z-index: 1;
 }
 
@@ -610,13 +642,11 @@ html {
   color: hsl(var(--foreground));
   text-transform: uppercase;
   font-family: 'Inter', system-ui, sans-serif;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--foreground)) 0%,
-    hsl(var(--accent)) 30%,
-    hsl(var(--gold-accent)) 60%,
-    hsl(var(--foreground)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--accent)) 30%,
+      hsl(var(--gold-accent)) 60%,
+      hsl(var(--foreground)) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -626,10 +656,12 @@ html {
 }
 
 @keyframes gradientShift {
+
   0%,
   100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -651,12 +683,10 @@ html {
   align-items: center;
   gap: 1.5rem;
   padding: 1.25rem 2.5rem;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--teal-medium)) 50%,
-    hsl(var(--teal-dark)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--teal-medium)) 50%,
+      hsl(var(--teal-dark)) 100%);
   color: hsl(var(--primary-foreground));
   border-radius: 60px;
   font-weight: 600;
@@ -679,12 +709,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.2),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -715,11 +743,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.03;
-  background-image: radial-gradient(
-      circle at 25% 25%,
+  background-image: radial-gradient(circle at 25% 25%,
       hsl(var(--accent)) 2px,
-      transparent 2px
-    ),
+      transparent 2px),
     radial-gradient(circle at 75% 75%, hsl(var(--primary)) 2px, transparent 2px);
   background-size: 100px 100px;
   background-position: 0 0, 50px 50px;
@@ -731,14 +757,12 @@ html {
   left: 0;
   width: 200%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    hsl(var(--accent) / 0.3) 20%,
-    hsl(var(--primary) / 0.5) 50%,
-    hsl(var(--accent) / 0.3) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--accent) / 0.3) 20%,
+      hsl(var(--primary) / 0.5) 50%,
+      hsl(var(--accent) / 0.3) 80%,
+      transparent 100%);
   transform: rotate(-12deg) translateX(-25%);
   transform-origin: left center;
 }
@@ -761,11 +785,9 @@ html {
   right: 10%;
   width: 200px;
   height: 200px;
-  background: radial-gradient(
-    circle,
-    hsl(var(--accent) / 0.1) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      hsl(var(--accent) / 0.1) 0%,
+      transparent 70%);
   border-radius: 50%;
   filter: blur(40px);
   animation: float 8s ease-in-out infinite;
@@ -777,24 +799,25 @@ html {
   left: 15%;
   width: 150px;
   height: 150px;
-  background: radial-gradient(
-    circle,
-    hsl(var(--primary) / 0.08) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      hsl(var(--primary) / 0.08) 0%,
+      transparent 70%);
   border-radius: 50%;
   filter: blur(30px);
   animation: float 6s ease-in-out infinite reverse;
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px) translateX(0px);
   }
+
   33% {
     transform: translateY(-20px) translateX(10px);
   }
+
   66% {
     transform: translateY(10px) translateX(-10px);
   }
@@ -802,12 +825,10 @@ html {
 
 /* Experience Section Styles */
 .experience-portrait-card {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--teal-medium)) 50%,
-    hsl(var(--teal-dark)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--teal-medium)) 50%,
+      hsl(var(--teal-dark)) 100%);
   border-radius: 20px;
   padding: 2rem;
   margin-bottom: 2rem;
@@ -878,12 +899,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.1),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -901,12 +920,10 @@ html {
   position: relative;
   width: 120px;
   height: 120px;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--teal-dark)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent) / 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--teal-dark)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent) / 0.3) 100%);
   border-radius: 20px;
   padding: 8px;
   box-shadow: 0 15px 30px -8px hsl(var(--primary) / 0.4),
@@ -938,12 +955,10 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--warm-beige) / 0.1) 0%,
-    transparent 50%,
-    hsl(var(--accent) / 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--warm-beige) / 0.1) 0%,
+      transparent 50%,
+      hsl(var(--accent) / 0.05) 100%);
   z-index: 1;
 }
 
@@ -955,13 +970,11 @@ html {
   text-transform: uppercase;
   letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--foreground)) 0%,
-    hsl(var(--accent)) 30%,
-    hsl(var(--gold-accent)) 60%,
-    hsl(var(--foreground)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--accent)) 30%,
+      hsl(var(--gold-accent)) 60%,
+      hsl(var(--foreground)) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1037,12 +1050,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--primary) / 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--primary) / 0.05),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -1102,12 +1113,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.08),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.08),
+      transparent);
   transition: left 0.6s ease;
 }
 
@@ -1126,12 +1135,10 @@ html {
   position: relative;
   width: 80px;
   height: 80px;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--teal-dark)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent) / 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--teal-dark)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent) / 0.3) 100%);
   border-radius: 16px;
   padding: 6px;
   box-shadow: 0 10px 25px -8px hsl(var(--primary) / 0.4),
@@ -1154,13 +1161,11 @@ html {
   text-transform: uppercase;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
-  background: linear-gradient(
-    135deg,
-    hsl(var(--foreground)) 0%,
-    hsl(var(--accent)) 30%,
-    hsl(var(--gold-accent)) 60%,
-    hsl(var(--foreground)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--accent)) 30%,
+      hsl(var(--gold-accent)) 60%,
+      hsl(var(--foreground)) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1237,12 +1242,10 @@ html {
 
 .tech-progress-fill {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    hsl(var(--accent)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent)) 100%
-  );
+  background: linear-gradient(90deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent)) 100%);
   border-radius: 3px;
   position: relative;
   overflow: hidden;
@@ -1255,12 +1258,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.3),
+      transparent);
   animation: progressShine 2s ease-in-out infinite;
 }
 
@@ -1268,6 +1269,7 @@ html {
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
@@ -1281,11 +1283,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.02;
-  background-image: linear-gradient(
-      90deg,
+  background-image: linear-gradient(90deg,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     linear-gradient(hsl(var(--accent)) 1px, transparent 1px),
     radial-gradient(circle at 25% 25%, hsl(var(--primary)) 2px, transparent 2px),
     radial-gradient(circle at 75% 75%, hsl(var(--accent)) 2px, transparent 2px);
@@ -1298,6 +1298,7 @@ html {
   0% {
     transform: translateX(0) translateY(0);
   }
+
   100% {
     transform: translateX(40px) translateY(40px);
   }
@@ -1311,11 +1312,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.03;
-  background-image: linear-gradient(
-      45deg,
+  background-image: linear-gradient(45deg,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     linear-gradient(-45deg, hsl(var(--primary)) 1px, transparent 1px);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
@@ -1326,6 +1325,7 @@ html {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(60px);
   }
@@ -1486,11 +1486,13 @@ html {
 
 /* Pulse animation for scroll icon */
 @keyframes scrollIconPulse {
+
   0%,
   100% {
     box-shadow: 0 0 12px hsl(var(--accent) / 0.6),
       0 0 24px hsl(var(--accent) / 0.3), 0 0 0 2px hsl(var(--background));
   }
+
   50% {
     box-shadow: 0 0 16px hsl(var(--accent) / 0.8),
       0 0 32px hsl(var(--accent) / 0.5), 0 0 0 2px hsl(var(--background));
@@ -1533,11 +1535,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.015;
-  background-image: linear-gradient(
-      0deg,
+  background-image: linear-gradient(0deg,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px);
   background-size: 20px 20px;
   animation: matrixFlow 25s linear infinite;
@@ -1547,6 +1547,7 @@ html {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(20px);
   }
@@ -1559,13 +1560,11 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.02;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    hsl(var(--accent)) 2px,
-    hsl(var(--accent)) 4px
-  );
+  background-image: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--accent)) 2px,
+      hsl(var(--accent)) 4px);
   background-size: 100% 20px;
   animation: binaryRain 30s linear infinite;
 }
@@ -1574,6 +1573,7 @@ html {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100%);
   }
@@ -1620,6 +1620,7 @@ html {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
+
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
@@ -1632,11 +1633,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.01;
-  background-image: radial-gradient(
-      circle at 20% 20%,
+  background-image: radial-gradient(circle at 20% 20%,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     radial-gradient(circle at 80% 80%, hsl(var(--primary)) 1px, transparent 1px),
     radial-gradient(circle at 40% 60%, hsl(var(--accent)) 1px, transparent 1px);
   background-size: 100px 100px, 150px 150px, 200px 200px;
@@ -1644,10 +1643,12 @@ html {
 }
 
 @keyframes neuralPulse {
+
   0%,
   100% {
     opacity: 0.01;
   }
+
   50% {
     opacity: 0.03;
   }
@@ -1655,10 +1656,8 @@ html {
 
 /* Tech Card Grid Overlay */
 .tech-card-grid {
-  background-image: linear-gradient(
-      hsl(var(--accent) / 0.1) 1px,
-      transparent 1px
-    ),
+  background-image: linear-gradient(hsl(var(--accent) / 0.1) 1px,
+      transparent 1px),
     linear-gradient(90deg, hsl(var(--accent) / 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
@@ -1701,12 +1700,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.05),
+      transparent);
   transition: left 0.5s ease;
 }
 
@@ -1750,12 +1747,10 @@ html {
 
 .tech-progress-fill-professional {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    hsl(var(--accent)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent)) 100%
-  );
+  background: linear-gradient(90deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent)) 100%);
   border-radius: 2px;
   position: relative;
   overflow: hidden;
@@ -1768,12 +1763,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.4),
+      transparent);
   animation: progressShine 3s ease-in-out infinite;
 }
 
@@ -1785,11 +1778,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.02;
-  background-image: linear-gradient(
-      0deg,
+  background-image: linear-gradient(0deg,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px);
   background-size: 30px 30px;
   animation: matrixFlow 20s linear infinite;
@@ -1802,11 +1793,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.015;
-  background-image: radial-gradient(
-      circle at 20% 20%,
+  background-image: radial-gradient(circle at 20% 20%,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     radial-gradient(circle at 80% 80%, hsl(var(--primary)) 1px, transparent 1px);
   background-size: 60px 60px, 80px 80px;
   animation: circuitPulse 15s ease-in-out infinite;
@@ -1819,11 +1808,9 @@ html {
   right: 0;
   bottom: 0;
   opacity: 0.01;
-  background-image: linear-gradient(
-      45deg,
+  background-image: linear-gradient(45deg,
       hsl(var(--accent)) 1px,
-      transparent 1px
-    ),
+      transparent 1px),
     linear-gradient(-45deg, hsl(var(--primary)) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: dataFlow 25s linear infinite;
@@ -1867,10 +1854,12 @@ html {
 }
 
 @keyframes circuitPulse {
+
   0%,
   100% {
     opacity: 0.015;
   }
+
   50% {
     opacity: 0.03;
   }
@@ -1894,12 +1883,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.05),
+      transparent);
   transition: left 0.6s ease;
 }
 
@@ -1962,12 +1949,10 @@ html {
 
 .expertise-progress-fill {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    hsl(var(--accent)) 0%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--accent)) 100%
-  );
+  background: linear-gradient(90deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent)) 100%);
   border-radius: 3px;
   position: relative;
   overflow: hidden;
@@ -1980,12 +1965,10 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--accent) / 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--accent) / 0.4),
+      transparent);
   animation: progressShine 2.5s ease-in-out infinite;
 }
 
