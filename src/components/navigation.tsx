@@ -77,8 +77,8 @@ const Navigation = () => {
               className="navbar-logo text-base sm:text-lg md:text-xl font-mono font-medium"
               style={{ color: 'hsl(var(--accent))' }}
             >
-              <span className="hidden xs:inline">KhadeejahAsif</span>
-              <span className="xs:hidden">K.Asif</span>
+              <span className="hidden xs:inline">AbdullahJutt</span>
+              <span className="xs:hidden">A.Jutt</span>
               <span style={{ color: 'hsl(var(--primary))' }}>._</span>
             </motion.div>
 

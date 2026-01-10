@@ -15,7 +15,7 @@ export const NAV_ITEMS = [
   { name: 'home', href: '#home' },
   { name: 'expertise', href: '#expertise' },
   { name: 'work', href: '#work' },
-  { name: 'experience', href: '#experience' },
+  // { name: 'experience', href: '#experience' },
   { name: 'contact', href: '#contact' },
 ] as const;
 
@@ -24,15 +24,15 @@ export const EXPERTISE_DATA = [
     title: 'Software Development',
     highlight: 'Development',
     description:
-      'Experienced in both functional and OOP: JavaScript, TypeScript, Python, Java.',
+      'Experienced in both functional and OOP and DSA: JavaScript, TypeScript, Java,C++.',
     icon: Code,
-    technologies: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++'],
+    technologies: ['JavaScript', 'TypeScript', 'Java', 'C++','DSA'],
   },
   {
     title: 'Frontend Dev',
-    highlight: 'React, NextJS',
+    highlight: 'React, NextJS,TypeScript',
     description:
-      'Passionate about UI/UX. Over 2 years of development experience in HTML, CSS, JS, React and NextJS frameworks.',
+      'Passionate about UI/UX. Over 2 years of development experience in HTML, CSS, JS, React and NextJS, GASP, LocomoticeJS frameworks.',
     icon: Code,
     technologies: [
       'React',
@@ -40,69 +40,72 @@ export const EXPERTISE_DATA = [
       'Tailwind',
       'Framer Motion',
       'TypeScript',
+      'GASP',
+      'LocomoticeJS',
+      'JavaScript',
     ],
   },
   {
     title: 'Backend Dev',
-    highlight: 'Node.js, MongoDB',
+    highlight: 'Node.js, Express, MongoDB, SQL',
     description:
       'Skilled in developing scalable backend solutions and APIs using Node.js, Express, and MongoDB.',
     icon: Database,
-    technologies: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Redis'],
+    technologies: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Redis','SQL'],
   },
 ] as const;
 
 export const EXPERIENCE_DATA = [
   {
-    title: 'Associate Software Developer (Frontend)',
-    company: 'Tekvaly, Phenologix',
-    location: 'Canada',
-    period: '04/2024 - Present',
-    workType: 'Hybrid' as const,
-    description:
-      'Designed and optimized responsive UIs using React.js, Next.js, and SWR, ensuring seamless performance and data handling. Built and maintained management and job portal platforms with features like authentication, attendance tracking, and workflow automation.',
-    technologies: [
-      { name: 'React.js', level: 95, icon: Code },
-      { name: 'Next.js', level: 90, icon: Globe },
-      { name: 'SWR', level: 85, icon: Database },
-      { name: 'TypeScript', level: 90, icon: Code },
-      { name: 'Web Workers', level: 80, icon: Cpu },
-    ],
-    website: 'https://tekvaly.com',
-    logo: 'TEK',
-    expanded: true,
-    achievements: [
-      'Resolved critical rendering issues and revamped UIs',
-      'Implemented performance optimizations (caching, Web Workers, refetching, validations)',
-      'Developed role-based features for HR teams, job seekers, and company owners',
-      'Ensured smooth and consistent global user experience',
-    ],
-    type: 'Frontend' as const,
-    contact: 'Hamza Ahmed (Technical Lead) - 0322 4874405',
-  },
-  {
-    title: 'Junior MERN Stack Developer',
-    company: 'WebSouls',
-    location: 'Lahore, Pakistan',
-    period: '05/2023 - 12/2023',
+    title: 'Software Engineering Student',  
+    company: 'University',
+    location: 'Pakistan',
+    period: 'Present',
     workType: 'On-site' as const,
     description:
-      'Developed full-stack web platforms Voyage Vista (property booking) and ShopEase (e-commerce) using the MERN stack. Built key features like search, filtering, booking, cart, and checkout flows, ensuring smooth user interaction and data flow. Worked on both the front-end and back-end of the projects. Collaborated with the team to deliver on time.',
+      'Pursuing knowledge in software engineering principles, algorithms, and system design. Actively building projects to apply theoretical concepts in practical scenarios.',
+    technologies: [
+      { name: 'C++', level: 85, icon: Code },
+      { name: 'Java', level: 85, icon: Code },
+      { name: 'Data Structures', level: 80, icon: Database },
+      { name: 'Algorithms', level: 80, icon: Cpu },
+      { name: 'SQL', level: 75, icon: Database },
+    ],
+    website: '#',
+    logo: 'UNI',
+    expanded: true,
+    achievements: [
+      'Mastered Data Structures and Algorithms',
+      'Built Sudoku solver using Backtracking',
+      'Developed strong foundation in OOP and Database Design',
+      'Consistently exploring new technologies',
+    ],
+    type: 'Frontend' as const,
+    contact: '',
+  },
+  {
+    title: 'Full Stack Engineer',
+    company: 'Freelance / Projects',
+    location: 'Remote',
+    period: '2023 - Present',
+    workType: 'Remote' as const,
+    description:
+      'Developing modern web applications using the MERN stack. Building projects like HOMEIGO (Real Estate Platform) and Weather Applications. Focusing on responsive UI, SEO optimization, and scalable backend architecture.',
     technologies: [
       { name: 'React.js', level: 90, icon: Code },
       { name: 'Node.js', level: 85, icon: Database },
       { name: 'Express.js', level: 85, icon: Database },
-      { name: 'MongoDB', level: 80, icon: Database },
+      { name: 'MongoDB', level: 85, icon: Database },
       { name: 'Tailwind CSS', level: 90, icon: Code },
     ],
-    website: 'https://websouls.com',
-    logo: 'WS',
+    website: 'https://github.com/Abdullah-JUTT-cloud',
+    logo: 'FS',
     expanded: false,
     achievements: [
-      'Designed responsive and dynamic UIs with React.js and Tailwind CSS',
-      'Integrated Node.js/Express and MongoDB for secure authentication',
-      'Implemented user sessions and role-based access control',
-      'Built seamless cross-device experiences',
+      'Built full-stack real estate platform (HOMEIGO)',
+      'Developed real-time chat applications',
+      'Implemented secure authentication and REST APIs',
+      'Created responsive weather forecasting apps',
     ],
     type: 'Full-Stack' as const,
   },
@@ -111,17 +114,17 @@ export const EXPERIENCE_DATA = [
 export const CONTACT_METHODS = [
   {
     icon: Mail,
-    href: 'mailto:khadeejaasif323@gmail.com',
+    href: 'mailto:abdullahjuttjutt910@gmail.com',
     color: 'hsl(var(--accent))',
   },
   {
     icon: Linkedin,
-    href: 'https://www.linkedin.com/in/khadeejah-asif/',
+    href: 'https://www.linkedin.com/in/muhammad-abdullah-757aa2287/',
     color: 'hsl(var(--primary))',
   },
   {
     icon: Github,
-    href: 'https://github.com/Khadeejahh-Asiff',
+    href: 'https://github.com/Abdullah-JUTT-cloud',
     color: 'hsl(var(--accent))',
   },
 ] as const;
@@ -129,22 +132,22 @@ export const CONTACT_METHODS = [
 export const SOCIAL_LINKS = [
   {
     icon: Github,
-    href: 'https://github.com/Khadeejahh-Asiff',
+    href: 'https://github.com/Abdullah-JUTT-cloud',
     color: 'hsl(var(--accent))',
   },
   {
     icon: Linkedin,
-    href: 'https://linkedin.com/in/khadeejah-asif',
+    href: 'https://www.linkedin.com/in/muhammad-abdullah-757aa2287/',
     color: 'hsl(var(--primary))',
   },
   {
     icon: Mail,
-    href: 'mailto:khadeejaasif323@gmail.com',
+    href: 'mailto:abdullahjuttjutt910@gmail.com',
     color: 'hsl(var(--accent))',
   },
   {
     icon: Instagram,
-    href: '#',
+    href: 'https://www.instagram.com/abdullah_jutt.44?igsh=dGVwODBvcnN2N3c0',
     color: 'hsl(var(--primary))',
   },
 ] as const;
@@ -167,9 +170,9 @@ export const BREAKPOINTS = {
 } as const;
 
 export const CONTACT_INFO = {
-  email: 'khadeejaasif323@gmail.com',
-  phone: '+92 333 4304342',
+  email: 'abdullahjuttjutt910@gmail.com', // Update with your actual email
+  phone: '+92 3214194045', // Update with your actual phone
   location: 'Lahore, Pakistan',
-  linkedin: 'https://linkedin.com/in/khadeejah-asif',
-  github: 'https://github.com/Khadeejahh-Asiff',
+  linkedin: 'https://www.linkedin.com/in/muhammad-abdullah-757aa2287/',
+  github: 'https://github.com/Abdullah-JUTT-cloud',
 } as const;

@@ -258,7 +258,7 @@ const ExpertiseSection = () => {
                     &lt;title&gt;
                   </span>
                   <span style={{ color: 'hsl(var(--foreground))' }}>
-                    Khadeeja Asif - Portfolio
+                    Muhammad Abdullah - Portfolio
                   </span>
                   <span style={{ color: 'hsl(var(--primary))' }}>
                     &lt;/title&gt;

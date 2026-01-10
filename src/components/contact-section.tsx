@@ -72,7 +72,7 @@ const ContactSection = () => {
                   Contact
                 </p>
                 <a
-                  href="mailto:khadeejaasif323@gmail.com"
+                  href="mailto:abdullahjuttjutt910@gmail.com"
                   className="block w-full px-4 py-3 rounded-lg bg-background/50 border border-primary text-foreground hover:bg-primary hover:text-background hover:border-primary transition-all duration-300 text-sm text-center font-medium"
                 >
                   Email
@@ -122,7 +122,7 @@ const ContactSection = () => {
                   Connect
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/khadeejah-asif/"
+                  href="https://www.linkedin.com/in/muhammad-abdullah-757aa2287/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full px-4 py-3 rounded-lg bg-background/50 border border-primary text-foreground hover:bg-primary hover:text-background hover:border-primary transition-all duration-300 text-sm text-center font-medium"
@@ -174,7 +174,7 @@ const ContactSection = () => {
                   Repository
                 </p>
                 <a
-                  href="https://github.com/Khadeejahh-Asiff"
+                  href="https://github.com/Abdullah-JUTT-cloud"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full px-4 py-3 rounded-lg bg-background/50 border border-primary text-foreground hover:bg-primary hover:text-background hover:border-primary transition-all duration-300 text-sm text-center font-medium"

@@ -144,11 +144,11 @@ const WorkSection = () => {
                     ease: 'easeInOut',
                   }}
                 >
-                  {/* Desktop Screen Content - Using p1.png image */}
+                  {/* Desktop Screen Content */}
                   <div className="w-full h-full relative overflow-hidden">
                     <Image
                       src="/p1.png"
-                      alt="Project Screenshot"
+                      alt="HomeIGO Project"
                       fill
                       className="object-cover"
                     />
@@ -158,6 +158,11 @@ const WorkSection = () => {
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
                     <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-transparent"></div>
                     <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent"></div>
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-4 backdrop-blur-sm">
+                      <h3 className="text-white font-bold text-xl">HOMEIGO</h3>
+                      <p className="text-gray-200 text-sm">Full Stack Real Estate Platform</p>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -238,21 +243,18 @@ const WorkSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                    Hiredroid
+                    Weather App
                   </h3>
                   <p className="text-teal-400 text-xs sm:text-sm font-mono">
-                    Job Portal, HR Management
+                    React.js, OpenWeather API
                   </p>
                 </div>
               </div>
 
               {/* Description */}
               <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
-                Dynamic job portal for HR professionals, job seekers, and
-                company owners. Built intuitive front-end interfaces with
-                Next.js, enabling HR teams to post jobs, manage interviews, and
-                streamline workflows. Implemented UTC-based date and time
-                handling for global consistency.
+                A modern weather forecasting application built with React.js that provides real-time weather data.
+                Features include location-based forecasting, beautiful visualizations, and responsive design for all devices.
               </p>
 
               {/* Tech Stack Section */}
@@ -262,22 +264,22 @@ const WorkSection = () => {
                 </h4>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    Next.js
+                    React.js
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    React
+                    API Integration
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    TypeScript
+                    CSS3
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    UTC Handling
+                    Responsive
                   </span>
                 </div>
               </div>
 
               <a
-                href="https://hiredroid.com"
+                href="https://github.com/Abdullah-JUTT-cloud/WheatherApp_React"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
@@ -353,21 +355,18 @@ const WorkSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                    ScrumDroid
+                    HOMEIGO
                   </h3>
                   <p className="text-teal-400 text-xs sm:text-sm font-mono">
-                    Attendance Management, UI/UX
+                    Express, MongoDB,Node,Js,EJS
                   </p>
                 </div>
               </div>
 
               {/* Description */}
               <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
-                Comprehensive organizational management platform for attendance.
-                Designed and optimized UIs with React.js and SWR, ensuring
-                seamless data handling and responsiveness. Resolved critical
-                rendering issues and implemented performance optimization
-                practices including caching, Web Workers.
+                A real-time rental property management application powered by Node.js.
+                Features secure authentication and  MongoDB.
               </p>
 
               {/* Tech Stack Section */}
@@ -377,25 +376,22 @@ const WorkSection = () => {
                 </h4>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    React.js
+                    Node.js
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    SWR
+                    MongoDB
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    Web Workers
+                    Express
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    Caching
-                  </span>
-                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    Performance
+                    EJS
                   </span>
                 </div>
               </div>
 
               <a
-                href="https://scrumdroid.com"
+                href="https://homeigo-fullstack-project-1.onrender.com/listings"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"

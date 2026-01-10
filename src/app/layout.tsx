@@ -12,12 +12,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://khadeeja-portfolio.vercel.app'),
-  title: 'Khadeejah Asif - Full Stack Developer',
+  metadataBase: new URL('https://your-portfolio-domain.com'),
+  title: 'Muhammad Abdullah - Full Stack Engineer',
   description:
-    'Full Stack Developer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
+    'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
   keywords: [
-    'Full Stack Developer',
+    'Full Stack Engineer',
     'React',
     'Next.js',
     'TypeScript',
@@ -28,38 +28,37 @@ export const metadata: Metadata = {
     'Backend Developer',
     'Software Engineer',
     'Portfolio',
-    'Lahore',
     'Pakistan',
   ],
-  authors: [{ name: 'Khadeejah Asif' }],
-  creator: 'Khadeejah Asif',
-  publisher: 'Khadeejah Asif',
+  authors: [{ name: 'Muhammad Abdullah' }],
+  creator: 'Muhammad Abdullah',
+  publisher: 'Muhammad Abdullah',
   robots: 'index, follow',
   alternates: {
-    canonical: 'https://khadeeja-portfolio.vercel.app',
+    canonical: 'https://your-portfolio-domain.com',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://khadeeja-portfolio.vercel.app',
-    title: 'Khadeejah Asif - Full Stack Developer',
+    url: 'https://your-portfolio-domain.com',
+    title: 'Muhammad Abdullah - Full Stack Engineer',
     description:
-      'Full Stack Developer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
-    siteName: 'Khadeejah Asif Portfolio',
+      'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
+    siteName: 'Muhammad Abdullah Portfolio',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Khadeejah Asif - Full Stack Developer',
+        alt: 'Muhammad Abdullah - Full Stack Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Khadeejah Asif - Full Stack Developer',
+    title: 'Muhammad Abdullah - Full Stack Engineer',
     description:
-      'Full Stack Developer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB.',
+      'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB.',
     images: ['/og-image.jpg'],
   },
   verification: {

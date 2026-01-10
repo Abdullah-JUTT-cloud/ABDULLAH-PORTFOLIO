@@ -40,7 +40,7 @@ const HeroSection = () => {
             <div className="hero-portrait-inner">
               <Image
                 src="/me.jpeg"
-                alt="Khadeeja Asif"
+                alt="Abdullah Jutt"
                 fill
                 className="object-cover relative z-10"
                 priority
@@ -104,7 +104,7 @@ const HeroSection = () => {
               className="font-mono text-sm tracking-wider"
               style={{ color: 'hsl(var(--accent))' }}
             >
-              &gt; KHADEEJA_ASIF.portfolio
+              &gt; Abdullah_Jutt.portfolio
             </span>
           </motion.div>
 
@@ -115,9 +115,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="hero-title"
           >
-            KHADEEJAH
+            Abdullah
             <br />
-            ASIF
+            Jutt
           </motion.h1>
 
           {/* Subtitle */}
@@ -144,8 +144,8 @@ const HeroSection = () => {
             className="text-base sm:text-lg leading-relaxed mt-4 sm:mt-6 max-w-lg mx-auto lg:mx-0"
             style={{ color: 'hsl(var(--muted-foreground))' }}
           >
-            Crafting exceptional digital experiences through innovative
-            front-end development and cutting-edge mobile applications.
+Architecting end-to-end applications with zero tolerance for inefficiency, weak design, or fragile code—only clean, scalable, and battle-tested systems. <br />
+Owning architecture, implementation, and optimization across the stack while consistently delivering systems built to scale, survive, and dominate in production.
           </motion.p>
 
           {/* CTA Button */}

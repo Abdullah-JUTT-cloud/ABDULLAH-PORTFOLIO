@@ -4,12 +4,12 @@ export const StructuredData = () => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Khadeejah Asif',
-    jobTitle: 'Full Stack Developer',
+    name: 'Muhammad Abdullah',
+    jobTitle: 'Full Stack Engineer',
     description:
-      'Full Stack Developer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
-    url: 'https://khadeeja-portfolio.vercel.app',
-    image: 'https://khadeeja-portfolio.vercel.app/me.jpeg',
+      'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
+    url: 'https://your-portfolio-domain.com',
+    image: 'https://your-portfolio-domain.com/me.jpeg',
     sameAs: [CONTACT_INFO.linkedin, CONTACT_INFO.github],
     address: {
       '@type': 'PostalAddress',
@@ -31,7 +31,7 @@ export const StructuredData = () => {
     ],
     hasOccupation: {
       '@type': 'Occupation',
-      name: 'Software Developer',
+      name: 'Software Engineer',
       occupationLocation: {
         '@type': 'Country',
         name: 'Pakistan',
