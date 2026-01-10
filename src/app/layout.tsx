@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://your-portfolio-domain.com'),
+  metadataBase: new URL('https://muhammadabdullahportfolio-khaki.vercel.app'),
   title: 'Muhammad Abdullah - Full Stack Engineer',
   description:
     'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
@@ -35,12 +35,12 @@ export const metadata: Metadata = {
   publisher: 'Muhammad Abdullah',
   robots: 'index, follow',
   alternates: {
-    canonical: 'https://your-portfolio-domain.com',
+    canonical: 'https://muhammadabdullahportfolio-khaki.vercel.app',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-portfolio-domain.com',
+    url: 'https://muhammadabdullahportfolio-khaki.vercel.app',
     title: 'Muhammad Abdullah - Full Stack Engineer',
     description:
       'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',

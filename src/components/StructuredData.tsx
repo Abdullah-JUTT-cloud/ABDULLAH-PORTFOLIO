@@ -8,8 +8,8 @@ export const StructuredData = () => {
     jobTitle: 'Full Stack Engineer',
     description:
       'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
-    url: 'https://your-portfolio-domain.com',
-    image: 'https://your-portfolio-domain.com/me.jpeg',
+    url: 'https://muhammadabdullahportfolio-khaki.vercel.app',
+    image: 'https://muhammadabdullahportfolio-khaki.vercel.app/me.jpeg',
     sameAs: [CONTACT_INFO.linkedin, CONTACT_INFO.github],
     address: {
       '@type': 'PostalAddress',
