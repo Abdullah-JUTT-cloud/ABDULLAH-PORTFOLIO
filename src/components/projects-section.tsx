@@ -279,7 +279,7 @@ const WorkSection = () => {
               </div>
 
               <a
-                href="https://github.com/Abdullah-JUTT-cloud/WheatherApp_React"
+                href="https://wheatherapp-sigma.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
