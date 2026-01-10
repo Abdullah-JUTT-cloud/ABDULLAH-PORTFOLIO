@@ -1,4 +1,4 @@
-# Khadeejah Asif - Portfolio Website
+# Abdullah Jutt- Portfolio Website
 
 A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. This portfolio showcases my skills, experience, and projects as a Full Stack Developer.
 
@@ -132,13 +132,6 @@ The portfolio is fully responsive and optimized for:
 - **System Preference**: Automatically follows system theme
 - **Smooth Transitions**: Animated theme switching
 
-## 📧 Contact Information
-
-- **Email**: khadeejaasif323@gmail.com
-- **Phone**: +92 333 4304342
-- **Location**: Lahore, Pakistan
-- **LinkedIn**: [linkedin.com/in/khadeejah-asif](https://linkedin.com/in/khadeejah-asif)
-- **GitHub**: [github.com/Khadeejahh-Asiff](https://github.com/Khadeejahh-Asiff)
 
 ## 🚀 Deployment
 
@@ -174,5 +167,5 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ---
 
-**Made with ❤️ by Khadeejah Asif**
+**Made with ❤️ by Abdullah Jutt**
 # ABDULLAH-PORTFOLIO
