@@ -243,18 +243,18 @@ const WorkSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                    Weather App
+                    Banking System
                   </h3>
                   <p className="text-teal-400 text-xs sm:text-sm font-mono">
-                    React.js, OpenWeather API
+                    React.js, Node.js, Express.js, MongoDB
                   </p>
                 </div>
               </div>
 
               {/* Description */}
               <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
-                A modern weather forecasting application built with React.js that provides real-time weather data.
-                Features include location-based forecasting, beautiful visualizations, and responsive design for all devices.
+                A modern banking system built with React.js that provides real-time banking data.
+                Features include login, signup, deposit, withdraw, transfer,request loan,request credit card,request cheque book and responsive design for all devices.
               </p>
 
               {/* Tech Stack Section */}
@@ -273,13 +273,19 @@ const WorkSection = () => {
                     CSS3
                   </span>
                   <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
-                    Responsive
+                    Node.js
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    Express.js
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    MongoDB
                   </span>
                 </div>
               </div>
 
               <a
-                href="https://wheatherapp-sigma.vercel.app/"
+                href="https://enterpriselevelbankingsystem.vercel.app/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
@@ -392,6 +398,440 @@ const WorkSection = () => {
 
               <a
                 href="https://homeigo-fullstack-project-1.onrender.com/listings"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
+              >
+                View Project →
+              </a>
+            </div>
+          </motion.div>
+          {/* Project 3 - Placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+            className="relative"
+          >
+            <motion.div
+              className="relative z-10"
+              animate={{
+                y: [0, -10, 0, 10, 0],
+                scale: [1, 1.02, 1, 0.98, 1],
+              }}
+              transition={{
+                y: {
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+                scale: {
+                  duration: 100,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+              }}
+            >
+              <motion.div
+                className="w-full h-[200px] sm:h-[300px] shadow-2xl"
+                animate={{
+                  boxShadow: [
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                    '0 25px 50px rgba(0,0,0,0.4)',
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="w-full h-full relative overflow-hidden">
+                  <Image
+                    src="/p4.png"
+                    alt="Project 3 Screenshot"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent"></div>
+                </div>
+              </motion.div>
+            </motion.div>
+            <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gray-900 rounded-lg border border-teal-500/50 shadow-lg shadow-teal-500/10">
+              <div className="flex items-start mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800 rounded-lg border border-teal-500/50 flex items-center justify-center mr-3 sm:mr-4">
+                  <span className="text-white text-base sm:text-lg font-bold">
+                    &lt;/&gt;
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                    Lazarev.agency
+                  </h3>
+                  <p className="text-teal-400 text-xs sm:text-sm font-mono">
+                    HTML, CSS, JavaScript,GSAP,Locomotive Scroll
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+                This is a clone of lazarev.agency website. I have tried to make it as close as possible to the original website. I have used GSAP and Locomotive Scroll to make it as smooth as possible.
+              </p>
+
+              <div className="mb-4 sm:mb-6">
+                <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2 sm:mb-3 text-center">
+                  TECH STACK
+                </h4>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    HTML
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    CSS
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    JavaScript
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    GSAP
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    Locomotive Scroll
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://beamish-cajeta-b009d1.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
+              >
+                View Project →
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Project 4 - Placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 1.6 }}
+            className="relative"
+          >
+            <motion.div
+              className="relative z-10"
+              animate={{
+                y: [0, -10, 0, 10, 0],
+                scale: [1, 1.02, 1, 0.98, 1],
+              }}
+              transition={{
+                y: {
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+                scale: {
+                  duration: 100,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+              }}
+            >
+              <motion.div
+                className="w-full h-[200px] sm:h-[300px] shadow-2xl"
+                animate={{
+                  boxShadow: [
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                    '0 25px 50px rgba(0,0,0,0.4)',
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="w-full h-full relative overflow-hidden">
+                  <Image
+                    src="/p5.png"
+                    alt="Project 4 Screenshot"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 to-red-500"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-yellow-500"></div>
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-yellow-500 to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-red-500 to-transparent"></div>
+                </div>
+              </motion.div>
+            </motion.div>
+            <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gray-900 rounded-lg border border-teal-500/50 shadow-lg shadow-teal-500/10">
+              <div className="flex items-start mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800 rounded-lg border border-teal-500/50 flex items-center justify-center mr-3 sm:mr-4">
+                  <span className="text-white text-base sm:text-lg font-bold">
+                    &lt;/&gt;
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                    Chatify
+                  </h3>
+                  <p className="text-teal-400 text-xs sm:text-sm font-mono">
+                    React, Node.js, MongoDB, Socket.io
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+                Chatify is a real-time messaging application that allows users to send and receive messages in real-time. It is built with React, Node.js, MongoDB, and Socket.io.
+              </p>
+
+              <div className="mb-4 sm:mb-6">
+                <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2 sm:mb-3 text-center">
+                  TECH STACK
+                </h4>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    React
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    Node.js
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    MongoDB
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    Socket.io
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://chatify-v8u2.onrender.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
+              >
+                View Project →
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Project 5 - Placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 1.8 }}
+            className="relative"
+          >
+            <motion.div
+              className="relative z-10"
+              animate={{
+                y: [0, -10, 0, 10, 0],
+                scale: [1, 1.02, 1, 0.98, 1],
+              }}
+              transition={{
+                y: {
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+                scale: {
+                  duration: 100,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+              }}
+            >
+              <motion.div
+                className="w-full h-[200px] sm:h-[300px] shadow-2xl"
+                animate={{
+                  boxShadow: [
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                    '0 25px 50px rgba(0,0,0,0.4)',
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="w-full h-full relative overflow-hidden">
+                  <Image
+                    src="/p6.png"
+                    alt="Project 5 Screenshot"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-pink-500 to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-purple-500 to-transparent"></div>
+                </div>
+              </motion.div>
+            </motion.div>
+            <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gray-900 rounded-lg border border-teal-500/50 shadow-lg shadow-teal-500/10">
+              <div className="flex items-start mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800 rounded-lg border border-teal-500/50 flex items-center justify-center mr-3 sm:mr-4">
+                  <span className="text-white text-base sm:text-lg font-bold">
+                    &lt;/&gt;
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                    Sudoku Game
+                  </h3>
+                  <p className="text-teal-400 text-xs sm:text-sm font-mono">
+                    React.js, Tailwind CSS, JavaScript,DSA
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+                Sudoku Game is a puzzle game that challenges players to fill a 9x9 grid with numbers from 1 to 9, ensuring that each row, column, and 3x3 subgrid contains all the numbers without repetition.
+              </p>
+
+              <div className="mb-4 sm:mb-6">
+                <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2 sm:mb-3 text-center">
+                  TECH STACK
+                </h4>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    React.js
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    Tailwind CSS
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    JavaScript
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    DSA
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://sudukoreact.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
+              >
+                View Project →
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Project 6 - Placeholder */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 2.0 }}
+            className="relative"
+          >
+            <motion.div
+              className="relative z-10"
+              animate={{
+                y: [0, -10, 0, 10, 0],
+                scale: [1, 1.02, 1, 0.98, 1],
+              }}
+              transition={{
+                y: {
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+                scale: {
+                  duration: 100,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                },
+              }}
+            >
+              <motion.div
+                className="w-full h-[200px] sm:h-[300px] shadow-2xl"
+                animate={{
+                  boxShadow: [
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                    '0 25px 50px rgba(0,0,0,0.4)',
+                    '0 15px 30px rgba(0,0,0,0.3)',
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <div className="w-full h-full relative overflow-hidden">
+                  <Image
+                    src="/p7.png"
+                    alt="Project 6 Screenshot"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-green-500"></div>
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-green-500 to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-emerald-500 to-transparent"></div>
+                </div>
+              </motion.div>
+            </motion.div>
+            <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gray-900 rounded-lg border border-teal-500/50 shadow-lg shadow-teal-500/10">
+              <div className="flex items-start mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800 rounded-lg border border-teal-500/50 flex items-center justify-center mr-3 sm:mr-4">
+                  <span className="text-white text-base sm:text-lg font-bold">
+                    &lt;/&gt;
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                    Chess Game
+                  </h3>
+                  <p className="text-teal-400 text-xs sm:text-sm font-mono">
+                   JAVA,DSA,JAVAFX,JAVA_SWING
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+                Chess Game is a Java-based application that implements a chess game using the JavaFX and Swing libraries. The game allows two players to play chess against each other on a virtual chessboard. The game includes features such as piece movement, piece capture, and game history tracking.
+              </p>
+
+              <div className="mb-4 sm:mb-6">
+                <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2 sm:mb-3 text-center">
+                  TECH STACK
+                </h4>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    JAVA
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    DSA
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    JAVAFX
+                  </span>
+                  <span className="px-2 sm:px-3 py-1 bg-gray-800 text-white text-xs rounded border border-teal-500/50">
+                    JAVA_SWING
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href="https://github.com/Abdullah-JUTT-cloud/Chess_java"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block w-full text-center py-2 px-4 bg-teal-500/10 text-teal-400 rounded border border-teal-500/50 hover:bg-teal-500/20 hover:border-teal-500 transition-all duration-300 text-sm"
