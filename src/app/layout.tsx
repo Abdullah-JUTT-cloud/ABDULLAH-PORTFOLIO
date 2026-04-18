@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import Navigation from '@/components/navigation';
 import CustomCursor from '@/components/custom-cursor';
 import { StructuredData } from '@/components/StructuredData';
+import WhatsAppButton from '@/components/whatsapp-button';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -99,6 +100,7 @@ export default function RootLayout({
           <CustomCursor />
           <Navigation />
           <main role="main">{children}</main>
+          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>
