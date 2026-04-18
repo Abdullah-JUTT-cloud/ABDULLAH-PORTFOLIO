@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { NAV_ITEMS } from '@/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
@@ -11,11 +11,17 @@ import { scrollToSection } from '@/utils/scrollUtils';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const activeSection = useActiveSection();
   const scrollProgress = useScrollProgress();
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = (href: string) => {
@@ -29,13 +35,8 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="scroll-progress-bar"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]">
         <motion.div
           className="h-full origin-left"
           style={{
@@ -45,88 +46,105 @@ const Navigation = () => {
           }}
           transition={{ type: 'spring', stiffness: 100, damping: 30 }}
         />
-
-        {/* Moving Scroll Icon */}
-        <motion.div
-          className="scroll-icon"
-          style={{
-            left: `${scrollProgress}%`,
-          }}
-          transition={{ type: 'spring', stiffness: 100, damping: 30 }}
-        >
-          <ChevronDown
-            className="w-2.5 h-2.5"
-            style={{
-              transform: `rotate(${scrollProgress * 3.6}deg)`,
-            }}
-          />
-        </motion.div>
-      </motion.div>
+      </div>
 
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="fixed top-1 left-0 right-0 z-50 bg-hsl(var(--background) / 0.8) backdrop-blur-xl border-b border-hsl(var(--border) / 0.2)"
+        className="fixed top-[2px] left-0 right-0 z-50 transition-all duration-500"
+        style={{
+          background: scrolled
+            ? 'hsl(var(--background) / 0.85)'
+            : 'hsl(var(--background) / 0.4)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: scrolled
+            ? '1px solid hsl(var(--border) / 0.15)'
+            : '1px solid transparent',
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
+          <div className="flex justify-between items-center h-16 sm:h-18">
             {/* Logo */}
-            <motion.div
+            <motion.button
               whileHover={{ scale: 1.02 }}
-              className="navbar-logo text-base sm:text-lg md:text-xl font-mono font-medium"
+              onClick={() => handleNavClick('#home')}
+              className="font-mono font-bold text-base sm:text-lg"
               style={{ color: 'hsl(var(--accent))' }}
             >
-              <span className="hidden xs:inline">AbdullahJutt</span>
-              <span className="xs:hidden">A.Jutt</span>
-              <span style={{ color: 'hsl(var(--primary))' }}>._</span>
-            </motion.div>
+              <span className="hidden xs:inline">Abdullah</span>
+              <span className="xs:hidden">A</span>
+              <span style={{ color: 'hsl(var(--foreground))' }}>.Jutt</span>
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 1.2, repeat: Infinity }}
+                style={{ color: 'hsl(var(--accent))' }}
+              >
+                _
+              </motion.span>
+            </motion.button>
 
             {/* Desktop Navigation */}
             <nav
-              className="hidden md:flex items-center space-x-8"
+              className="hidden md:flex items-center gap-1"
               role="navigation"
               aria-label="Main navigation"
             >
-              {NAV_ITEMS.map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ y: -1 }}
-                  onClick={() => handleNavClick(item.href)}
-                  aria-label={`Navigate to ${item.name} section`}
-                  className={`relative text-sm font-mono transition-colors duration-300 ${
-                    activeSection === item.name
-                      ? 'text-hsl(var(--accent))'
-                      : 'text-hsl(var(--muted-foreground)) hover:text-hsl(var(--foreground))'
-                  }`}
-                  style={{
-                    color:
-                      activeSection === item.name
+              {NAV_ITEMS.map((item, index) => {
+                const isActive = activeSection === item.name;
+                return (
+                  <motion.button
+                    key={item.name}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    onClick={() => handleNavClick(item.href)}
+                    aria-label={`Navigate to ${item.name} section`}
+                    className="relative px-4 py-2 rounded-lg text-sm font-mono transition-all duration-300"
+                    style={{
+                      color: isActive
                         ? 'hsl(var(--accent))'
                         : 'hsl(var(--muted-foreground))',
-                  }}
-                >
-                  <span className="uppercase tracking-wide">{item.name}</span>
+                      backgroundColor: isActive
+                        ? 'hsl(var(--accent) / 0.08)'
+                        : 'transparent',
+                    }}
+                    whileHover={{ y: -1 }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = 'hsl(var(--foreground))';
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--accent) / 0.04)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    <span className="uppercase tracking-wider text-xs">
+                      {item.name}
+                    </span>
 
-                  {/* Active indicator */}
-                  {activeSection === item.name && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute -bottom-2 left-0 right-0 h-0.5 rounded-full"
-                      style={{ backgroundColor: 'hsl(var(--accent))' }}
-                      initial={false}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 500,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </motion.button>
-              ))}
+                    {/* Active dot indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="navDot"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                        style={{ backgroundColor: 'hsl(var(--accent))' }}
+                        initial={false}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 400,
+                          damping: 25,
+                        }}
+                      />
+                    )}
+                  </motion.button>
+                );
+              })}
             </nav>
 
             {/* Mobile menu button */}
@@ -135,57 +153,75 @@ const Navigation = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-hsl(var(--foreground)) hover:text-hsl(var(--accent)) transition-colors duration-300"
+                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300"
+                style={{
+                  color: 'hsl(var(--foreground))',
+                  background: isOpen ? 'hsl(var(--accent) / 0.08)' : 'transparent',
+                  border: isOpen ? '1px solid hsl(var(--accent) / 0.15)' : '1px solid transparent',
+                }}
               >
                 {isOpen ? (
-                  <X className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <X className="h-5 w-5" />
                 ) : (
-                  <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <Menu className="h-5 w-5" />
                 )}
               </motion.button>
             </div>
           </div>
 
           {/* Mobile Navigation */}
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden border-t border-hsl(var(--border) / 0.2)"
-            >
-              <div className="py-3 sm:py-4 space-y-1">
-                {NAV_ITEMS.map((item, index) => (
-                  <motion.button
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    onClick={() => handleNavClick(item.href)}
-                    aria-label={`Navigate to ${item.name} section`}
-                    className={`block w-full text-left px-4 py-2.5 sm:py-3 text-sm font-mono transition-colors duration-300 ${
-                      activeSection === item.name
-                        ? 'text-hsl(var(--accent)) bg-hsl(var(--primary) / 0.1)'
-                        : 'text-hsl(var(--muted-foreground)) hover:text-hsl(var(--foreground)) hover:bg-hsl(var(--accent) / 0.05)'
-                    }`}
-                    style={{
-                      color:
-                        activeSection === item.name
-                          ? 'hsl(var(--accent))'
-                          : 'hsl(var(--muted-foreground))',
-                      backgroundColor:
-                        activeSection === item.name
-                          ? 'hsl(var(--primary) / 0.1)'
-                          : 'transparent',
-                    }}
-                  >
-                    <span className="uppercase tracking-wide">{item.name}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="md:hidden overflow-hidden"
+              >
+                <div
+                  className="py-3 space-y-1 border-t"
+                  style={{ borderColor: 'hsl(var(--border) / 0.1)' }}
+                >
+                  {NAV_ITEMS.map((item, index) => {
+                    const isActive = activeSection === item.name;
+                    return (
+                      <motion.button
+                        key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                        onClick={() => handleNavClick(item.href)}
+                        aria-label={`Navigate to ${item.name} section`}
+                        className="block w-full text-left px-4 py-3 rounded-xl text-sm font-mono transition-all duration-300"
+                        style={{
+                          color: isActive
+                            ? 'hsl(var(--accent))'
+                            : 'hsl(var(--muted-foreground))',
+                          backgroundColor: isActive
+                            ? 'hsl(var(--accent) / 0.08)'
+                            : 'transparent',
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          {isActive && (
+                            <div
+                              className="w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: 'hsl(var(--accent))' }}
+                            />
+                          )}
+                          <span className="uppercase tracking-wider text-xs">
+                            {item.name}
+                          </span>
+                        </div>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
     </>

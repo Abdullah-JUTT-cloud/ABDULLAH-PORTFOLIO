@@ -2,93 +2,49 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { EXPERTISE_DATA } from '@/constants';
-import { SectionHeader } from '@/components/ui/SectionHeader';
-import { TechStack } from '@/components/ui/TechStack';
+import { Code, Database, Layers } from 'lucide-react';
+
+const cardIcons = [Code, Layers, Database];
 
 const ExpertiseSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section
       id="expertise"
-      className="py-24 relative"
-      style={{ backgroundColor: 'hsl(var(--background))' }}
+      className="relative overflow-hidden py-24 sm:py-32"
+      style={{
+        background: `linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 50%, hsl(var(--background)) 100%)`,
+      }}
     >
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-            linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px),
-            linear-gradient(hsl(var(--accent)) 1px, transparent 1px)
-          `,
-            backgroundSize: '50px 50px',
-          }}
-        ></div>
-      </div>
+      {/* Background decorations */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, hsl(var(--accent)) 1px, transparent 1px), radial-gradient(circle at 75% 75%, hsl(var(--primary)) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
+        }}
+      />
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), transparent)`,
+        }}
+      />
 
-      {/* Floating elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            x: [0, 10, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-20 left-10 w-2 h-2 bg-hsl(var(--accent)) opacity-30 rounded-full"
-        />
-        <motion.div
-          animate={{
-            y: [0, 15, 0],
-            x: [0, -8, 0],
-            rotate: [0, -3, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-          className="absolute top-40 right-20 w-1.5 h-1.5 bg-hsl(var(--primary)) opacity-20 rounded-full"
-        />
-        <motion.div
-          animate={{
-            y: [0, -10, 0],
-            x: [0, 12, 0],
-            rotate: [0, 8, 0],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
-          className="absolute bottom-40 left-20 w-1 h-1 bg-hsl(var(--accent)) opacity-25 rounded-full"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            x: [0, -15, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 0.5,
-          }}
-          className="absolute bottom-20 right-10 w-2.5 h-2.5 bg-hsl(var(--primary)) opacity-15 rounded-full"
-        />
-      </div>
+      {/* Glow orbs */}
+      <div
+        className="absolute top-1/3 -left-40 w-80 h-80 rounded-full blur-3xl opacity-[0.06]"
+        style={{ background: 'hsl(var(--accent))' }}
+      />
+      <div
+        className="absolute bottom-1/3 -right-40 w-80 h-80 rounded-full blur-3xl opacity-[0.06]"
+        style={{ background: 'hsl(var(--primary))' }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -96,227 +52,331 @@ const ExpertiseSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="space-y-12 sm:space-y-16"
         >
-          <SectionHeader
-            title="My Expertise"
-            description="Technical skills and expertise in modern web development"
-            indicator="EXPERTISE"
-            isInView={isInView}
-            className="text-center"
-          />
+          {/* Section Header */}
+          <div className="text-center mb-16 sm:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex items-center justify-center gap-3 mb-6"
+            >
+              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
+              <span
+                className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em]"
+                style={{ color: 'hsl(var(--accent))' }}
+              >
+                Expertise
+              </span>
+              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
+            </motion.div>
 
-          {/* Expertise cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <motion.h2
+              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <span style={{ color: 'hsl(var(--foreground))' }}>What I </span>
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Do Best
+              </span>
+            </motion.h2>
+
+            <motion.p
+              className="text-base sm:text-lg max-w-2xl mx-auto"
+              style={{ color: 'hsl(var(--muted-foreground))' }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              Technical skills and expertise refined through real-world projects and continuous learning
+            </motion.p>
+          </div>
+
+          {/* Expertise Cards */}
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20">
             {EXPERTISE_DATA.map((item, index) => {
-              const IconComponent = item.icon;
+              const IconComponent = cardIcons[index % cardIcons.length];
+              const isHovered = hoveredIndex === index;
+
               return (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={
-                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                  }
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="expertise-card group relative p-6 sm:p-8 lg:p-12"
-                  whileHover={{ y: -2 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  whileHover={{ y: -6 }}
+                  className="group relative"
                 >
-                  {/* Subtle corner accent */}
-                  <div className="absolute top-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-t-2 border-r-2 border-hsl(var(--accent)) opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                  <div
+                    className="relative rounded-2xl p-7 sm:p-8 h-full overflow-hidden transition-all duration-500"
+                    style={{
+                      background: 'hsl(var(--background))',
+                      border: `1px solid ${isHovered ? 'hsl(var(--accent) / 0.3)' : 'hsl(var(--border))'}`,
+                      boxShadow: isHovered
+                        ? '0 25px 60px hsl(var(--accent) / 0.08), 0 0 0 1px hsl(var(--accent) / 0.1)'
+                        : 'none',
+                    }}
+                  >
+                    {/* Hover gradient overlay */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(var(--accent) / 0.04), transparent 60%, hsl(var(--primary) / 0.04))`,
+                      }}
+                    />
 
-                  <div className="flex items-center mb-6 sm:mb-8">
-                    <div className="expertise-icon relative">
-                      <IconComponent
-                        className="h-8 w-8 sm:h-10 sm:w-10"
-                        style={{ color: 'hsl(var(--accent))' }}
-                      />
-                      {/* Subtle glow effect */}
-                      <div className="absolute inset-0 bg-hsl(var(--accent)) opacity-10 rounded-full blur-sm group-hover:opacity-20 transition-opacity"></div>
-                    </div>
-                    <div className="ml-4 sm:ml-6">
+                    {/* Top accent line */}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))`,
+                      }}
+                    />
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {/* Icon + Number */}
+                      <div className="flex items-center justify-between mb-6">
+                        <motion.div
+                          className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                          style={{
+                            background: 'hsl(var(--accent) / 0.08)',
+                            border: '1px solid hsl(var(--accent) / 0.15)',
+                          }}
+                          whileHover={{ rotate: 5, scale: 1.05 }}
+                        >
+                          <IconComponent
+                            className="w-6 h-6"
+                            style={{ color: 'hsl(var(--accent))' }}
+                          />
+                        </motion.div>
+                        <span
+                          className="text-5xl font-black font-mono opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 select-none"
+                          style={{ color: 'hsl(var(--accent))' }}
+                        >
+                          0{index + 1}
+                        </span>
+                      </div>
+
+                      {/* Title */}
                       <h3
-                        className="text-xl sm:text-2xl font-semibold"
+                        className="text-xl sm:text-2xl font-bold mb-2"
                         style={{ color: 'hsl(var(--foreground))' }}
                       >
-                        {item.title.split(' ')[0]}
-                        {item.title
-                          .split(' ')
-                          .slice(1)
-                          .map((word, i) => (
-                            <span key={i}>
-                              {' '}
-                              <span style={{ color: 'hsl(var(--accent))' }}>
-                                {word}
-                              </span>
-                            </span>
-                          ))}
+                        {item.title}
                       </h3>
+
+                      {/* Highlight */}
                       <p
-                        className="text-sm sm:text-base font-medium font-mono"
+                        className="text-xs sm:text-sm font-mono mb-4"
                         style={{ color: 'hsl(var(--accent))' }}
                       >
                         {item.highlight}
                       </p>
+
+                      {/* Description */}
+                      <p
+                        className="text-sm sm:text-base leading-relaxed mb-6"
+                        style={{ color: 'hsl(var(--muted-foreground))' }}
+                      >
+                        {item.description}
+                      </p>
+
+                      {/* Divider */}
+                      <div
+                        className="h-px w-full mb-5 opacity-50"
+                        style={{ background: 'hsl(var(--border))' }}
+                      />
+
+                      {/* Tech Stack */}
+                      <div>
+                        <p
+                          className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] mb-3"
+                          style={{ color: 'hsl(var(--accent) / 0.6)' }}
+                        >
+                          Technologies
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {item.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1.5 text-[10px] sm:text-xs font-mono rounded-full transition-all duration-300 group-hover:border-opacity-30"
+                              style={{
+                                backgroundColor: 'hsl(var(--accent) / 0.06)',
+                                color: 'hsl(var(--accent))',
+                                border: '1px solid hsl(var(--accent) / 0.12)',
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <p
-                    className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 text-justify"
-                    style={{ color: 'hsl(var(--muted-foreground))' }}
-                  >
-                    {item.description}
-                  </p>
-
-                  <TechStack
-                    technologies={item.technologies.map(tech => ({
-                      name: tech,
-                      level: 85,
-                      icon: item.icon,
-                    }))}
-                  />
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Enhanced Code snippet */}
+          {/* Code Snippet - Terminal Style */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12 sm:mt-16 relative"
+            className="relative"
           >
-            {/* Terminal-style header */}
-            <div className="flex items-center gap-2 mb-2">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-              </div>
-              <span className="font-mono text-xs text-hsl(var(--muted-foreground))">
-                portfolio.html
-              </span>
-            </div>
-
             <div
-              className="p-4 sm:p-6 rounded-lg border relative overflow-hidden"
+              className="rounded-2xl overflow-hidden border"
               style={{
                 borderColor: 'hsl(var(--border))',
-                backgroundColor: 'hsl(var(--card-bg))',
+                background: 'hsl(var(--background))',
               }}
             >
-              {/* Subtle line numbers - hidden on mobile */}
-              <div className="hidden sm:block absolute left-2 top-6 font-mono text-xs text-hsl(var(--muted-foreground)) opacity-30 select-none">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
-                <div>11</div>
-                <div>12</div>
-                <div>13</div>
-                <div>14</div>
-                <div>15</div>
-                <div>16</div>
-                <div>17</div>
-                <div>18</div>
-                <div>19</div>
-                <div>20</div>
+              {/* Terminal header */}
+              <div
+                className="flex items-center gap-3 px-5 py-3.5 border-b"
+                style={{
+                  borderColor: 'hsl(var(--border))',
+                  background: 'hsl(var(--muted) / 0.5)',
+                }}
+              >
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <span
+                  className="font-mono text-xs ml-2"
+                  style={{ color: 'hsl(var(--muted-foreground))' }}
+                >
+                  abdullah_portfolio.tsx
+                </span>
+                <div className="flex-1" />
+                <div className="flex gap-1.5">
+                  {['TypeScript', 'React'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 text-[10px] font-mono rounded"
+                      style={{
+                        background: 'hsl(var(--accent) / 0.08)',
+                        color: 'hsl(var(--accent) / 0.6)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="font-mono text-xs sm:text-sm sm:ml-8">
-                <div className="mb-2">
-                  <span style={{ color: 'hsl(var(--accent))' }}>
-                    &lt;head&gt;
-                  </span>
-                </div>
-                <div className="ml-4 mb-1">
-                  <span style={{ color: 'hsl(var(--primary))' }}>&lt;meta</span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    {' '}
-                    name=
-                  </span>
-                  <span style={{ color: 'hsl(var(--gold-accent))' }}>
-                    &quot;viewport&quot;
-                  </span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    {' '}
-                    content=
-                  </span>
-                  <span style={{ color: 'hsl(var(--gold-accent))' }}>
-                    &quot;width=device-width, initial-scale=1.0&quot;
-                  </span>
-                  <span style={{ color: 'hsl(var(--primary))' }}>&gt;</span>
-                </div>
-                <div className="ml-4 mb-1">
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;title&gt;
-                  </span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    Muhammad Abdullah - Portfolio
-                  </span>
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;/title&gt;
-                  </span>
-                </div>
-                <div className="mb-2">
-                  <span style={{ color: 'hsl(var(--accent))' }}>
-                    &lt;/head&gt;
-                  </span>
-                </div>
-                <div className="mb-2">
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;body&gt;
-                  </span>
-                </div>
-                <div className="ml-4 mb-1">
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;h1&gt;
-                  </span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    Building exceptional digital experiences
-                  </span>
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;/h1&gt;
-                  </span>
-                </div>
-                <div className="ml-4 mb-1">
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;p&gt;
-                  </span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    Crafting modern web applications with passion and precision.
-                  </span>
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;/p&gt;
-                  </span>
-                </div>
-                <div className="ml-4 mb-1">
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;span&gt;
-                  </span>
-                  <span style={{ color: 'hsl(var(--foreground))' }}>
-                    Ready to bring your ideas to life!
-                  </span>
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;/span&gt;
-                  </span>
-                </div>
-                <div>
-                  <span style={{ color: 'hsl(var(--primary))' }}>
-                    &lt;/body&gt;
-                  </span>
+              {/* Code content */}
+              <div className="p-5 sm:p-6 font-mono text-xs sm:text-sm overflow-x-auto">
+                <div className="flex">
+                  {/* Line numbers */}
+                  <div
+                    className="hidden sm:flex flex-col items-end pr-5 select-none"
+                    style={{ color: 'hsl(var(--muted-foreground) / 0.3)' }}
+                  >
+                    {Array.from({ length: 12 }, (_, i) => (
+                      <div key={i} className="leading-6">{i + 1}</div>
+                    ))}
+                  </div>
+
+                  {/* Code */}
+                  <div className="flex-1 leading-6">
+                    <div>
+                      <span style={{ color: 'hsl(var(--primary))' }}>import</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}> {'{ '}</span>
+                      <span style={{ color: 'hsl(var(--accent))' }}>Developer</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>{' }'} </span>
+                      <span style={{ color: 'hsl(var(--primary))' }}>from</span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}> &quot;@abdullah/core&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>;</span>
+                    </div>
+                    <div className="opacity-30">│</div>
+                    <div>
+                      <span style={{ color: 'hsl(var(--primary))' }}>const</span>
+                      <span style={{ color: 'hsl(var(--accent))' }}> abdullah</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}> = </span>
+                      <span style={{ color: 'hsl(var(--primary))' }}>new</span>
+                      <span style={{ color: 'hsl(var(--accent))' }}> Developer</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>({"{"}</span>
+                    </div>
+                    <div className="ml-4 sm:ml-6">
+                      <span style={{ color: 'hsl(var(--foreground))' }}>name: </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Muhammad Abdullah&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>,</span>
+                    </div>
+                    <div className="ml-4 sm:ml-6">
+                      <span style={{ color: 'hsl(var(--foreground))' }}>role: </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Full Stack Engineer&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>,</span>
+                    </div>
+                    <div className="ml-4 sm:ml-6">
+                      <span style={{ color: 'hsl(var(--foreground))' }}>stack: [</span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;React&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>, </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Next.js&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>, </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Node.js&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>, </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Spring Boot&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>],</span>
+                    </div>
+                    <div className="ml-4 sm:ml-6">
+                      <span style={{ color: 'hsl(var(--foreground))' }}>passion: </span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;Building systems that scale&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>,</span>
+                    </div>
+                    <div className="ml-4 sm:ml-6">
+                      <span style={{ color: 'hsl(var(--foreground))' }}>available: </span>
+                      <span style={{ color: 'hsl(var(--accent))' }}>true</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>,</span>
+                    </div>
+                    <div>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>{"}"});</span>
+                    </div>
+                    <div className="opacity-30">│</div>
+                    <div>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>abdullah.</span>
+                      <span style={{ color: 'hsl(var(--accent))' }}>build</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>(</span>
+                      <span style={{ color: 'hsl(var(--gold-accent))' }}>&quot;something amazing&quot;</span>
+                      <span style={{ color: 'hsl(var(--foreground))' }}>);</span>
+                    </div>
+                    <div>
+                      <span style={{ color: 'hsl(var(--muted-foreground))' }}>
+                        {'// '}
+                      </span>
+                      <span style={{ color: 'hsl(var(--muted-foreground) / 0.5)' }}>
+                        → Ready to bring your ideas to life ✨
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom gradient */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32"
+        style={{
+          background: `linear-gradient(to top, hsl(var(--background)), transparent)`,
+        }}
+      />
     </section>
   );
 };
