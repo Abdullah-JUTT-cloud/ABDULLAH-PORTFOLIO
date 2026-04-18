@@ -278,7 +278,7 @@ const WorkSection = () => {
                 }}
               >
                 <motion.div
-                  className="w-[320px] h-[220px] sm:w-[480px] sm:h-[340px] lg:w-[620px] lg:h-[440px] rounded-xl overflow-hidden"
+                  className="w-[280px] h-[190px] min-[400px]:w-[340px] min-[400px]:h-[240px] sm:w-[480px] sm:h-[340px] lg:w-[620px] lg:h-[440px] rounded-xl overflow-hidden"
                   animate={{
                     boxShadow: [
                       "0 30px 60px rgba(0,0,0,0.4), 0 0 40px hsl(180 60% 65% / 0.1)",
