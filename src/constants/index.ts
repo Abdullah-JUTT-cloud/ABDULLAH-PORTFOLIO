@@ -16,6 +16,7 @@ export const NAV_ITEMS = [
   { name: 'expertise', href: '#expertise' },
   { name: 'work', href: '#work' },
   { name: 'experience', href: '#experience' },
+  { name: 'education', href: '#education' },
   { name: 'contact', href: '#contact' },
 ] as const;
 
@@ -143,6 +144,27 @@ export const EXPERIENCE_DATA = [
       'Worked across MERN and Spring Boot ecosystems',
     ],
     type: 'Full-Stack' as const,
+  },
+] as const;
+
+export const EDUCATION_DATA = [
+  {
+    institution: 'University of Central Punjab',
+    degree: 'BSSE (Software Engineering)',
+    graduationDate: 'March-04-2027',
+    cgpa: '3.73',
+    details: [
+      'Focusing on Software Engineering, advanced systems design, database management systems, and algorithms.',
+      'Maintaining a strong academic performance with a 3.73 CGPA.',
+      'Gaining practical development experience through lab projects and curriculum coursework.',
+    ],
+    courses: [
+      'Software Engineering',
+      'Data Structures & Algorithms',
+      'Object Oriented Programming',
+      'Database Systems',
+      'System Design',
+    ],
   },
 ] as const;
 

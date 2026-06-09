@@ -37,9 +37,9 @@ const WorkSection = () => {
     },
     {
       title: "Lazarev.agency",
-      subtitle: "Agency Website Clone",
+      subtitle: "Agency Website",
       description:
-        "A pixel-perfect clone of lazarev.agency website with smooth GSAP animations and Locomotive Scroll for an ultra-smooth scrolling experience.",
+        "A pixel-perfect implementation of lazarev.agency website with smooth GSAP animations and Locomotive Scroll for an ultra-smooth scrolling experience.",
       image: "/p4.png",
       tech: ["HTML", "CSS", "JavaScript", "GSAP", "Locomotive Scroll"],
       link: "https://beamish-cajeta-b009d1.netlify.app/",
@@ -63,7 +63,7 @@ const WorkSection = () => {
       title: "Sudoku Game",
       subtitle: "Interactive Puzzle Game",
       description:
-        "A challenging puzzle game where players fill a 9x9 grid with numbers 1-9, ensuring each row, column, and 3x3 subgrid contains all numbers without repetition.",
+        "An algorithm-driven Sudoku application utilizing advanced backtracking search. Features dynamic grid generation, real-time error detection, and puzzle solvers, optimized for an intuitive, mobile-friendly interface.",
       image: "/p6.png",
       tech: ["React.js", "Tailwind CSS", "JavaScript", "DSA"],
       link: "https://sudukoreact.vercel.app/",
@@ -75,7 +75,7 @@ const WorkSection = () => {
       title: "Chess Game",
       subtitle: "Classic Strategy Game",
       description:
-        "A Java-based chess game using JavaFX and Swing libraries. Two players compete on a virtual chessboard with features like piece movement, capture, and game history tracking.",
+        "A robust, high-performance Chess engine built in Java. Implements object-oriented architecture, real-time board state validation, and a sleek JavaFX interface, demonstrating advanced programming principles and DSA concepts.",
       image: "/p7.png",
       tech: ["Java", "DSA", "JavaFX", "Java Swing"],
       link: "https://github.com/Abdullah-JUTT-cloud/Chess_java",
@@ -479,19 +479,32 @@ const WorkSection = () => {
                   {/* Tech stack */}
                   <div className="mb-5">
                     <div className="flex flex-wrap gap-1.5">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2.5 py-1 text-[10px] sm:text-xs font-mono rounded-full transition-colors duration-300"
-                          style={{
-                            backgroundColor: "hsl(var(--accent) / 0.08)",
-                            color: "hsl(var(--accent))",
-                            border: "1px solid hsl(var(--accent) / 0.15)",
-                          }}
-                        >
-                          {t}
-                        </span>
-                      ))}
+                      {project.tech.map((t) => {
+                        const isHighlighted = t === "Java";
+                        return (
+                          <span
+                            key={t}
+                            className="px-2.5 py-1 text-[10px] sm:text-xs font-mono rounded-full transition-all duration-300"
+                            style={{
+                              backgroundColor: isHighlighted
+                                ? "hsl(var(--accent) / 0.25)"
+                                : "hsl(var(--accent) / 0.08)",
+                              color: isHighlighted
+                                ? "hsl(var(--foreground))"
+                                : "hsl(var(--accent))",
+                              border: isHighlighted
+                                ? "1px solid hsl(var(--accent))"
+                                : "1px solid hsl(var(--accent) / 0.15)",
+                              boxShadow: isHighlighted
+                                ? "0 0 12px hsl(var(--accent) / 0.4)"
+                                : "none",
+                              fontWeight: isHighlighted ? "600" : "normal",
+                            }}
+                          >
+                            {t}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
 
