@@ -293,35 +293,7 @@ const HeroSection = () => {
                   transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                 />
 
-                {/* Experience badge */}
-                <motion.div
-                  className="absolute -right-4 sm:-right-6 bottom-20 sm:bottom-24"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 1.4 }}
-                >
-                  <div
-                    className="px-4 py-3 rounded-xl backdrop-blur-md"
-                    style={{
-                      background: 'hsl(var(--background) / 0.85)',
-                      border: '1px solid hsl(var(--accent) / 0.2)',
-                      boxShadow: '0 10px 30px hsl(var(--background) / 0.5)',
-                    }}
-                  >
-                    <div
-                      className="text-xl sm:text-2xl font-bold font-mono"
-                      style={{ color: 'hsl(var(--accent))' }}
-                    >
-                      2+
-                    </div>
-                    <div
-                      className="text-[10px] sm:text-xs font-mono uppercase tracking-wider"
-                      style={{ color: 'hsl(var(--muted-foreground))' }}
-                    >
-                      Years Exp
-                    </div>
-                  </div>
-                </motion.div>
+
               </motion.div>
             </div>
           </motion.div>
