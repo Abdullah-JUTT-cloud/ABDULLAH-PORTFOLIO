@@ -266,24 +266,15 @@ export default function BootSequence({
     finish();
   }, [finish]);
 
+  const logContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const replay = () => start();
     window.addEventListener('trigger-boot-sequence', replay);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const params = new URLSearchParams(window.location.search);
-    const hasBootQuery = params.get('boot') === 'true' || params.get('reboot') === 'true';
 
-    let hasSeenBoot = false;
-    try {
-      hasSeenBoot = localStorage.getItem('abdullah-portfolio-boot-seen') === 'true';
-    } catch {
-      hasSeenBoot = false;
-    }
-
-    const shouldPlay = forceReplay || hasBootQuery || !hasSeenBoot;
-
-    if (!shouldPlay || prefersReducedMotion) {
+    if (prefersReducedMotion) {
       setIsVisible(false);
       onComplete?.();
     } else {
@@ -346,9 +337,15 @@ export default function BootSequence({
   );
 
   const visibleLines = useMemo(
-    () => LOG_LINES.filter((l) => elapsed >= T(l.at)).slice(-14),
+    () => LOG_LINES.filter((l) => elapsed >= T(l.at)),
     [elapsed, T]
   );
+
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [visibleLines.length]);
 
   const stageLabel = useMemo(() => {
     if (online) return 'SYSTEM ONLINE';
@@ -596,9 +593,9 @@ export default function BootSequence({
           </header>
 
           {/* ===== MAIN GRID ===== */}
-          <main className="flex-1 min-h-0 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 px-3 sm:px-6 py-3 sm:py-4">
+          <main className="flex-1 min-h-0 overflow-y-auto lg:overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 px-3 sm:px-6 py-2 sm:py-4">
             {/* ---------- TERMINAL ---------- */}
-            <section className="order-2 lg:order-1 lg:col-span-4 min-h-0 flex">
+            <section className="order-2 lg:order-1 lg:col-span-4 min-h-[180px] lg:min-h-0 flex">
               <div className="boot-panel relative flex flex-col w-full min-h-0">
                 <div className="flex items-center justify-between px-3 h-8 border-b border-[#4dd0d0]/15 shrink-0">
                   <span className="flex items-center gap-1.5 text-[9px] tracking-[0.18em] text-[#4dd0d0] font-bold">
@@ -610,7 +607,10 @@ export default function BootSequence({
                   </span>
                 </div>
 
-                <div className="flex-1 min-h-0 overflow-hidden px-3 py-2 flex flex-col justify-end gap-[3px]">
+                <div
+                  ref={logContainerRef}
+                  className="flex-1 min-h-0 overflow-y-auto px-3 py-2 flex flex-col justify-start gap-[3px] [scrollbar-width:thin] [scrollbar-color:rgba(77,208,208,0.2)_transparent]"
+                >
                   {visibleLines.map((l) => renderLine(l, LOG_LINES.indexOf(l)))}
                   <div className="flex items-center gap-1.5 pt-1 text-[10px] sm:text-[11.5px]">
                     <span className="text-[#f2c17b] font-bold">$</span>
