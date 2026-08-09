@@ -87,7 +87,7 @@ const Navigation = () => {
 
             {/* Desktop Navigation */}
             <nav
-              className="hidden md:flex items-center gap-1"
+              className="hidden lg:flex items-center gap-1"
               role="navigation"
               aria-label="Main navigation"
             >
@@ -101,7 +101,7 @@ const Navigation = () => {
                     transition={{ duration: 0.4, delay: index * 0.08 }}
                     onClick={() => handleNavClick(item.href)}
                     aria-label={`Navigate to ${item.name} section`}
-                    className="relative px-4 py-2 rounded-lg text-sm font-mono transition-all duration-300"
+                    className="relative px-3 py-2 rounded-lg text-sm font-mono transition-all duration-300"
                     style={{
                       color: isActive
                         ? 'hsl(var(--accent))'
@@ -148,7 +148,7 @@ const Navigation = () => {
             </nav>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -177,7 +177,7 @@ const Navigation = () => {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="md:hidden overflow-hidden"
+                className="lg:hidden overflow-hidden"
               >
                 <div
                   className="py-3 space-y-1 border-t"

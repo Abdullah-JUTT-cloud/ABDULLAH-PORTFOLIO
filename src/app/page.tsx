@@ -3,6 +3,7 @@ import ExpertiseSection from '@/components/about-section';
 import WorkSection from '@/components/projects-section';
 import ExperienceSection from '@/components/experience-section';
 import EducationSection from '@/components/education-section';
+import CertificatesSection from '@/components/certificates-section';
 import ContactSection from '@/components/contact-section';
 import Footer from '@/components/footer';
 
@@ -14,6 +15,7 @@ export default function Home() {
       <WorkSection />
       <ExperienceSection />
       <EducationSection />
+      <CertificatesSection />
       <ContactSection />
       <Footer />
     </main>
