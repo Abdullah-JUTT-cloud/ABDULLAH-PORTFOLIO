@@ -1,3 +1,4 @@
+import BootSequence from '@/components/boot-sequence';
 import HeroSection from '@/components/hero-section';
 import ExpertiseSection from '@/components/about-section';
 import WorkSection from '@/components/projects-section';
@@ -10,6 +11,7 @@ import Footer from '@/components/footer';
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <BootSequence />
       <HeroSection />
       <ExpertiseSection />
       <WorkSection />
@@ -21,3 +23,4 @@ export default function Home() {
     </main>
   );
 }
+
