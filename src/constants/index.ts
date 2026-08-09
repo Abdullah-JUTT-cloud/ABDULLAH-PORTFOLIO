@@ -9,6 +9,10 @@ import {
   Instagram,
   Cpu,
   Globe,
+  Terminal,
+  ShieldCheck,
+  BrainCircuit,
+  Sparkles,
 } from 'lucide-react';
 
 export const NAV_ITEMS = [
@@ -17,8 +21,49 @@ export const NAV_ITEMS = [
   { name: 'work', href: '#work' },
   { name: 'experience', href: '#experience' },
   { name: 'education', href: '#education' },
+  { name: 'certificates', href: '#certificates' },
   { name: 'contact', href: '#contact' },
 ] as const;
+
+export const CERTIFICATE_CATEGORIES = [
+  {
+    id: 'ethical-hacking',
+    title: 'Ethical Hacking',
+    subtitle: 'Penetration testing, exploitation & offensive security',
+    icon: Terminal,
+    color: 'hsl(var(--accent))',
+    direction: 'left' as const,
+    images: ['/H1.jpg', '/H2.jpg', '/H3.jpg', '/H4.jpg'],
+  },
+  {
+    id: 'cyber-security',
+    title: 'Cyber Security',
+    subtitle: 'Network defense, threat analysis & security operations',
+    icon: ShieldCheck,
+    color: 'hsl(var(--primary))',
+    direction: 'right' as const,
+    images: ['/C1.jpg', '/C2.jpg', '/C3.jpg', '/C4.jpg', '/C5.jpg'],
+  },
+  {
+    id: 'artificial-intelligence',
+    title: 'Artificial Intelligence & Agentic AI',
+    subtitle: 'Machine learning, LLMs & autonomous agent systems',
+    icon: BrainCircuit,
+    color: 'hsl(var(--accent))',
+    direction: 'left' as const,
+    images: ['/A1.jpg', '/A2.jpg', '/A3.jpg', '/A4.jpg'],
+  },
+  {
+    id: 'extras',
+    title: 'Extras',
+    subtitle: 'Additional achievements & professional credentials',
+    icon: Sparkles,
+    color: 'hsl(var(--primary))',
+    direction: 'right' as const,
+    images: ['/E1.jpg', '/E2.jpg', '/E3.jpg'],
+  },
+] as const;
+
 
 
 

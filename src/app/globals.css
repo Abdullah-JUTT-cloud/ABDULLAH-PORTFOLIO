@@ -2083,3 +2083,218 @@ html {
     padding: 1rem;
   }
 }
+
+/* ==========================================================================
+   Licenses & Certificates - Infinite Marquee Sliders
+   ========================================================================== */
+
+/* Viewport that clips the moving track and fades both edges */
+.cert-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%);
+  mask-image: linear-gradient(90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%);
+}
+
+/* The moving strip. Contains the slide set duplicated twice, so a
+   -50% translation lands exactly on the start of the second copy. */
+.cert-marquee-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cert-scroll-left;
+}
+
+.cert-marquee-track[data-direction='right'] {
+  animation-name: cert-scroll-right;
+}
+
+/* Pause on hover (and keyboard focus) anywhere over the row */
+.cert-marquee:hover .cert-marquee-track,
+.cert-marquee:focus-within .cert-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes cert-scroll-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes cert-scroll-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Each slide: the right padding acts as the gutter so every slide has an
+   identical total width. This keeps the 50% loop point pixel perfect
+   (a flex `gap` would leave a half-gutter seam on each cycle). */
+.cert-slide {
+  flex: 0 0 auto;
+  width: 320px;
+  padding-right: 1.25rem;
+  box-sizing: content-box;
+}
+
+@media (min-width: 640px) {
+  .cert-slide {
+    width: 440px;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cert-slide {
+    width: 560px;
+    padding-right: 1.75rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cert-slide {
+    width: 640px;
+    padding-right: 2rem;
+  }
+}
+
+/* Certificate card frame */
+.cert-card {
+  position: relative;
+  width: 100%;
+  /* Certificates are 1650x1275 (22:17) - keeps the full page visible */
+  aspect-ratio: 22 / 17;
+  border-radius: 14px;
+  overflow: hidden;
+  background: hsl(var(--muted) / 0.35);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+  transition: transform 0.45s ease, border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  border-color: hsl(var(--accent) / 0.45);
+  box-shadow: 0 28px 60px -18px hsl(var(--accent) / 0.28),
+    0 0 0 1px hsl(var(--accent) / 0.15);
+}
+
+.cert-card img {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.cert-card:hover img {
+  transform: scale(1.03);
+}
+
+/* Sheen sweep on hover */
+.cert-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg,
+      transparent 35%,
+      hsl(var(--accent) / 0.14) 50%,
+      transparent 65%);
+  opacity: 0;
+  transform: translateX(-60%);
+  transition: opacity 0.4s ease, transform 0.7s ease;
+  pointer-events: none;
+}
+
+.cert-card:hover::after {
+  opacity: 1;
+  transform: translateX(60%);
+}
+
+/* Zoom affordance shown while a row is paused */
+.cert-card-zoom {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background) / 0.75);
+  border: 1px solid hsl(var(--accent) / 0.3);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.cert-card:hover .cert-card-zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hint pill that disappears once the user hovers a row */
+.cert-hover-hint {
+  transition: opacity 0.35s ease;
+}
+
+.cert-marquee:hover ~ .cert-hover-hint {
+  opacity: 0;
+}
+
+/* Accessibility: stop all motion when the user asks for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cert-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .cert-marquee {
+    overflow-x: auto;
+  }
+
+  .cert-card,
+  .cert-card img,
+  .cert-card::after {
+    transition: none !important;
+  }
+}
+
+/* Allow touch users to swipe the rows manually */
+@media (hover: none) and (pointer: coarse) {
+  .cert-marquee {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .cert-marquee::-webkit-scrollbar {
+    display: none;
+  }
+}
+
