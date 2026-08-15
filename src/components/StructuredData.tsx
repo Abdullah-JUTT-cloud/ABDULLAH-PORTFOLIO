@@ -37,6 +37,18 @@ export const StructuredData = () => {
         name: 'Pakistan',
       },
     },
+    subjectOf: {
+      '@type': 'VideoObject',
+      name: 'Meet Muhammad Abdullah — Full Stack Engineer Introduction',
+      description:
+        'A short personal introduction covering who I am, what I build, and how I can help you ship your next product as a Full Stack Engineer.',
+      thumbnailUrl:
+        'https://muhammadabdullahportfolio-khaki.vercel.app/gig-poster.jpg',
+      contentUrl: 'https://muhammadabdullahportfolio-khaki.vercel.app/gig.mp4',
+      embedUrl: 'https://muhammadabdullahportfolio-khaki.vercel.app/#intro',
+      duration: 'PT1M8S',
+      uploadDate: '2026-08-16',
+    },
   };
 
   return (

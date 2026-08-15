@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -112,7 +113,7 @@ const Navigation = () => {
                       transition={{ duration: 0.4, delay: index * 0.08 }}
                       onClick={() => handleNavClick(item.href)}
                       aria-label={`Navigate to ${item.name} section`}
-                      className="relative px-3 py-2 rounded-lg text-sm font-mono transition-all duration-300"
+                      className="relative px-2 xl:px-3 py-2 rounded-lg text-sm font-mono transition-all duration-300"
                       style={{
                         color: isActive
                           ? 'hsl(var(--accent))'
@@ -135,7 +136,7 @@ const Navigation = () => {
                         }
                       }}
                     >
-                      <span className="uppercase tracking-wider text-xs">
+                      <span className="uppercase tracking-wide xl:tracking-wider text-[11px] xl:text-xs">
                         {item.name}
                       </span>
 

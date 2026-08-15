@@ -19,11 +19,15 @@ import {
   Server,
   ScanSearch,
   Briefcase,
+  UserRound,
+  Rocket,
+  Handshake,
 } from 'lucide-react';
 import { SiFiverr, SiUpwork, SiFreelancer } from 'react-icons/si';
 
 export const NAV_ITEMS = [
   { name: 'home', href: '#home' },
+  { name: 'intro', href: '#intro' },
   { name: 'expertise', href: '#expertise' },
   { name: 'work', href: '#work' },
   { name: 'security', href: '#security' },
@@ -33,6 +37,47 @@ export const NAV_ITEMS = [
   { name: 'contact', href: '#contact' },
 ] as const;
 
+
+/* ============================================================
+   INTRO VIDEO  —  personal introduction / client pitch
+   ============================================================ */
+
+export const INTRO_VIDEO = {
+  src: '/gig.mp4',
+  poster: '/gig-poster.jpg',
+  duration: '1:08',
+  eyebrow: 'Introduction',
+  titleLead: 'Meet Me',
+  titleAccent: 'In 60 Seconds',
+  subtitle:
+    'Rather than reading about me — hear it directly. Who I am, what I build, and exactly how I can help you ship your next product.',
+  chapters: [
+    {
+      icon: UserRound,
+      label: 'Who I Am',
+      description:
+        'Software Engineer & Full Stack Developer building production-grade systems.',
+    },
+    {
+      icon: Rocket,
+      label: 'What I Do',
+      description:
+        'End-to-end web & mobile applications — architecture, APIs, and polished interfaces.',
+    },
+    {
+      icon: Handshake,
+      label: 'What I Bring You',
+      description:
+        'Clear communication, clean scalable code, and delivery you can rely on.',
+    },
+  ],
+  highlights: [
+    'Full Stack Development',
+    'Scalable Architecture',
+    'Clean, Maintainable Code',
+    'On-Time Delivery',
+  ],
+} as const;
 
 export const CERTIFICATE_CATEGORIES = [
   {

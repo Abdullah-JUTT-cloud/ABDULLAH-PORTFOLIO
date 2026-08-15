@@ -1,5 +1,6 @@
 import BootSequence from '@/components/boot-sequence';
 import HeroSection from '@/components/hero-section';
+import IntroVideoSection from '@/components/intro-video-section';
 import ExpertiseSection from '@/components/about-section';
 import WorkSection from '@/components/projects-section';
 import SecuritySection from '@/components/security-section';
@@ -15,6 +16,7 @@ export default function Home() {
     <main className="min-h-screen">
       <BootSequence />
       <HeroSection />
+      <IntroVideoSection />
       <ExpertiseSection />
       <WorkSection />
       <SecuritySection />

@@ -2,15 +2,18 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Play, Github, Linkedin, Mail } from 'lucide-react';
 
 const HeroSection = () => {
-  const scrollToExpertise = () => {
-    const element = document.querySelector('#expertise');
+  const scrollToSection = (selector: string) => {
+    const element = document.querySelector(selector);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const scrollToExpertise = () => scrollToSection('#expertise');
+  const scrollToIntro = () => scrollToSection('#intro');
 
   return (
     <section
@@ -161,7 +164,37 @@ const HeroSection = () => {
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
 
-
+              <motion.button
+                onClick={scrollToIntro}
+                className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-medium transition-all duration-300"
+                style={{
+                  background: 'hsl(var(--accent) / 0.06)',
+                  border: '1px solid hsl(var(--accent) / 0.2)',
+                  color: 'hsl(var(--foreground))',
+                }}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.45)';
+                  e.currentTarget.style.boxShadow = '0 8px 25px hsl(var(--accent) / 0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.2)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <span
+                  className="flex items-center justify-center w-5 h-5 rounded-full"
+                  style={{ background: 'hsl(var(--accent) / 0.15)' }}
+                >
+                  <Play
+                    className="w-2.5 h-2.5 ml-[1px]"
+                    style={{ color: 'hsl(var(--accent))' }}
+                    fill="currentColor"
+                  />
+                </span>
+                Watch My Intro
+              </motion.button>
             </motion.div>
 
             {/* Social links */}
