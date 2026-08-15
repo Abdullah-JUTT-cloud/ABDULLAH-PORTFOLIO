@@ -13,17 +13,26 @@ import {
   ShieldCheck,
   BrainCircuit,
   Sparkles,
+  Crosshair,
+  Bug,
+  Network,
+  Server,
+  ScanSearch,
+  Briefcase,
 } from 'lucide-react';
+import { SiFiverr, SiUpwork, SiFreelancer } from 'react-icons/si';
 
 export const NAV_ITEMS = [
   { name: 'home', href: '#home' },
   { name: 'expertise', href: '#expertise' },
   { name: 'work', href: '#work' },
+  { name: 'security', href: '#security' },
   { name: 'experience', href: '#experience' },
   { name: 'education', href: '#education' },
   { name: 'certificates', href: '#certificates' },
   { name: 'contact', href: '#contact' },
 ] as const;
+
 
 export const CERTIFICATE_CATEGORIES = [
   {
@@ -112,7 +121,226 @@ export const EXPERTISE_DATA = [
   },
 ] as const;
 
+/* ============================================================
+   CYBERSECURITY  —  data sourced from CV
+   ============================================================ */
+
+export const SECURITY_INTRO = {
+  role: 'Cybersecurity / Ethical Hacking',
+  headline:
+    'A developer’s understanding of how applications are actually built, applied to offensive security.',
+  summary:
+    'Software Engineering student transitioning into cybersecurity and ethical hacking, backed by hands-on production engineering experience. Completed a structured, self-directed training path covering network security, Linux security, and the full Certified Ethical Hacker (CEH) curriculum, reinforced through daily practice in a self-built penetration testing lab.',
+  stats: [
+    { label: 'CEH Curriculum', value: '19h+' },
+    { label: 'Vulnerable Lab Targets', value: '19+' },
+    { label: 'Security Domains', value: '5' },
+  ],
+} as const;
+
+export const SECURITY_SKILLS = [
+  {
+    title: 'Offensive Security',
+    highlight: 'Recon → Enumeration → Exploitation',
+    icon: Crosshair,
+    items: [
+      'Network scanning & enumeration',
+      'Vulnerability assessment',
+      'Web application penetration testing',
+      'OSINT & reconnaissance',
+      'Password attacks',
+      'ARP/DNS spoofing concepts',
+    ],
+  },
+  {
+    title: 'Security Tools',
+    highlight: 'Industry-standard offensive tooling',
+    icon: Terminal,
+    items: [
+      'Nmap',
+      'Burp Suite (Proxy, Repeater, Intercept)',
+      'OWASP ZAP',
+      'enum4linux',
+      'WhatWeb',
+      'h8mail',
+      'Wireshark (fundamentals)',
+    ],
+  },
+  {
+    title: 'Web App Security',
+    highlight: 'OWASP Top 10 exploitation',
+    icon: Bug,
+    items: [
+      'SQL Injection',
+      'Cross-Site Scripting (XSS)',
+      'SSRF',
+      'XXE',
+      'Path Traversal',
+      'Insecure Deserialization',
+      'Authentication & Session flaws',
+    ],
+  },
+  {
+    title: 'Network Security',
+    highlight: 'Defense, segmentation & monitoring',
+    icon: Network,
+    items: [
+      'TCP/IP & OSI model',
+      'Firewalls',
+      'VLANs & network segmentation',
+      'NAT',
+      'IPSec',
+      'DNS/DHCP security',
+      'Honeypots',
+      'IDS/IPS concepts',
+    ],
+  },
+  {
+    title: 'Systems & Platforms',
+    highlight: 'Lab infrastructure & Linux internals',
+    icon: Server,
+    items: [
+      'Kali Linux',
+      'Linux command line & permissions',
+      'Docker-based lab environments',
+      'VirtualBox virtualization',
+    ],
+  },
+  {
+    title: 'Security Frameworks',
+    highlight: 'Standards & threat models',
+    icon: ShieldCheck,
+    items: [
+      'NIST Cybersecurity Framework',
+      'COBIT',
+      'Cyber Kill Chain',
+      'CEH Body of Knowledge',
+    ],
+  },
+] as const;
+
+export const SECURITY_TRAINING = [
+  {
+    title: 'Certified Ethical Hacker (CEH)',
+    provider: 'LinkedIn Learning',
+    duration: '19h 19m',
+    description:
+      'Full CEH exam blueprint: footprinting & reconnaissance, scanning networks, enumeration, vulnerability analysis, system hacking, malware threats, sniffing, social engineering, denial-of-service, session hijacking, evading IDS/firewalls/honeypots, hacking web servers & applications, SQL injection, wireless hacking, cryptography, and cloud security.',
+  },
+  {
+    title: 'IT Security Foundations: Network Security',
+    provider: 'LinkedIn Learning',
+    duration: 'Completed',
+    description:
+      'Firewalls, honeypots, VLAN/domain isolation, NAT, ARP/DNS spoofing, IPSec, secure protocols, security baselines, and physical security.',
+  },
+  {
+    title: 'Networking Foundations & Cisco Switching / Routing',
+    provider: 'LinkedIn Learning',
+    duration: 'Completed',
+    description:
+      'OSI model, IP addressing, VLANs, trunking, Spanning Tree Protocol, and static/dynamic routing.',
+  },
+  {
+    title: 'Cybersecurity Foundations',
+    provider: 'LinkedIn Learning',
+    duration: 'Completed',
+    description:
+      'Cyber Kill Chain, threat frameworks (NIST, COBIT), cryptography fundamentals, and incident detection and response basics.',
+  },
+] as const;
+
+export const SECURITY_LAB_WORK = [
+  {
+    command: 'docker compose up websploit-labs',
+    title: 'Isolated Penetration Testing Lab',
+    icon: Server,
+    description:
+      'Built a Kali Linux (VirtualBox) attack environment and deployed WebSploit Labs — 19+ intentionally vulnerable Docker containers including OWASP Juice Shop, WebGoat, and DVWA — covering SQL injection, XSS, SSRF, XXE, path traversal, insecure deserialization, and GraphQL vulnerabilities.',
+    tools: ['Kali Linux', 'VirtualBox', 'Docker', 'Juice Shop', 'WebGoat', 'DVWA'],
+  },
+  {
+    command: 'nmap -sS -sV <target>',
+    title: 'Network Reconnaissance & Service Discovery',
+    icon: ScanSearch,
+    description:
+      'Performed network reconnaissance with Nmap (SYN scans, service/version detection) against lab targets to identify open ports and running services (FTP, SSH, DNS, HTTP, SMB) as a precursor to enumeration.',
+    tools: ['Nmap', 'SYN Scan', 'Service Detection'],
+  },
+  {
+    command: 'enum4linux -a <target>',
+    title: 'SMB / NetBIOS Enumeration',
+    icon: Network,
+    description:
+      'Conducted SMB/NetBIOS enumeration with enum4linux to extract host, share, and user information from lab targets.',
+    tools: ['enum4linux', 'SMB', 'NetBIOS'],
+  },
+  {
+    command: 'burpsuite --proxy --intercept',
+    title: 'Live HTTP Traffic Interception',
+    icon: Crosshair,
+    description:
+      'Used Burp Suite (Proxy, Intercept, Repeater) to inspect, intercept, and analyze live HTTP traffic against DVWA and other lab web applications.',
+    tools: ['Burp Suite', 'Proxy', 'Repeater'],
+  },
+  {
+    command: 'zap-cli active-scan <target>',
+    title: 'Automated Scanning & Vulnerability Triage',
+    icon: Bug,
+    description:
+      'Ran OWASP ZAP active/passive scans against test targets, triaged findings (missing security headers, cookie attribute issues, information disclosure), and practiced writing clear vulnerability descriptions.',
+    tools: ['OWASP ZAP', 'Security Headers', 'Reporting'],
+  },
+  {
+    command: 'whatweb <target> && h8mail -t <email>',
+    title: 'OSINT & Information Gathering',
+    icon: Terminal,
+    description:
+      'Performed OSINT reconnaissance using WhatWeb (technology fingerprinting) and h8mail (breach-data exposure checks) as part of the information-gathering phase of the ethical hacking methodology.',
+    tools: ['WhatWeb', 'h8mail', 'OSINT'],
+  },
+] as const;
+
+export const SECURITY_APPLIED_PRACTICES = [
+  'Multi-entity REST API with JWT-based role-level access control (patient vs. provider)',
+  'Input-validation and structured error-handling middleware to reduce malicious input exposure',
+  'Role-based access control enforced across a live production healthcare SaaS platform',
+  'Docker-based deployment with isolated service boundaries on cloud infrastructure',
+] as const;
+
+export const FREELANCE_PLATFORMS = [
+  {
+    name: 'Fiverr',
+    icon: SiFiverr,
+    href: 'https://www.fiverr.com/s/42ePl8y',
+    tagline: 'Fixed-scope gigs',
+    cta: 'Place Your Order',
+  },
+  {
+    name: 'Upwork',
+    icon: SiUpwork,
+    href: 'https://www.upwork.com/freelancers/~01960cac3b684eba9d?mp_source=share',
+    tagline: 'Hourly & contract work',
+    cta: 'Hire Me',
+  },
+  {
+    name: 'Contra',
+    icon: Briefcase,
+    href: 'https://contra.com/muhammad_abdullah_m5bn5vlv?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=muhammad_abdullah_m5bn5vlv',
+    tagline: 'Commission-free projects',
+    cta: 'Start a Project',
+  },
+  {
+    name: 'Freelancer',
+    icon: SiFreelancer,
+    href: 'https://www.freelancer.com/u/abdullahjutt44?frm=abdullahjutt44&sb=t',
+    tagline: 'Project bidding',
+    cta: 'Post Your Project',
+  },
+] as const;
+
 export const EXPERIENCE_DATA = [
+
   {
     title: 'MERN Stack Developer',
     company: 'Devverx',

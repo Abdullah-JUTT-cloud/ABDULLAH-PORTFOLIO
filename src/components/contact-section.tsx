@@ -13,8 +13,11 @@ import {
   Phone,
   Copy,
   Check,
+  Rocket,
+  Sparkles,
 } from 'lucide-react';
-import { CONTACT_INFO } from '@/constants';
+import { CONTACT_INFO, FREELANCE_PLATFORMS } from '@/constants';
+
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -325,6 +328,159 @@ const ContactSection = () => {
             </div>
           </div>
 
+          {/* ===== HIRE ME / PLACE YOUR ORDER ===== */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.7, delay: 0.85 }}
+            className="mb-16 sm:mb-20"
+          >
+            <div
+              className="relative rounded-2xl p-7 sm:p-10 overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, hsl(var(--accent) / 0.07), hsl(var(--primary) / 0.05))`,
+                border: '1px solid hsl(var(--accent) / 0.15)',
+              }}
+            >
+              {/* Animated gradient top border */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px]"
+                style={{
+                  background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))`,
+                  backgroundSize: '200% 100%',
+                  animation: 'shimmer 3s linear infinite',
+                }}
+              />
+
+              {/* Heading */}
+              <div className="relative z-10 text-center mb-9 sm:mb-10">
+                <motion.div
+                  className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5"
+                  style={{
+                    background: 'hsl(var(--accent) / 0.1)',
+                    border: '1px solid hsl(var(--accent) / 0.2)',
+                  }}
+                  whileHover={{ rotate: 10, scale: 1.05 }}
+                >
+                  <Rocket className="w-6 h-6" style={{ color: 'hsl(var(--accent))' }} />
+                </motion.div>
+
+                <h3
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+                  style={{ color: 'hsl(var(--foreground))' }}
+                >
+                  Have a project or idea in mind?
+                  <br />
+                  <span
+                    style={{
+                      background:
+                        'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Contact me &amp; place your order.
+                  </span>
+                </h3>
+
+                <p
+                  className="text-sm sm:text-base max-w-2xl mx-auto"
+                  style={{ color: 'hsl(var(--muted-foreground))' }}
+                >
+                  Let&apos;s build your real solution — pick the platform you prefer and let&apos;s
+                  get started.
+                </p>
+              </div>
+
+              {/* Platform cards */}
+              <div className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {FREELANCE_PLATFORMS.map((platform, index) => {
+                  const PlatformIcon = platform.icon;
+                  return (
+                    <motion.a
+                      key={platform.name}
+                      href={platform.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5, delay: 0.95 + index * 0.08 }}
+                      whileHover={{ y: -5 }}
+                      className="group relative rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-500 flex flex-col"
+                      style={{
+                        background: 'hsl(var(--background))',
+                        border: '1px solid hsl(var(--border))',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor =
+                          'hsl(var(--accent) / 0.35)';
+                        (e.currentTarget as HTMLElement).style.boxShadow =
+                          '0 20px 45px hsl(var(--accent) / 0.08)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--border))';
+                        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                      }}
+                    >
+                      {/* Hover overlay */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{
+                          background: `linear-gradient(135deg, hsl(var(--accent) / 0.04), transparent 65%, hsl(var(--primary) / 0.04))`,
+                        }}
+                      />
+
+                      <div className="relative z-10 flex items-start justify-between mb-4">
+                        <div
+                          className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+                          style={{
+                            background: 'hsl(var(--accent) / 0.08)',
+                            border: '1px solid hsl(var(--accent) / 0.15)',
+                          }}
+                        >
+                          <PlatformIcon
+                            className="w-5 h-5"
+                            style={{ color: 'hsl(var(--accent))' }}
+                          />
+                        </div>
+                        <ArrowUpRight
+                          className="w-4 h-4 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          style={{ color: 'hsl(var(--accent))' }}
+                        />
+                      </div>
+
+                      <div className="relative z-10 flex-1">
+                        <h4
+                          className="text-base sm:text-lg font-semibold mb-1"
+                          style={{ color: 'hsl(var(--foreground))' }}
+                        >
+                          {platform.name}
+                        </h4>
+                        <p
+                          className="text-xs font-mono"
+                          style={{ color: 'hsl(var(--muted-foreground) / 0.7)' }}
+                        >
+                          {platform.tagline}
+                        </p>
+                      </div>
+
+                      <div
+                        className="relative z-10 mt-5 pt-4 flex items-center gap-2 text-xs font-mono uppercase tracking-wider"
+                        style={{
+                          borderTop: '1px solid hsl(var(--border))',
+                          color: 'hsl(var(--accent))',
+                        }}
+                      >
+                        <Sparkles className="w-3.5 h-3.5" />
+                        {platform.cta}
+                      </div>
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+
           {/* ===== BOTTOM CTA ===== */}
           <motion.div
             className="text-center"
@@ -332,6 +488,7 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.9 }}
           >
+
             <div
               className="h-px w-32 mx-auto mb-8"
               style={{

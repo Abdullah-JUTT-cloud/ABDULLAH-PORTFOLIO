@@ -2,7 +2,9 @@ import BootSequence from '@/components/boot-sequence';
 import HeroSection from '@/components/hero-section';
 import ExpertiseSection from '@/components/about-section';
 import WorkSection from '@/components/projects-section';
+import SecuritySection from '@/components/security-section';
 import ExperienceSection from '@/components/experience-section';
+
 import EducationSection from '@/components/education-section';
 import CertificatesSection from '@/components/certificates-section';
 import ContactSection from '@/components/contact-section';
@@ -15,7 +17,9 @@ export default function Home() {
       <HeroSection />
       <ExpertiseSection />
       <WorkSection />
+      <SecuritySection />
       <ExperienceSection />
+
       <EducationSection />
       <CertificatesSection />
       <ContactSection />
