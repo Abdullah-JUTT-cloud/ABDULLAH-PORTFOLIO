@@ -5,43 +5,43 @@
    ========================================================================== */
 
 :root {
-  /* Base surfaces */
-  --background: 200 12% 5%;
-  --surface: 200 10% 8%;
-  --surface-2: 200 10% 11%;
-  --foreground: 40 12% 96%;
+  /* Base surfaces — proven dark portfolio palette */
+  --background: 0 0% 4%;       /* #0a0a0a — true near-black */
+  --surface: 0 0% 8%;          /* #141414 — card backgrounds */
+  --surface-2: 0 0% 11%;       /* #1c1c1c — hover states */
+  --foreground: 0 0% 98%;      /* #fafafa — primary text */
 
-  --muted: 200 10% 10%;
-  --muted-foreground: 200 8% 62%;
-  --border: 200 10% 16%;
+  --muted: 0 0% 13%;           /* #212121 — subtle surfaces */
+  --muted-foreground: 0 0% 50%; /* #808080 — secondary text */
+  --border: 0 0% 16%;          /* #292929 — borders */
 
-  /* Accent — teal lineage kept from #2D5A5A, brightened for hierarchy */
-  --primary: 180 45% 35%;
+  /* Accent — bright blue that actually pops on dark backgrounds */
+  --primary: 217 91% 60%;      /* #3b82f6 — Tailwind blue-500 */
   --primary-foreground: 0 0% 100%;
-  --secondary: 200 10% 11%;
-  --secondary-foreground: 40 12% 96%;
-  --accent: 172 68% 56%;
-  --accent-foreground: 200 12% 5%;
+  --secondary: 0 0% 8%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 217 91% 60%;       /* #3b82f6 — same bright blue */
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --ring: 172 68% 56%;
+  --ring: 217 91% 60%;
 
-  /* Legacy aliases still referenced by content components */
+  /* Legacy aliases */
   --warm-beige: 30 25% 88%;
-  --teal-dark: 180 50% 20%;
-  --teal-light: 180 65% 80%;
-  --teal-medium: 180 45% 40%;
-  --card-bg: 200 10% 8%;
-  --testimonial-teal: 180 45% 35%;
-  --testimonial-accent: 172 68% 56%;
+  --teal-dark: 217 70% 25%;
+  --teal-light: 217 80% 75%;
+  --teal-medium: 217 65% 45%;
+  --card-bg: 0 0% 8%;
+  --testimonial-teal: 217 91% 60%;
+  --testimonial-accent: 217 91% 60%;
   --gold-accent: 40 92% 66%;
 
   /* Terminal language (cybersecurity section) */
-  --term-bg: 160 24% 4%;
-  --term-green: 145 72% 55%;
+  --term-bg: 0 0% 5%;
+  --term-green: 217 91% 60%;
   --term-amber: 38 94% 62%;
-  --term-dim: 160 12% 48%;
+  --term-dim: 0 0% 45%;
 
   /* Typography */
   --font-display: 'Sora', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -54,22 +54,22 @@
 }
 
 .dark {
-  --background: 200 12% 5%;
-  --surface: 200 10% 8%;
-  --surface-2: 200 10% 11%;
-  --foreground: 40 12% 96%;
-  --muted: 200 10% 10%;
-  --muted-foreground: 200 8% 62%;
-  --border: 200 10% 16%;
-  --primary: 180 45% 35%;
+  --background: 0 0% 4%;
+  --surface: 0 0% 8%;
+  --surface-2: 0 0% 11%;
+  --foreground: 0 0% 98%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 50%;
+  --border: 0 0% 16%;
+  --primary: 217 91% 60%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 200 10% 11%;
-  --secondary-foreground: 40 12% 96%;
-  --accent: 172 68% 56%;
-  --accent-foreground: 200 12% 5%;
+  --secondary: 0 0% 8%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 217 91% 60%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --ring: 172 68% 56%;
+  --ring: 217 91% 60%;
 }
 
 @theme inline {
@@ -485,84 +485,7 @@ video {
    CUSTOM CURSOR (kept)
    ========================================================================== */
 
-@media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-}
-
-.custom-cursor-dot {
-  position: fixed;
-  width: 5px;
-  height: 5px;
-  background: hsl(var(--accent));
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  mix-blend-mode: difference;
-}
-
-.custom-cursor-ring {
-  position: fixed;
-  width: 26px;
-  height: 26px;
-  border: 1px solid hsl(var(--accent));
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  mix-blend-mode: difference;
-}
-
-.custom-cursor-trail {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: hsl(var(--accent) / 0.25);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9997;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  mix-blend-mode: difference;
-}
-
-.custom-cursor-dot.clicking {
-  background: hsl(var(--primary));
-  transform: translate(-50%, -50%) scale(0.7) !important;
-}
-
-.custom-cursor-ring.clicking {
-  border-color: hsl(var(--primary));
-  transform: translate(-50%, -50%) scale(1.2) !important;
-}
-
-.custom-cursor-dot.link,
-.custom-cursor-dot.interactive {
-  background: hsl(var(--accent));
-  transform: translate(-50%, -50%) scale(1.2);
-}
-
-.custom-cursor-ring.link,
-.custom-cursor-ring.interactive {
-  border-color: hsl(var(--accent));
-  transform: translate(-50%, -50%) scale(1.8);
-}
-
-.custom-cursor-dot.button {
-  background: hsl(var(--accent));
-  transform: translate(-50%, -50%) scale(1.3);
-}
-
-.custom-cursor-ring.button {
-  border-color: hsl(var(--accent));
-  transform: translate(-50%, -50%) scale(2.1);
-}
-
-.custom-cursor-dot.text {
-  background: hsl(var(--foreground));
-  transform: translate(-50%, -50%) scale(0.8);
-}
+/* Custom cursor removed — using default cursor */
 
 .custom-cursor-ring.text {
   border-color: hsl(var(--foreground));

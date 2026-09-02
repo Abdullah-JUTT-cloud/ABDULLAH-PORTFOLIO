@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Terminal } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { NAV_ITEMS } from '@/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
@@ -28,23 +28,11 @@ const Navigation = () => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
   const handleNavClick = (href: string) => {
     scrollToSection(href);
-    setIsOpen(false);
-  };
-
-  const handleReboot = () => {
-    try {
-      localStorage.removeItem('abdullah-portfolio-boot-seen');
-    } catch {
-      // Storage fallback
-    }
-    window.dispatchEvent(new CustomEvent('trigger-boot-sequence'));
     setIsOpen(false);
   };
 
@@ -62,42 +50,42 @@ const Navigation = () => {
       </div>
 
       <motion.header
-        initial={{ y: -70, opacity: 0 }}
+        initial={{ y: -56, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="fixed top-[2px] left-0 right-0 z-50 transition-colors duration-500"
+        transition={{ duration: 0.55, ease: EASE }}
+        className="fixed top-[2px] left-0 right-0 z-50 transition-all duration-400"
         style={{
-          background: scrolled ? 'hsl(var(--background) / 0.82)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(18px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(18px)' : 'none',
-          borderBottom: `1px solid ${
-            scrolled ? 'hsl(var(--border) / 0.6)' : 'transparent'
-          }`,
+          background: scrolled ? 'hsl(var(--background) / 0.88)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px) saturate(1.2)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px) saturate(1.2)' : 'none',
+          borderBottom: scrolled ? '1px solid hsl(var(--border) / 0.5)' : '1px solid transparent',
         }}
       >
-        <div className="shell">
-          <div className="flex h-16 sm:h-20 items-center justify-between">
-            {/* Wordmark */}
+        {/* Full-width inner wrapper — edge to edge */}
+        <div className="w-full px-4 sm:px-6 lg:px-10">
+          <div className="flex h-14 sm:h-16 items-center justify-between">
+
+            {/* ===== Logo ===== */}
             <button
               type="button"
               onClick={() => handleNavClick('#home')}
-              className="font-mono text-sm sm:text-base font-medium tracking-tight text-foreground"
+              className="shrink-0 font-display text-[1.05rem] font-bold tracking-tight text-foreground"
             >
               <span className="text-[hsl(var(--accent))]">A</span>
               <span className="hidden xs:inline">bdullah</span>
               <span className="text-muted-foreground">.Jutt</span>
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 1.3, repeat: Infinity }}
+                transition={{ duration: 1.2, repeat: Infinity }}
                 className="text-[hsl(var(--accent))]"
               >
                 _
               </motion.span>
             </button>
 
-            {/* Desktop nav — numbered section markers */}
+            {/* ===== Desktop nav — spread evenly ===== */}
             <nav
-              className="hidden lg:flex items-center gap-1"
+              className="hidden lg:flex items-center justify-center flex-1 mx-6 xl:mx-10"
               aria-label="Main navigation"
             >
               {NAV_ITEMS.map((item, index) => {
@@ -107,21 +95,36 @@ const Navigation = () => {
                     key={item.name}
                     type="button"
                     onClick={() => handleNavClick(item.href)}
-                    aria-label={`Navigate to ${item.name} section`}
-                    className={`group relative rounded-full px-3 py-2 font-mono text-[0.7rem] tracking-[0.12em] transition-colors duration-300 ${
+                    aria-label={`Navigate to ${item.name}`}
+                    className={`relative flex items-baseline gap-1.5 rounded-lg px-3 xl:px-4 py-2 transition-all duration-300 ${
                       isActive
                         ? 'text-[hsl(var(--accent))]'
-                        : 'text-muted-foreground hover:text-foreground'
+                        : 'text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'
                     }`}
                   >
-                    <span className="opacity-45 mr-1.5">{pad(index)}</span>
-                    <span className="opacity-45 mr-1">//</span>
-                    <span className="uppercase">{item.name}</span>
+                    <span className={`font-mono text-[0.55rem] font-medium ${
+                      isActive ? 'text-[hsl(var(--accent))]' : 'text-[hsl(var(--muted-foreground)/0.4)]'
+                    }`}>
+                      {pad(index)}
+                    </span>
+                    <span className={`text-[0.6rem] ${
+                      isActive ? 'text-[hsl(var(--accent)/0.4)]' : 'text-[hsl(var(--muted-foreground)/0.25)]'
+                    }`}>
+                      //
+                    </span>
+                    <span className="text-[0.72rem] font-medium uppercase tracking-[0.08em]">
+                      {item.name}
+                    </span>
+
                     {isActive && (
                       <motion.span
-                        layoutId="navPill"
-                        className="absolute inset-0 -z-10 rounded-full bg-[hsl(var(--accent)/0.1)] ring-1 ring-[hsl(var(--accent)/0.25)]"
-                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                        layoutId="navActive"
+                        className="absolute inset-0 -z-10 rounded-lg"
+                        style={{
+                          background: 'hsl(var(--accent) / 0.08)',
+                          border: '1px solid hsl(var(--accent) / 0.2)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                       />
                     )}
                   </button>
@@ -129,75 +132,73 @@ const Navigation = () => {
               })}
             </nav>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleReboot}
-                title="Replay System Boot Sequence"
-                aria-label="Replay System Boot Sequence"
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-[hsl(var(--accent)/0.3)] bg-[hsl(var(--accent)/0.08)] px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[hsl(var(--accent))] transition-colors hover:bg-[hsl(var(--accent)/0.16)]"
+            {/* ===== Right side ===== */}
+            <div className="shrink-0 flex items-center gap-2.5">
+              <a
+                href="mailto:abdullahjuttjutt910@gmail.com"
+                className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--accent))] px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-white transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--accent)/0.4)] hover:scale-105"
               >
-                <Terminal className="h-3.5 w-3.5" />
-                Reboot
-              </button>
-
-              <button
-                type="button"
-                onClick={handleReboot}
-                aria-label="Replay System Boot Sequence"
-                className="sm:hidden icon-btn h-10 w-10 text-[hsl(var(--accent))]"
-              >
-                <Terminal className="h-4 w-4" />
-              </button>
+                Let&apos;s Talk
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
 
               <button
                 type="button"
                 onClick={() => setIsOpen((v) => !v)}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isOpen}
-                className="lg:hidden icon-btn h-10 w-10 text-foreground"
+                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-[hsl(var(--border))] text-[hsl(var(--foreground))] transition-colors hover:border-[hsl(var(--accent)/0.4)] hover:text-[hsl(var(--accent))]"
               >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile overlay menu */}
+        {/* Mobile menu — full width */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden fixed inset-x-0 top-[calc(4rem+2px)] bottom-0 z-40 overflow-y-auto border-t border-[hsl(var(--border))] bg-[hsl(var(--background))]"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className="lg:hidden overflow-hidden border-t border-[hsl(var(--border)/0.5)]"
+              style={{ background: 'hsl(var(--background) / 0.95)', backdropFilter: 'blur(16px)' }}
             >
-              <nav className="shell py-8" aria-label="Mobile navigation">
-                {NAV_ITEMS.map((item, index) => {
-                  const isActive = activeSection === item.name;
-                  return (
-                    <motion.button
-                      key={item.name}
-                      type="button"
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.35, delay: index * 0.04, ease: EASE }}
-                      onClick={() => handleNavClick(item.href)}
-                      className={`flex w-full items-baseline gap-4 border-b border-[hsl(var(--border))] py-5 text-left ${
-                        isActive ? 'text-[hsl(var(--accent))]' : 'text-foreground'
-                      }`}
-                    >
-                      <span className="font-mono text-[0.7rem] opacity-45">
-                        {pad(index)} //
-                      </span>
-                      <span className="wordmark text-3xl capitalize">
-                        {item.name}
-                      </span>
-                    </motion.button>
-                  );
-                })}
+              <nav className="w-full px-4 sm:px-6 py-5" aria-label="Mobile navigation">
+                <div className="grid grid-cols-2 gap-1">
+                  {NAV_ITEMS.map((item, index) => {
+                    const isActive = activeSection === item.name;
+                    return (
+                      <motion.button
+                        key={item.name}
+                        type="button"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25, delay: index * 0.03, ease: EASE }}
+                        onClick={() => handleNavClick(item.href)}
+                        className={`flex items-center gap-2.5 rounded-lg p-3 text-left transition-colors ${
+                          isActive
+                            ? 'bg-[hsl(var(--accent)/0.1)] text-[hsl(var(--accent))]'
+                            : 'text-[hsl(var(--muted-foreground))] hover:bg-[hsl(var(--foreground)/0.04)] hover:text-[hsl(var(--foreground))]'
+                        }`}
+                      >
+                        <span className="font-mono text-[0.6rem] opacity-50">{pad(index)}</span>
+                        <span className="text-[0.75rem] font-medium uppercase tracking-[0.06em]">{item.name}</span>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+                <div className="mt-4 pt-4 border-t border-[hsl(var(--border)/0.5)]">
+                  <a
+                    href="mailto:abdullahjuttjutt910@gmail.com"
+                    className="flex items-center justify-center gap-2 rounded-xl bg-[hsl(var(--accent))] py-3 text-[0.8rem] font-semibold text-white"
+                  >
+                    Let&apos;s Talk
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
               </nav>
             </motion.div>
           )}

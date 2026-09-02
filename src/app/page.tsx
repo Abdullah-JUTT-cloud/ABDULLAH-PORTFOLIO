@@ -1,4 +1,3 @@
-import BootSequence from '@/components/boot-sequence';
 import HeroSection from '@/components/hero-section';
 import IntroVideoSection from '@/components/intro-video-section';
 import ExpertiseSection from '@/components/about-section';
@@ -14,7 +13,6 @@ import Footer from '@/components/footer';
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <BootSequence />
       <HeroSection />
       <IntroVideoSection />
       <ExpertiseSection />

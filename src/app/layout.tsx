@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import Navigation from '@/components/navigation';
-import CustomCursor from '@/components/custom-cursor';
 import { StructuredData } from '@/components/StructuredData';
 import WhatsAppButton from '@/components/whatsapp-button';
 
@@ -82,7 +81,7 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0B1113" />
+        <meta name="theme-color" content="#0a0a0a" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
@@ -96,7 +95,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CustomCursor />
           <Navigation />
           <main role="main">{children}</main>
           <WhatsAppButton />
