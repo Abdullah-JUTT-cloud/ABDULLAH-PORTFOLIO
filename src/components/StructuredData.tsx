@@ -45,7 +45,7 @@ export const StructuredData = () => {
       thumbnailUrl:
         'https://muhammadabdullahportfolio-khaki.vercel.app/gig-poster.jpg',
       contentUrl: 'https://muhammadabdullahportfolio-khaki.vercel.app/gig.mp4',
-      embedUrl: 'https://muhammadabdullahportfolio-khaki.vercel.app/#intro',
+      embedUrl: 'https://muhammadabdullahportfolio-khaki.vercel.app/#contact',
       duration: 'PT1M8S',
       uploadDate: '2026-08-16',
     },
