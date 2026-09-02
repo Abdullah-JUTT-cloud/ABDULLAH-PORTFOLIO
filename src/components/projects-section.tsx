@@ -1,8 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import SectionHeader from './ui/SectionHeader';
 import Reveal, { EASE } from './ui/Reveal';
 
@@ -19,6 +20,13 @@ const PROJECTS = [
     image: '/p1.png',
     link: 'https://medalerto.me/',
     // Full-width featured card
+    size: 'full' as const,
+  },
+  {
+    title: 'WellSprings Medical',
+    subtitle: 'Medical Services Website',
+    images: ['/wellsmerry.png', '/wellsmerry2.png'],
+    link: 'https://well-s-merry.vercel.app/',
     size: 'full' as const,
   },
   {
@@ -68,6 +76,102 @@ const PROJECTS = [
 /* ------------------------------------------------------------------ */
 /*  Individual project card                                           */
 /* ------------------------------------------------------------------ */
+function ProjectImage({
+  project,
+  index,
+  size,
+}: {
+  project: (typeof PROJECTS)[number];
+  index: number;
+  size: 'full' | 'wide' | 'normal';
+}) {
+  const images = project.images ?? (project.image ? [project.image] : []);
+  const [active, setActive] = useState(0);
+  const multiple = images.length > 1;
+  const isFull = size === 'full';
+
+  return (
+    <div className={`relative w-full overflow-hidden ${isFull ? 'h-[300px] sm:h-[420px] lg:h-[500px]' : 'h-[220px] sm:h-[280px]'}`}>
+      {images.map((src, i) => (
+        <Image
+          key={src}
+          src={src}
+          alt={`${project.title} screenshot ${i + 1}`}
+          fill
+          sizes={
+            isFull
+              ? '100vw'
+              : size === 'wide'
+              ? '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw'
+              : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+          }
+          className={`object-cover transition-all duration-700 ease-out group-hover:scale-[1.04] ${
+            multiple && i !== active ? 'opacity-0' : 'opacity-100'
+          }`}
+          priority={index < 2}
+        />
+      ))}
+
+      {/* Bottom gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+      {/* "Show project" pill on hover */}
+      <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-4 py-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white opacity-0 translate-y-2 transition-all duration-400 group-hover:opacity-100 group-hover:translate-y-0">
+        Show project
+        <span className="inline-block w-5 h-px bg-white/70" />
+      </span>
+
+      {/* Multi-image controls */}
+      {multiple && (
+        <>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setActive((a) => (a - 1 + images.length) % images.length);
+            }}
+            aria-label="Previous image"
+            className="absolute left-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setActive((a) => (a + 1) % images.length);
+            }}
+            aria-label="Next image"
+            className="absolute right-3 top-1/2 -translate-y-1/2 grid h-9 w-9 place-items-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          <div className="absolute bottom-4 right-4 flex items-center gap-1.5">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Show image ${i + 1}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setActive(i);
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? 'w-5 bg-white' : 'w-1.5 bg-white/60 hover:bg-white/90'
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function ProjectCard({
   project,
   index,
@@ -92,31 +196,7 @@ function ProjectCard({
       } ${isWide ? 'sm:col-span-2' : ''}`}
     >
       {/* Image container — no fixed aspect ratio, let image dictate height */}
-      <div className={`relative w-full overflow-hidden ${isFull ? 'h-[300px] sm:h-[420px] lg:h-[500px]' : 'h-[220px] sm:h-[280px]'}`}>
-        <Image
-          src={project.image}
-          alt={`${project.title} screenshot`}
-          fill
-          sizes={
-            isFull
-              ? '100vw'
-              : isWide
-              ? '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw'
-              : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-          }
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          priority={index < 2}
-        />
-
-        {/* Bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
-        {/* "Show project" pill on hover */}
-        <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-4 py-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white opacity-0 translate-y-2 transition-all duration-400 group-hover:opacity-100 group-hover:translate-y-0">
-          Show project
-          <span className="inline-block w-5 h-px bg-white/70" />
-        </span>
-      </div>
+      <ProjectImage project={project} index={index} size={project.size} />
 
       {/* Card body */}
       <div className="flex items-center justify-between p-5 sm:p-6">
