@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   Mail,
   Linkedin,
@@ -17,11 +16,10 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { CONTACT_INFO, FREELANCE_PLATFORMS } from '@/constants';
-
+import SectionHeader from './ui/SectionHeader';
+import Reveal, { EASE } from './ui/Reveal';
 
 const ContactSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -58,460 +56,219 @@ const ContactSection = () => {
   ];
 
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden py-24 sm:py-32"
-      style={{
-        background: `linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 5%) 50%, hsl(0 0% 4%) 100%)`,
-      }}
-    >
-      {/* Background effects */}
+    <section id="contact" className="section relative overflow-hidden">
+      <div className="rule absolute top-0 left-0 right-0" aria-hidden />
       <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 50% 50%, hsl(var(--accent)) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
+        aria-hidden
+        className="orb left-1/2 top-1/3 h-[34rem] w-[34rem] -translate-x-1/2 opacity-[0.18]"
+        style={{ background: 'hsl(var(--accent) / 0.6)' }}
       />
 
-      {/* Large glow behind content */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-3xl opacity-[0.04]"
-        style={{
-          background: `radial-gradient(ellipse, hsl(var(--accent)), hsl(var(--primary)), transparent)`,
-        }}
-      />
+      <div className="shell relative z-10">
+        <SectionHeader
+          index="09"
+          eyebrow="Contact"
+          titleTop="Let's"
+          titleBottom="Work Together"
+          description="Have a project in mind or want to collaborate? I'm always open to discussing new opportunities."
+          className="mb-16 sm:mb-20"
+        />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* ===== HEADER ===== */}
-          <div className="text-center mb-16 sm:mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center justify-center gap-3 mb-6"
+        {/* ===== MAIN GRID ===== */}
+        <div className="grid gap-7 lg:grid-cols-5">
+          {/* CTA card */}
+          <Reveal className="lg:col-span-2" delay={0.05}>
+            <div
+              className="card relative flex h-full flex-col p-8 sm:p-10"
+              style={{
+                background:
+                  'linear-gradient(150deg, hsl(var(--accent) / 0.09), hsl(var(--primary) / 0.05))',
+                borderColor: 'hsl(var(--accent) / 0.2)',
+              }}
             >
-              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-              <span
-                className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em]"
-                style={{ color: 'hsl(var(--accent))' }}
-              >
-                Contact
+              <span className="shimmer-line absolute inset-x-0 top-0 h-[2px]" aria-hidden />
+
+              <span className="mb-7 flex h-16 w-16 items-center justify-center rounded-2xl border border-[hsl(var(--accent)/0.22)] bg-[hsl(var(--accent)/0.1)]">
+                <Send className="h-7 w-7 text-[hsl(var(--accent))]" />
               </span>
-              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-            </motion.div>
 
-            <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span style={{ color: 'hsl(var(--foreground))' }}>Let&apos;s </span>
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Work Together
-              </span>
-            </motion.h2>
+              <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
+                Got a project?
+                <br />
+                <span className="text-[hsl(var(--accent))]">Let&apos;s talk.</span>
+              </h3>
 
-            <motion.p
-              className="text-base sm:text-lg max-w-xl mx-auto mb-2"
-              style={{ color: 'hsl(var(--muted-foreground))' }}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              Have a project in mind or want to collaborate? I&apos;m always open to discussing new opportunities.
-            </motion.p>
-          </div>
+              <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                I&apos;m interested in freelance opportunities, full-time positions, and
+                exciting collaborations. If you have a project that needs my skills,
+                don&apos;t hesitate to reach out.
+              </p>
 
-          {/* ===== MAIN CONTENT GRID ===== */}
-          <div className="grid lg:grid-cols-5 gap-8 sm:gap-10 mb-16 sm:mb-20">
-            {/* Left - Big CTA card */}
-            <motion.div
-              className="lg:col-span-2"
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div
-                className="relative rounded-2xl p-8 sm:p-10 h-full overflow-hidden group"
-                style={{
-                  background: `linear-gradient(135deg, hsl(var(--accent) / 0.08), hsl(var(--primary) / 0.05))`,
-                  border: '1px solid hsl(var(--accent) / 0.15)',
-                }}
-              >
-                {/* Animated gradient border */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-[2px]"
-                  style={{
-                    background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))`,
-                    backgroundSize: '200% 100%',
-                    animation: 'shimmer 3s linear infinite',
-                  }}
-                />
-
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Icon */}
-                  <motion.div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-                    style={{
-                      background: 'hsl(var(--accent) / 0.1)',
-                      border: '1px solid hsl(var(--accent) / 0.2)',
-                    }}
-                    whileHover={{ rotate: 10, scale: 1.05 }}
-                  >
-                    <Send className="w-7 h-7" style={{ color: 'hsl(var(--accent))' }} />
-                  </motion.div>
-
-                  <h3
-                    className="text-2xl sm:text-3xl font-bold mb-4"
-                    style={{ color: 'hsl(var(--foreground))' }}
-                  >
-                    Got a project?
-                    <br />
-                    <span style={{ color: 'hsl(var(--accent))' }}>Let&apos;s talk.</span>
-                  </h3>
-
-                  <p
-                    className="text-sm sm:text-base leading-relaxed mb-8 flex-1"
-                    style={{ color: 'hsl(var(--muted-foreground))' }}
-                  >
-                    I&apos;m interested in freelance opportunities, full-time positions, and exciting collaborations. If you have a project that needs my skills, don&apos;t hesitate to reach out.
-                  </p>
-
-                  {/* Quick info */}
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: 'hsl(var(--accent) / 0.6)' }} />
-                      <span className="text-sm" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                        {CONTACT_INFO.location}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 flex-shrink-0" style={{ color: 'hsl(var(--accent) / 0.6)' }} />
-                      <span className="text-sm" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                        {CONTACT_INFO.phone}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Copy email button */}
-                  <motion.button
-                    onClick={handleCopyEmail}
-                    className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl text-sm font-medium transition-all duration-300"
-                    style={{
-                      background: copied ? 'hsl(var(--accent) / 0.2)' : 'hsl(var(--accent) / 0.1)',
-                      color: 'hsl(var(--accent))',
-                      border: `1px solid ${copied ? 'hsl(var(--accent) / 0.5)' : 'hsl(var(--accent) / 0.2)'}`,
-                    }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        Email Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        Copy Email Address
-                      </>
-                    )}
-                  </motion.button>
-                </div>
+              <div className="mt-8 space-y-3.5 border-t border-[hsl(var(--border))] pt-7">
+                <p className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4 shrink-0 text-[hsl(var(--accent))]" />
+                  {CONTACT_INFO.location}
+                </p>
+                <p className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <Phone className="h-4 w-4 shrink-0 text-[hsl(var(--accent))]" />
+                  {CONTACT_INFO.phone}
+                </p>
               </div>
-            </motion.div>
 
-            {/* Right - Contact links */}
-            <div className="lg:col-span-3 flex flex-col gap-5">
-              {contactLinks.map((link, index) => {
-                const IconComponent = link.icon;
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="btn btn-ghost mt-8 w-full"
+                style={
+                  copied
+                    ? {
+                        borderColor: 'hsl(var(--accent) / 0.6)',
+                        color: 'hsl(var(--accent))',
+                      }
+                    : undefined
+                }
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    Email Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    Copy Email Address
+                  </>
+                )}
+              </button>
+            </div>
+          </Reveal>
+
+          {/* Contact links */}
+          <div className="flex flex-col gap-5 lg:col-span-3">
+            {contactLinks.map((link, index) => {
+              const IconComponent = link.icon;
+              return (
+                <motion.a
+                  key={link.title}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  initial={{ opacity: 0, x: 24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, ease: EASE, delay: 0.1 + index * 0.08 }}
+                  className="card card-hover group flex flex-1 items-center gap-5 p-7"
+                >
+                  <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl border border-[hsl(var(--accent)/0.18)] bg-[hsl(var(--accent)/0.08)] p-3.5 transition-transform duration-500 group-hover:scale-105">
+                    <IconComponent className="h-6 w-6 text-[hsl(var(--accent))]" />
+                  </span>
+
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg font-semibold text-foreground">
+                      {link.title}
+                    </span>
+                    <span className="mt-0.5 block truncate font-mono text-xs text-[hsl(var(--accent))] sm:text-sm">
+                      {link.value}
+                    </span>
+                    <span className="mt-1.5 hidden text-xs text-muted-foreground sm:block">
+                      {link.description}
+                    </span>
+                  </span>
+
+                  <span className="hidden shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted-foreground transition-colors duration-300 group-hover:text-[hsl(var(--accent))] md:block">
+                    {link.cta}
+                  </span>
+
+                  <span className="icon-btn h-11 w-11 shrink-0 group-hover:border-[hsl(var(--accent)/0.5)] group-hover:text-[hsl(var(--accent))]">
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </span>
+                </motion.a>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ===== FREELANCE PLATFORMS ===== */}
+        <Reveal className="mt-20 sm:mt-24" delay={0.05}>
+          <div
+            className="card relative p-8 sm:p-12"
+            style={{
+              background:
+                'linear-gradient(150deg, hsl(var(--accent) / 0.07), hsl(var(--primary) / 0.04))',
+              borderColor: 'hsl(var(--accent) / 0.18)',
+            }}
+          >
+            <span className="shimmer-line absolute inset-x-0 top-0 h-[2px]" aria-hidden />
+
+            <div className="mb-10 max-w-2xl">
+              <span className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[hsl(var(--accent)/0.22)] bg-[hsl(var(--accent)/0.1)]">
+                <Rocket className="h-6 w-6 text-[hsl(var(--accent))]" />
+              </span>
+
+              <h3 className="wordmark text-[clamp(1.8rem,4.5vw,3rem)]">
+                <span className="block text-foreground">
+                  Have a project or idea in mind?
+                </span>
+                <span className="block text-[hsl(var(--accent))]">
+                  Contact me &amp; place your order.
+                </span>
+              </h3>
+
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                Let&apos;s build your real solution — pick the platform you prefer and
+                let&apos;s get started.
+              </p>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {FREELANCE_PLATFORMS.map((platform, index) => {
+                const PlatformIcon = platform.icon;
                 return (
                   <motion.a
-                    key={link.title}
-                    href={link.href}
-                    target={link.href.startsWith('http') ? '_blank' : undefined}
-                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    className="group relative rounded-2xl p-6 sm:p-7 overflow-hidden transition-all duration-500 flex items-center gap-5 sm:gap-6"
-                    style={{
-                      background: 'hsl(var(--background))',
-                      border: '1px solid hsl(var(--border))',
-                    }}
-                    whileHover={{ x: 4 }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--accent) / 0.3)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 40px hsl(var(--accent) / 0.06)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--border))';
-                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                    }}
+                    key={platform.name}
+                    href={platform.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 22 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.55, ease: EASE, delay: index * 0.07 }}
+                    className="card card-hover group flex flex-col p-6"
+                    style={{ background: 'hsl(var(--background) / 0.6)' }}
                   >
-                    {/* Hover overlay */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background: `linear-gradient(135deg, hsl(var(--accent) / 0.03), transparent)`,
-                      }}
-                    />
-
-                    {/* Icon */}
-                    <div
-                      className="relative z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex-shrink-0 flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        background: 'hsl(var(--accent) / 0.08)',
-                        border: '1px solid hsl(var(--accent) / 0.15)',
-                      }}
-                    >
-                      <IconComponent className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: 'hsl(var(--accent))' }} />
+                    <div className="mb-5 flex items-start justify-between">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-[hsl(var(--accent)/0.18)] bg-[hsl(var(--accent)/0.08)] transition-transform duration-500 group-hover:scale-105">
+                        <PlatformIcon className="h-5 w-5 text-[hsl(var(--accent))]" />
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[hsl(var(--accent))]" />
                     </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <h3
-                          className="text-base sm:text-lg font-semibold"
-                          style={{ color: 'hsl(var(--foreground))' }}
-                        >
-                          {link.title}
-                        </h3>
-                      </div>
-                      <p
-                        className="text-xs sm:text-sm truncate"
-                        style={{ color: 'hsl(var(--accent) / 0.7)' }}
-                      >
-                        {link.value}
-                      </p>
-                      <p
-                        className="text-xs mt-1 hidden sm:block"
-                        style={{ color: 'hsl(var(--muted-foreground) / 0.6)' }}
-                      >
-                        {link.description}
-                      </p>
-                    </div>
+                    <h4 className="font-display text-lg font-semibold text-foreground">
+                      {platform.name}
+                    </h4>
+                    <p className="mt-1 flex-1 font-mono text-xs text-muted-foreground">
+                      {platform.tagline}
+                    </p>
 
-                    {/* Arrow */}
-                    <div className="relative z-10 flex-shrink-0">
-                      <motion.div
-                        className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                        style={{
-                          background: 'hsl(var(--accent) / 0.06)',
-                          border: '1px solid hsl(var(--accent) / 0.1)',
-                        }}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <ArrowUpRight
-                          className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          style={{ color: 'hsl(var(--accent))' }}
-                        />
-                      </motion.div>
-                    </div>
+                    <span className="mt-6 flex items-center gap-2 border-t border-[hsl(var(--border))] pt-5 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[hsl(var(--accent))]">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      {platform.cta}
+                    </span>
                   </motion.a>
                 );
               })}
             </div>
           </div>
+        </Reveal>
 
-          {/* ===== HIRE ME / PLACE YOUR ORDER ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.7, delay: 0.85 }}
-            className="mb-16 sm:mb-20"
-          >
-            <div
-              className="relative rounded-2xl p-7 sm:p-10 overflow-hidden"
-              style={{
-                background: `linear-gradient(135deg, hsl(var(--accent) / 0.07), hsl(var(--primary) / 0.05))`,
-                border: '1px solid hsl(var(--accent) / 0.15)',
-              }}
-            >
-              {/* Animated gradient top border */}
-              <div
-                className="absolute top-0 left-0 right-0 h-[2px]"
-                style={{
-                  background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))`,
-                  backgroundSize: '200% 100%',
-                  animation: 'shimmer 3s linear infinite',
-                }}
-              />
-
-              {/* Heading */}
-              <div className="relative z-10 text-center mb-9 sm:mb-10">
-                <motion.div
-                  className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5"
-                  style={{
-                    background: 'hsl(var(--accent) / 0.1)',
-                    border: '1px solid hsl(var(--accent) / 0.2)',
-                  }}
-                  whileHover={{ rotate: 10, scale: 1.05 }}
-                >
-                  <Rocket className="w-6 h-6" style={{ color: 'hsl(var(--accent))' }} />
-                </motion.div>
-
-                <h3
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  Have a project or idea in mind?
-                  <br />
-                  <span
-                    style={{
-                      background:
-                        'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    Contact me &amp; place your order.
-                  </span>
-                </h3>
-
-                <p
-                  className="text-sm sm:text-base max-w-2xl mx-auto"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  Let&apos;s build your real solution — pick the platform you prefer and let&apos;s
-                  get started.
-                </p>
-              </div>
-
-              {/* Platform cards */}
-              <div className="relative z-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                {FREELANCE_PLATFORMS.map((platform, index) => {
-                  const PlatformIcon = platform.icon;
-                  return (
-                    <motion.a
-                      key={platform.name}
-                      href={platform.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ duration: 0.5, delay: 0.95 + index * 0.08 }}
-                      whileHover={{ y: -5 }}
-                      className="group relative rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-500 flex flex-col"
-                      style={{
-                        background: 'hsl(var(--background))',
-                        border: '1px solid hsl(var(--border))',
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor =
-                          'hsl(var(--accent) / 0.35)';
-                        (e.currentTarget as HTMLElement).style.boxShadow =
-                          '0 20px 45px hsl(var(--accent) / 0.08)';
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--border))';
-                        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                      }}
-                    >
-                      {/* Hover overlay */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                        style={{
-                          background: `linear-gradient(135deg, hsl(var(--accent) / 0.04), transparent 65%, hsl(var(--primary) / 0.04))`,
-                        }}
-                      />
-
-                      <div className="relative z-10 flex items-start justify-between mb-4">
-                        <div
-                          className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                          style={{
-                            background: 'hsl(var(--accent) / 0.08)',
-                            border: '1px solid hsl(var(--accent) / 0.15)',
-                          }}
-                        >
-                          <PlatformIcon
-                            className="w-5 h-5"
-                            style={{ color: 'hsl(var(--accent))' }}
-                          />
-                        </div>
-                        <ArrowUpRight
-                          className="w-4 h-4 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          style={{ color: 'hsl(var(--accent))' }}
-                        />
-                      </div>
-
-                      <div className="relative z-10 flex-1">
-                        <h4
-                          className="text-base sm:text-lg font-semibold mb-1"
-                          style={{ color: 'hsl(var(--foreground))' }}
-                        >
-                          {platform.name}
-                        </h4>
-                        <p
-                          className="text-xs font-mono"
-                          style={{ color: 'hsl(var(--muted-foreground) / 0.7)' }}
-                        >
-                          {platform.tagline}
-                        </p>
-                      </div>
-
-                      <div
-                        className="relative z-10 mt-5 pt-4 flex items-center gap-2 text-xs font-mono uppercase tracking-wider"
-                        style={{
-                          borderTop: '1px solid hsl(var(--border))',
-                          color: 'hsl(var(--accent))',
-                        }}
-                      >
-                        <Sparkles className="w-3.5 h-3.5" />
-                        {platform.cta}
-                      </div>
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ===== BOTTOM CTA ===== */}
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-          >
-
-            <div
-              className="h-px w-32 mx-auto mb-8"
-              style={{
-                background: `linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), transparent)`,
-              }}
-            />
-            <p
-              className="text-lg sm:text-xl md:text-2xl font-light italic"
-              style={{ color: 'hsl(var(--muted-foreground) / 0.5)' }}
-            >
-              &quot;Great things are built by those who dare to start.&quot;
-            </p>
-          </motion.div>
-        </motion.div>
+        {/* ===== CLOSING QUOTE ===== */}
+        <Reveal className="mt-20 text-center sm:mt-28" delay={0.05}>
+          <span className="mx-auto mb-9 block h-px w-32 bg-[hsl(var(--accent)/0.35)]" />
+          <p className="mx-auto max-w-3xl font-display text-xl font-semibold leading-snug tracking-tight text-muted-foreground/70 sm:text-2xl md:text-3xl">
+            &quot;Great things are built by those who dare to start.&quot;
+          </p>
+        </Reveal>
       </div>
-
-      {/* CSS for shimmer animation */}
-      <style jsx>{`
-        @keyframes shimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-      `}</style>
     </section>
   );
 };

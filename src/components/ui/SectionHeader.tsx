@@ -1,81 +1,87 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { EASE } from './Reveal';
 
-interface SectionHeaderProps {
-  title: string;
-  subtitle?: string;
-  description?: string;
-  indicator?: string;
+type SectionHeaderProps = {
+  /** Small mono eyebrow label, e.g. "Expertise" */
+  eyebrow: string;
+  /** Section index used for the `03 //` marker */
+  index?: string;
+  /** First line of the large heading */
+  titleTop: string;
+  /** Second line of the large heading — rendered in the accent colour */
+  titleBottom?: string;
+  /** Optional supporting paragraph */
+  description?: ReactNode;
+  align?: 'left' | 'center';
   className?: string;
-  isInView?: boolean;
-  children?: ReactNode;
-}
+};
 
-export const SectionHeader = ({
-  title,
-  subtitle,
+/**
+ * The one heading pattern used across every section:
+ * eyebrow label + oversized two-line display heading + optional lede.
+ */
+const SectionHeader = ({
+  eyebrow,
+  index,
+  titleTop,
+  titleBottom,
   description,
-  indicator,
+  align = 'left',
   className = '',
-  isInView = true,
-  children,
 }: SectionHeaderProps) => {
+  const centered = align === 'center';
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className={`${className}`}
+    <header
+      className={`${centered ? 'text-center mx-auto max-w-3xl' : ''} ${className}`}
     >
-      {indicator && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex items-center justify-center gap-2 mb-4"
-        >
-          <div className="w-2 h-2 rounded-full bg-hsl(var(--accent))"></div>
-          <span className="font-mono text-xs text-hsl(var(--accent)) tracking-wider">
-            {indicator}
-          </span>
-          <div className="w-2 h-2 rounded-full bg-hsl(var(--accent))"></div>
-        </motion.div>
-      )}
-
-      <h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
-        style={{ color: 'hsl(var(--foreground))' }}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, ease: EASE }}
+        className={`flex items-center gap-3 mb-6 ${centered ? 'justify-center' : ''}`}
       >
-        {title}
-      </h2>
+        {index && (
+          <span className="font-mono text-[0.7rem] tracking-[0.2em] text-muted-foreground/60">
+            {index} //
+          </span>
+        )}
+        <span className="eyebrow">{eyebrow}</span>
+        <span className="h-px w-10 sm:w-16 bg-[hsl(var(--accent)/0.45)]" />
+      </motion.div>
 
-      {subtitle && (
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-base sm:text-lg max-w-2xl mx-auto px-4"
-          style={{ color: 'hsl(var(--muted-foreground))' }}
-        >
-          {subtitle}
-        </motion.p>
-      )}
+      <motion.h2
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, ease: EASE, delay: 0.06 }}
+        className="wordmark text-[clamp(2.6rem,7.5vw,5.6rem)]"
+      >
+        <span className="block text-foreground">{titleTop}</span>
+        {titleBottom && (
+          <span className="block text-[hsl(var(--accent))]">{titleBottom}</span>
+        )}
+      </motion.h2>
 
       {description && (
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-base sm:text-lg max-w-2xl mx-auto px-4"
-          style={{ color: 'hsl(var(--muted-foreground))' }}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.14 }}
+          className={`mt-7 text-base sm:text-lg leading-relaxed text-muted-foreground max-w-2xl ${
+            centered ? 'mx-auto' : ''
+          }`}
         >
           {description}
         </motion.p>
       )}
-
-      {children}
-    </motion.div>
+    </header>
   );
 };
+
+export default SectionHeader;

@@ -1,14 +1,8 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import {
-  ShieldCheck,
-  Award,
-  Lock,
-  ChevronRight,
-  Radar,
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { ShieldCheck, Award, Lock, ChevronRight } from 'lucide-react';
 import {
   SECURITY_INTRO,
   SECURITY_SKILLS,
@@ -16,648 +10,362 @@ import {
   SECURITY_LAB_WORK,
   SECURITY_APPLIED_PRACTICES,
 } from '@/constants';
+import Reveal, { EASE } from './ui/Reveal';
 
 const SecuritySection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
   const [activeLab, setActiveLab] = useState(0);
-
   const activeLabItem = SECURITY_LAB_WORK[activeLab];
   const ActiveLabIcon = activeLabItem.icon;
 
   return (
     <section
       id="security"
-      className="relative overflow-hidden py-24 sm:py-32"
-      style={{
-        background: `linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 50%, hsl(var(--background)) 100%)`,
-      }}
+      className="section relative overflow-hidden"
+      style={{ background: 'hsl(var(--term-bg))' }}
     >
-      {/* Background grid */}
+      {/* Terminal-flavoured backdrop */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        aria-hidden
+        className="absolute inset-0 opacity-[0.5]"
         style={{
-          backgroundImage: `linear-gradient(hsl(var(--accent)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
+          backgroundImage:
+            'linear-gradient(to right, hsl(var(--term-green) / 0.05) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--term-green) / 0.05) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, #000, transparent 80%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 70% 60% at 50% 30%, #000, transparent 80%)',
         }}
       />
-
-      {/* Top divider */}
+      <div className="terminal-scan absolute inset-0 opacity-30" aria-hidden />
       <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: `linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), transparent)`,
-        }}
+        aria-hidden
+        className="orb -left-40 top-1/4 h-[26rem] w-[26rem] opacity-20"
+        style={{ background: 'hsl(var(--term-green) / 0.5)' }}
       />
 
-      {/* Glow orbs */}
-      <div
-        className="absolute top-1/4 -right-40 w-80 h-80 rounded-full blur-3xl opacity-[0.06]"
-        style={{ background: 'hsl(var(--accent))' }}
-      />
-      <div
-        className="absolute bottom-1/4 -left-40 w-80 h-80 rounded-full blur-3xl opacity-[0.06]"
-        style={{ background: 'hsl(var(--primary))' }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* ===== HEADER ===== */}
-          <div className="text-center mb-16 sm:mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center justify-center gap-3 mb-6"
-            >
-              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-              <span
-                className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em]"
-                style={{ color: 'hsl(var(--accent))' }}
-              >
+      <div className="shell relative z-10 font-mono">
+        {/* ===== HEADER ===== */}
+        <header className="max-w-4xl">
+          <Reveal>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="text-[0.7rem] tracking-[0.2em] text-[hsl(var(--term-dim))]">
+                05 //
+              </span>
+              <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[hsl(var(--term-green))]">
                 Cyber Security
               </span>
-              <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-            </motion.div>
+              <span className="h-px w-16 bg-[hsl(var(--term-green)/0.4)]" />
+            </div>
+          </Reveal>
 
-            <motion.h2
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span style={{ color: 'hsl(var(--foreground))' }}>Ethical </span>
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Hacking
-              </span>
-            </motion.h2>
+          <Reveal delay={0.06}>
+            <h2 className="wordmark text-[clamp(2.6rem,7.5vw,5.6rem)]">
+              <span className="block text-[hsl(var(--foreground))]">Ethical</span>
+              <span className="block text-[hsl(var(--term-green))]">Hacking</span>
+            </h2>
+          </Reveal>
 
-            <motion.p
-              className="text-base sm:text-lg max-w-3xl mx-auto"
-              style={{ color: 'hsl(var(--muted-foreground))' }}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+          <Reveal delay={0.14}>
+            <p className="mt-8 max-w-3xl text-sm leading-relaxed text-[hsl(var(--term-dim))] sm:text-base">
+              <span className="text-[hsl(var(--term-green))]">$ </span>
               {SECURITY_INTRO.headline}
-            </motion.p>
-          </div>
+            </p>
+          </Reveal>
+        </header>
 
-          {/* ===== SUMMARY + STATS ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="grid lg:grid-cols-5 gap-6 sm:gap-8 mb-16 sm:mb-20"
-          >
-            {/* Summary card */}
-            <div
-              className="lg:col-span-3 relative rounded-2xl p-7 sm:p-8 overflow-hidden"
-              style={{
-                background: `linear-gradient(135deg, hsl(var(--accent) / 0.06), hsl(var(--primary) / 0.04))`,
-                border: '1px solid hsl(var(--accent) / 0.15)',
-              }}
-            >
-              <div
-                className="absolute top-0 left-0 right-0 h-[2px]"
-                style={{
-                  background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), transparent)`,
-                }}
-              />
-              <div className="flex items-center gap-4 mb-5">
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{
-                    background: 'hsl(var(--accent) / 0.1)',
-                    border: '1px solid hsl(var(--accent) / 0.2)',
-                  }}
-                >
-                  <ShieldCheck className="w-6 h-6" style={{ color: 'hsl(var(--accent))' }} />
-                </div>
-                <div>
-                  <h3
-                    className="text-lg sm:text-xl font-bold"
-                    style={{ color: 'hsl(var(--foreground))' }}
-                  >
-                    {SECURITY_INTRO.role}
-                  </h3>
-                  <p className="text-xs font-mono" style={{ color: 'hsl(var(--accent) / 0.7)' }}>
-                    Aspiring Professional · Lahore, Pakistan
-                  </p>
-                </div>
-              </div>
-              <p
-                className="text-sm sm:text-base leading-relaxed"
-                style={{ color: 'hsl(var(--muted-foreground))' }}
-              >
-                {SECURITY_INTRO.summary}
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="lg:col-span-2 grid grid-cols-3 lg:grid-cols-1 gap-4">
-              {SECURITY_INTRO.stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="rounded-2xl p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-4 text-center lg:text-left"
-                  style={{
-                    background: 'hsl(var(--background))',
-                    border: '1px solid hsl(var(--border))',
-                  }}
-                >
-                  <span
-                    className="text-2xl sm:text-3xl font-black font-mono"
-                    style={{ color: 'hsl(var(--accent))' }}
-                  >
-                    {stat.value}
-                  </span>
-                  <span
-                    className="text-[10px] sm:text-xs font-mono uppercase tracking-wider leading-tight"
-                    style={{ color: 'hsl(var(--muted-foreground) / 0.7)' }}
-                  >
-                    {stat.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ===== SECURITY SKILLS GRID ===== */}
-          <div className="mb-16 sm:mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="flex items-center gap-3 mb-8"
-            >
-              <Radar className="w-4 h-4 flex-shrink-0" style={{ color: 'hsl(var(--accent))' }} />
-              <h3
-                className="text-sm font-mono uppercase tracking-[0.2em]"
-                style={{ color: 'hsl(var(--foreground))' }}
-              >
-                Security Skills
-              </h3>
-              <div
-                className="flex-1 h-px"
-                style={{ background: 'hsl(var(--border))' }}
-              />
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {SECURITY_SKILLS.map((skill, index) => {
-                const IconComponent = skill.icon;
-                const isHovered = hoveredSkill === index;
-
-                return (
-                  <motion.div
-                    key={skill.title}
-                    initial={{ opacity: 0, y: 25 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.08 }}
-                    onHoverStart={() => setHoveredSkill(index)}
-                    onHoverEnd={() => setHoveredSkill(null)}
-                    whileHover={{ y: -5 }}
-                    className="group relative"
-                  >
-                    <div
-                      className="relative rounded-2xl p-6 sm:p-7 h-full overflow-hidden transition-all duration-500"
-                      style={{
-                        background: 'hsl(var(--background))',
-                        border: `1px solid ${isHovered ? 'hsl(var(--accent) / 0.3)' : 'hsl(var(--border))'}`,
-                        boxShadow: isHovered
-                          ? '0 25px 60px hsl(var(--accent) / 0.08), 0 0 0 1px hsl(var(--accent) / 0.1)'
-                          : 'none',
-                      }}
-                    >
-                      {/* Hover overlay */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                        style={{
-                          background: `linear-gradient(135deg, hsl(var(--accent) / 0.04), transparent 60%, hsl(var(--primary) / 0.04))`,
-                        }}
-                      />
-
-                      {/* Top accent line */}
-                      <div
-                        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                        style={{
-                          background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))`,
-                        }}
-                      />
-
-                      <div className="relative z-10">
-                        {/* Icon row */}
-                        <div className="flex items-center justify-between mb-5">
-                          <motion.div
-                            className="w-12 h-12 rounded-xl flex items-center justify-center"
-                            style={{
-                              background: 'hsl(var(--accent) / 0.08)',
-                              border: '1px solid hsl(var(--accent) / 0.15)',
-                            }}
-                            whileHover={{ rotate: 5, scale: 1.05 }}
-                          >
-                            <IconComponent
-                              className="w-5 h-5"
-                              style={{ color: 'hsl(var(--accent))' }}
-                            />
-                          </motion.div>
-                          <span
-                            className="text-4xl font-black font-mono opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 select-none"
-                            style={{ color: 'hsl(var(--accent))' }}
-                          >
-                            0{index + 1}
-                          </span>
-                        </div>
-
-                        <h4
-                          className="text-lg sm:text-xl font-bold mb-1.5"
-                          style={{ color: 'hsl(var(--foreground))' }}
-                        >
-                          {skill.title}
-                        </h4>
-
-                        <p
-                          className="text-[11px] sm:text-xs font-mono mb-5"
-                          style={{ color: 'hsl(var(--accent))' }}
-                        >
-                          {skill.highlight}
-                        </p>
-
-                        <div
-                          className="h-px w-full mb-4 opacity-50"
-                          style={{ background: 'hsl(var(--border))' }}
-                        />
-
-                        <ul className="space-y-2">
-                          {skill.items.map((item) => (
-                            <li key={item} className="flex items-start gap-2">
-                              <ChevronRight
-                                className="w-3.5 h-3.5 mt-0.5 flex-shrink-0"
-                                style={{ color: 'hsl(var(--accent) / 0.5)' }}
-                              />
-                              <span
-                                className="text-xs sm:text-sm leading-relaxed"
-                                style={{ color: 'hsl(var(--muted-foreground))' }}
-                              >
-                                {item}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* ===== HANDS-ON LAB (TERMINAL) ===== */}
-          <div className="mb-16 sm:mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex items-center gap-3 mb-8"
-            >
-              <Lock className="w-4 h-4 flex-shrink-0" style={{ color: 'hsl(var(--accent))' }} />
-              <h3
-                className="text-sm font-mono uppercase tracking-[0.2em]"
-                style={{ color: 'hsl(var(--foreground))' }}
-              >
-                Hands-On Lab Experience
-              </h3>
-              <div className="flex-1 h-px" style={{ background: 'hsl(var(--border))' }} />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="rounded-2xl overflow-hidden border"
-              style={{
-                borderColor: 'hsl(var(--border))',
-                background: 'hsl(var(--background))',
-              }}
-            >
-              {/* Terminal header */}
-              <div
-                className="flex items-center gap-3 px-5 py-3.5 border-b"
-                style={{
-                  borderColor: 'hsl(var(--border))',
-                  background: 'hsl(var(--muted) / 0.5)',
-                }}
-              >
+        {/* ===== SUMMARY + STATS ===== */}
+        <div className="mt-16 grid gap-6 lg:grid-cols-5 sm:mt-20">
+          <Reveal className="lg:col-span-3" delay={0.05}>
+            <div className="terminal h-full">
+              <div className="terminal-bar">
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[hsl(var(--term-green))]/70" />
                 </div>
-                <span
-                  className="font-mono text-xs ml-2 truncate"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  root@kali: ~/pentest-lab
+                <span className="ml-2 text-[0.7rem] text-[hsl(var(--term-dim))]">
+                  ~/profile --whoami
                 </span>
-                <div className="flex-1" />
-                <div className="hidden sm:flex gap-1.5">
-                  {['Kali', 'Docker'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 text-[10px] font-mono rounded"
-                      style={{
-                        background: 'hsl(var(--accent) / 0.08)',
-                        color: 'hsl(var(--accent) / 0.6)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
 
-              <div className="grid lg:grid-cols-5">
-                {/* Command list */}
-                <div
-                  className="lg:col-span-2 p-3 sm:p-4 lg:border-r border-b lg:border-b-0"
-                  style={{ borderColor: 'hsl(var(--border))' }}
-                >
-                  <div className="space-y-1.5">
-                    {SECURITY_LAB_WORK.map((lab, index) => {
-                      const isActive = activeLab === index;
-                      return (
-                        <button
-                          key={lab.title}
-                          type="button"
-                          onClick={() => setActiveLab(index)}
-                          className="w-full text-left px-3 py-3 rounded-xl transition-all duration-300 font-mono text-[11px] sm:text-xs"
-                          style={{
-                            background: isActive
-                              ? 'hsl(var(--accent) / 0.08)'
-                              : 'transparent',
-                            border: `1px solid ${isActive ? 'hsl(var(--accent) / 0.25)' : 'transparent'}`,
-                            color: isActive
-                              ? 'hsl(var(--accent))'
-                              : 'hsl(var(--muted-foreground))',
-                          }}
-                        >
-                          <span className="flex items-start gap-2">
-                            <span
-                              className="flex-shrink-0"
-                              style={{
-                                color: isActive
-                                  ? 'hsl(var(--accent))'
-                                  : 'hsl(var(--muted-foreground) / 0.4)',
-                              }}
-                            >
-                              $
-                            </span>
-                            <span className="break-all">{lab.command}</span>
-                          </span>
-                        </button>
-                      );
-                    })}
+              <div className="relative p-6 sm:p-8">
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[hsl(var(--term-green)/0.25)] bg-[hsl(var(--term-green)/0.08)]">
+                    <ShieldCheck className="h-6 w-6 text-[hsl(var(--term-green))]" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-foreground sm:text-xl">
+                      {SECURITY_INTRO.role}
+                    </h3>
+                    <p className="text-xs text-[hsl(var(--term-green))]/70">
+                      Aspiring Professional · Lahore, Pakistan
+                    </p>
                   </div>
                 </div>
 
-                {/* Active lab output */}
-                <div className="lg:col-span-3 p-5 sm:p-7">
-                  <motion.div
-                    key={activeLabItem.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                        style={{
-                          background: 'hsl(var(--accent) / 0.08)',
-                          border: '1px solid hsl(var(--accent) / 0.15)',
-                        }}
-                      >
-                        <ActiveLabIcon
-                          className="w-5 h-5"
-                          style={{ color: 'hsl(var(--accent))' }}
-                        />
-                      </div>
-                      <h4
-                        className="text-base sm:text-lg font-bold"
-                        style={{ color: 'hsl(var(--foreground))' }}
-                      >
-                        {activeLabItem.title}
-                      </h4>
-                    </div>
-
-                    <p
-                      className="text-sm leading-relaxed mb-6 font-mono"
-                      style={{ color: 'hsl(var(--muted-foreground))' }}
-                    >
-                      <span style={{ color: 'hsl(var(--accent) / 0.6)' }}>{'>> '}</span>
-                      {activeLabItem.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {activeLabItem.tools.map((tool) => (
-                        <span
-                          key={tool}
-                          className="px-3 py-1.5 text-[10px] sm:text-xs font-mono rounded-full"
-                          style={{
-                            backgroundColor: 'hsl(var(--accent) / 0.06)',
-                            color: 'hsl(var(--accent))',
-                            border: '1px solid hsl(var(--accent) / 0.12)',
-                          }}
-                        >
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
+                <p className="text-sm leading-relaxed text-[hsl(var(--term-dim))]">
+                  {SECURITY_INTRO.summary}
+                </p>
               </div>
-            </motion.div>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-3 gap-4 lg:col-span-2 lg:grid-cols-1">
+            {SECURITY_INTRO.stats.map((stat, index) => (
+              <Reveal key={stat.label} delay={0.1 + index * 0.08}>
+                <div className="flex h-full flex-col justify-center gap-1 rounded-2xl border border-[hsl(var(--term-green)/0.18)] bg-[hsl(var(--term-green)/0.04)] p-5 text-center lg:flex-row lg:items-center lg:gap-5 lg:text-left">
+                  <span className="wordmark text-3xl text-[hsl(var(--term-green))] sm:text-4xl">
+                    {stat.value}
+                  </span>
+                  <span className="text-[0.62rem] uppercase leading-tight tracking-[0.14em] text-[hsl(var(--term-dim))] sm:text-[0.7rem]">
+                    {stat.label}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
           </div>
+        </div>
 
-          {/* ===== TRAINING + APPLIED PRACTICES ===== */}
-          <div className="grid lg:grid-cols-5 gap-6 sm:gap-8">
-            {/* Training */}
-            <div className="lg:col-span-3">
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-                transition={{ duration: 0.5, delay: 0.65 }}
-                className="flex items-center gap-3 mb-8"
+        {/* ===== SKILL CARDS ===== */}
+        <Reveal className="mt-20 sm:mt-28">
+          <div className="flex items-center gap-4">
+            <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[hsl(var(--term-green))]">
+              Security Skills
+            </span>
+            <span className="h-px flex-1 bg-[hsl(var(--term-green)/0.2)]" />
+          </div>
+        </Reveal>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {SECURITY_SKILLS.map((skill, index) => {
+            const Icon = skill.icon;
+            return (
+              <motion.article
+                key={skill.title}
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.6, ease: EASE, delay: (index % 3) * 0.08 }}
+                className="group flex flex-col rounded-2xl border border-[hsl(var(--term-green)/0.16)] bg-[hsl(var(--term-green)/0.03)] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-[hsl(var(--term-green)/0.42)] hover:bg-[hsl(var(--term-green)/0.06)]"
               >
-                <Award className="w-4 h-4 flex-shrink-0" style={{ color: 'hsl(var(--accent))' }} />
-                <h3
-                  className="text-sm font-mono uppercase tracking-[0.2em]"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  Training & Certifications
+                <div className="mb-6 flex items-start justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-[hsl(var(--term-green)/0.22)] bg-[hsl(var(--term-green)/0.08)] transition-transform duration-500 group-hover:-rotate-6">
+                    <Icon className="h-5 w-5 text-[hsl(var(--term-green))]" />
+                  </span>
+                  <span className="wordmark select-none text-4xl text-[hsl(var(--term-green))]/10 transition-colors duration-500 group-hover:text-[hsl(var(--term-green))]/25">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-lg font-semibold text-foreground">
+                  {skill.title}
                 </h3>
-                <div className="flex-1 h-px" style={{ background: 'hsl(var(--border))' }} />
-              </motion.div>
+                <p className="mt-1.5 text-xs text-[hsl(var(--term-green))]/70">
+                  {skill.highlight}
+                </p>
 
-              <div className="space-y-4">
-                {SECURITY_TRAINING.map((item, index) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ duration: 0.5, delay: 0.7 + index * 0.08 }}
-                    whileHover={{ x: 4 }}
-                    className="group relative rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-500"
-                    style={{
-                      background: 'hsl(var(--background))',
-                      border: '1px solid hsl(var(--border))',
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor =
-                        'hsl(var(--accent) / 0.3)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = 'hsl(var(--border))';
-                    }}
+                <ul className="mt-6 flex-1 space-y-2.5 border-t border-[hsl(var(--term-green)/0.14)] pt-5">
+                  {skill.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-xs leading-relaxed text-[hsl(var(--term-dim))]"
+                    >
+                      <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[hsl(var(--term-green))]/60" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* ===== HANDS-ON LAB TERMINAL ===== */}
+        <Reveal className="mt-20 sm:mt-28">
+          <div className="flex items-center gap-4">
+            <Lock className="h-4 w-4 shrink-0 text-[hsl(var(--term-green))]" />
+            <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[hsl(var(--term-green))]">
+              Hands-On Lab Experience
+            </span>
+            <span className="h-px flex-1 bg-[hsl(var(--term-green)/0.2)]" />
+          </div>
+        </Reveal>
+
+        <Reveal className="mt-8" delay={0.08}>
+          <div className="terminal">
+            <div className="terminal-bar">
+              <div className="flex gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[hsl(var(--term-green))]/70" />
+              </div>
+              <span className="ml-2 truncate text-[0.7rem] text-[hsl(var(--term-dim))]">
+                root@kali: ~/pentest-lab
+              </span>
+              <span className="flex-1" />
+              <div className="hidden gap-1.5 sm:flex">
+                {['Kali', 'Docker'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded px-2 py-0.5 text-[10px] text-[hsl(var(--term-green))]/70 bg-[hsl(var(--term-green)/0.08)]"
                   >
-                    <div
-                      className="absolute left-0 top-0 bottom-0 w-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background: `linear-gradient(180deg, hsl(var(--accent)), hsl(var(--primary)))`,
-                      }}
-                    />
-
-                    <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-                      <h4
-                        className="text-base sm:text-lg font-bold"
-                        style={{ color: 'hsl(var(--foreground))' }}
-                      >
-                        {item.title}
-                      </h4>
-                      <span
-                        className="px-2.5 py-1 text-[10px] font-mono rounded-full whitespace-nowrap"
-                        style={{
-                          background: 'hsl(var(--accent) / 0.08)',
-                          color: 'hsl(var(--accent))',
-                          border: '1px solid hsl(var(--accent) / 0.15)',
-                        }}
-                      >
-                        {item.duration}
-                      </span>
-                    </div>
-
-                    <p
-                      className="text-xs font-mono mb-3"
-                      style={{ color: 'hsl(var(--accent) / 0.7)' }}
-                    >
-                      {item.provider}
-                    </p>
-
-                    <p
-                      className="text-xs sm:text-sm leading-relaxed"
-                      style={{ color: 'hsl(var(--muted-foreground))' }}
-                    >
-                      {item.description}
-                    </p>
-                  </motion.div>
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
 
-            {/* Applied practices */}
-            <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="flex items-center gap-3 mb-8"
-              >
-                <ShieldCheck
-                  className="w-4 h-4 flex-shrink-0"
-                  style={{ color: 'hsl(var(--accent))' }}
-                />
-                <h3
-                  className="text-sm font-mono uppercase tracking-[0.2em]"
-                  style={{ color: 'hsl(var(--foreground))' }}
+            <div className="relative grid lg:grid-cols-5">
+              {/* Command list */}
+              <div className="border-b border-[hsl(var(--term-green)/0.14)] p-3 sm:p-4 lg:col-span-2 lg:border-b-0 lg:border-r">
+                <div className="space-y-1.5">
+                  {SECURITY_LAB_WORK.map((lab, index) => {
+                    const isActive = activeLab === index;
+                    return (
+                      <button
+                        key={lab.title}
+                        type="button"
+                        onClick={() => setActiveLab(index)}
+                        aria-pressed={isActive}
+                        className={`w-full rounded-xl px-3 py-3 text-left text-[11px] transition-all duration-300 sm:text-xs ${
+                          isActive
+                            ? 'border border-[hsl(var(--term-green)/0.35)] bg-[hsl(var(--term-green)/0.1)] text-[hsl(var(--term-green))]'
+                            : 'border border-transparent text-[hsl(var(--term-dim))] hover:bg-[hsl(var(--term-green)/0.05)] hover:text-[hsl(var(--term-green))]/80'
+                        }`}
+                      >
+                        <span className="flex items-start gap-2">
+                          <span className="shrink-0 opacity-70">$</span>
+                          <span className="break-all">{lab.command}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Active lab output */}
+              <div className="p-6 sm:p-8 lg:col-span-3">
+                <motion.div
+                  key={activeLabItem.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: EASE }}
                 >
+                  <div className="mb-5 flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[hsl(var(--term-green)/0.22)] bg-[hsl(var(--term-green)/0.08)]">
+                      <ActiveLabIcon className="h-5 w-5 text-[hsl(var(--term-green))]" />
+                    </span>
+                    <h4 className="font-display text-base font-semibold text-foreground sm:text-lg">
+                      {activeLabItem.title}
+                    </h4>
+                  </div>
+
+                  <p className="mb-6 text-sm leading-relaxed text-[hsl(var(--term-dim))]">
+                    <span className="text-[hsl(var(--term-green))]/70">{'>> '}</span>
+                    {activeLabItem.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {activeLabItem.tools.map((tool) => (
+                      <span
+                        key={tool}
+                        className="rounded-full border border-[hsl(var(--term-green)/0.2)] bg-[hsl(var(--term-green)/0.06)] px-3 py-1.5 text-[10px] text-[hsl(var(--term-green))] sm:text-xs"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="mt-6 text-xs text-[hsl(var(--term-green))]/60">
+                    <span className="term-caret" />
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* ===== TRAINING + SECURITY IN PRODUCTION ===== */}
+        <div className="mt-20 grid gap-8 lg:grid-cols-5 sm:mt-28">
+          {/* Training */}
+          <div className="lg:col-span-3">
+            <Reveal>
+              <div className="flex items-center gap-4">
+                <Award className="h-4 w-4 shrink-0 text-[hsl(var(--term-green))]" />
+                <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[hsl(var(--term-green))]">
+                  Training &amp; Certifications
+                </span>
+                <span className="h-px flex-1 bg-[hsl(var(--term-green)/0.2)]" />
+              </div>
+            </Reveal>
+
+            <div className="mt-8 space-y-4">
+              {SECURITY_TRAINING.map((item, index) => (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, x: -18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.55, ease: EASE, delay: index * 0.07 }}
+                  className="group rounded-2xl border border-[hsl(var(--term-green)/0.16)] bg-[hsl(var(--term-green)/0.03)] p-6 transition-all duration-500 hover:translate-x-1.5 hover:border-[hsl(var(--term-green)/0.4)]"
+                >
+                  <div className="mb-2 flex flex-wrap items-start justify-between gap-3">
+                    <h4 className="font-display text-base font-semibold text-foreground sm:text-lg">
+                      {item.title}
+                    </h4>
+                    <span className="whitespace-nowrap rounded-full border border-[hsl(var(--term-green)/0.2)] bg-[hsl(var(--term-green)/0.07)] px-2.5 py-1 text-[10px] text-[hsl(var(--term-green))]">
+                      {item.duration}
+                    </span>
+                  </div>
+
+                  <p className="mb-3 text-xs text-[hsl(var(--term-green))]/70">
+                    {item.provider}
+                  </p>
+
+                  <p className="text-xs leading-relaxed text-[hsl(var(--term-dim))] sm:text-sm">
+                    {item.description}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+
+          {/* Applied practices */}
+          <div className="lg:col-span-2">
+            <Reveal>
+              <div className="flex items-center gap-4">
+                <ShieldCheck className="h-4 w-4 shrink-0 text-[hsl(var(--term-green))]" />
+                <span className="text-[0.7rem] uppercase tracking-[0.28em] text-[hsl(var(--term-green))]">
                   Security in Production
-                </h3>
-                <div className="flex-1 h-px" style={{ background: 'hsl(var(--border))' }} />
-              </motion.div>
+                </span>
+                <span className="h-px flex-1 bg-[hsl(var(--term-green)/0.2)]" />
+              </div>
+            </Reveal>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                transition={{ duration: 0.6, delay: 0.75 }}
-                className="relative rounded-2xl p-6 sm:p-7 h-full overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, hsl(var(--accent) / 0.06), hsl(var(--primary) / 0.04))`,
-                  border: '1px solid hsl(var(--accent) / 0.15)',
-                }}
-              >
-                <div
-                  className="absolute top-0 left-0 right-0 h-[2px]"
-                  style={{
-                    background: `linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)), transparent)`,
-                  }}
-                />
-
-                <p
-                  className="text-sm leading-relaxed mb-6"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  Security practices applied while building and shipping a live healthcare SaaS
-                  platform used daily by medical professionals.
+            <Reveal className="mt-8" delay={0.08}>
+              <div className="rounded-2xl border border-[hsl(var(--term-green)/0.2)] bg-[hsl(var(--term-green)/0.05)] p-7">
+                <p className="mb-6 text-sm leading-relaxed text-[hsl(var(--term-dim))]">
+                  Security practices applied while building and shipping a live
+                  healthcare SaaS platform used daily by medical professionals.
                 </p>
 
                 <ul className="space-y-4">
                   {SECURITY_APPLIED_PRACTICES.map((practice) => (
                     <li key={practice} className="flex items-start gap-3">
-                      <div
-                        className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5"
-                        style={{
-                          background: 'hsl(var(--accent) / 0.1)',
-                          border: '1px solid hsl(var(--accent) / 0.2)',
-                        }}
-                      >
-                        <Lock className="w-2.5 h-2.5" style={{ color: 'hsl(var(--accent))' }} />
-                      </div>
-                      <span
-                        className="text-xs sm:text-sm leading-relaxed"
-                        style={{ color: 'hsl(var(--muted-foreground))' }}
-                      >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-[hsl(var(--term-green)/0.25)] bg-[hsl(var(--term-green)/0.1)]">
+                        <Lock className="h-2.5 w-2.5 text-[hsl(var(--term-green))]" />
+                      </span>
+                      <span className="text-xs leading-relaxed text-[hsl(var(--term-dim))] sm:text-sm">
                         {practice}
                       </span>
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            </div>
+              </div>
+            </Reveal>
           </div>
-        </motion.div>
+        </div>
       </div>
-
-      {/* Bottom gradient */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          background: `linear-gradient(to top, hsl(var(--background)), transparent)`,
-        }}
-      />
     </section>
   );
 };

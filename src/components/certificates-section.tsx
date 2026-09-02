@@ -1,10 +1,12 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Award, Maximize2, X, MousePointer2 } from 'lucide-react';
 import { CERTIFICATE_CATEGORIES } from '@/constants';
+import SectionHeader from './ui/SectionHeader';
+import Reveal, { EASE } from './ui/Reveal';
 
 /**
  * Builds the list rendered inside a marquee track.
@@ -29,7 +31,7 @@ type MarqueeRowProps = {
 const MarqueeRow = ({ images, direction, title, onSelect }: MarqueeRowProps) => {
   const { set, slides } = buildSlides(images);
   // Keeps a constant scroll speed no matter how many certificates a row has
-  const duration = set.length * 9;
+  const duration = set.length * 10;
 
   return (
     <div className="relative">
@@ -80,16 +82,9 @@ const MarqueeRow = ({ images, direction, title, onSelect }: MarqueeRowProps) => 
       </div>
 
       {/* Hover hint - fades out as soon as the row is hovered */}
-      <div className="cert-hover-hint mt-4 flex justify-center">
-        <span
-          className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.15em] px-3 py-1.5 rounded-full"
-          style={{
-            color: 'hsl(var(--muted-foreground))',
-            background: 'hsl(var(--muted) / 0.3)',
-            border: '1px solid hsl(var(--border))',
-          }}
-        >
-          <MousePointer2 className="w-3 h-3" />
+      <div className="cert-hover-hint mt-5 flex justify-center">
+        <span className="chip">
+          <MousePointer2 className="h-3 w-3" />
           Hover to pause
         </span>
       </div>
@@ -98,8 +93,6 @@ const MarqueeRow = ({ images, direction, title, onSelect }: MarqueeRowProps) => 
 };
 
 const CertificatesSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(
     null
   );
@@ -135,183 +128,62 @@ const CertificatesSection = () => {
   }, [lightbox, closeLightbox]);
 
   return (
-    <section
-      id="certificates"
-      className="relative overflow-hidden py-24 sm:py-32"
-      style={{
-        background: `linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 50%, hsl(var(--background)) 100%)`,
-      }}
-    >
-      {/* Background decorations */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 30% 30%, hsl(var(--accent)) 1px, transparent 1px), radial-gradient(circle at 70% 70%, hsl(var(--primary)) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }}
-      />
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: `linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), transparent)`,
-        }}
-      />
-      <div
-        className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full blur-3xl opacity-[0.07] pointer-events-none"
-        style={{ background: 'hsl(var(--accent))' }}
-      />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-[0.07] pointer-events-none"
-        style={{ background: 'hsl(var(--primary))' }}
-      />
+    <section id="certificates" className="section relative overflow-hidden">
+      <div className="rule absolute top-0 left-0 right-0" aria-hidden />
 
       {/* ===== SECTION HEADER ===== */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 sm:mb-20"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center justify-center gap-3 mb-6"
-          >
-            <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-            <span
-              className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em]"
-              style={{ color: 'hsl(var(--accent))' }}
-            >
-              Licenses &amp; Certificates
-            </span>
-            <div className="h-px w-8 sm:w-12" style={{ background: 'hsl(var(--accent))' }} />
-          </motion.div>
+      <div className="shell relative z-10">
+        <SectionHeader
+          index="08"
+          eyebrow="Licenses & Certificates"
+          titleTop="Verified"
+          titleBottom="Credentials"
+          description="Professional certifications across offensive security, cyber defense and applied artificial intelligence."
+        />
 
-          <motion.h2
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <span style={{ color: 'hsl(var(--foreground))' }}>Verified </span>
-            <span
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Credentials
-            </span>
-          </motion.h2>
-
-          <motion.p
-            className="text-base sm:text-lg max-w-2xl mx-auto"
-            style={{ color: 'hsl(var(--muted-foreground))' }}
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Professional certifications across offensive security, cyber defense
-            and applied artificial intelligence.
-          </motion.p>
-
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-3 mt-8"
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <span
-              className="inline-flex items-center gap-2 text-xs font-mono px-4 py-2 rounded-full"
-              style={{
-                background: 'hsl(var(--accent) / 0.08)',
-                color: 'hsl(var(--accent))',
-                border: '1px solid hsl(var(--accent) / 0.15)',
-              }}
-            >
-              <Award className="w-3.5 h-3.5" />
-              {totalCertificates} Certificates
-            </span>
-            <span
-              className="inline-flex items-center gap-2 text-xs font-mono px-4 py-2 rounded-full"
-              style={{
-                background: 'hsl(var(--primary) / 0.08)',
-                color: 'hsl(var(--primary))',
-                border: '1px solid hsl(var(--primary) / 0.15)',
-              }}
-            >
-              {CERTIFICATE_CATEGORIES.length} Specializations
-            </span>
-          </motion.div>
-        </motion.div>
+        <Reveal className="mt-8 flex flex-wrap gap-3" delay={0.15}>
+          <span className="chip chip-accent">
+            <Award className="h-3.5 w-3.5" />
+            {totalCertificates} Certificates
+          </span>
+          <span className="chip chip-accent">
+            {CERTIFICATE_CATEGORIES.length} Specializations
+          </span>
+        </Reveal>
       </div>
 
       {/* ===== CATEGORY ROWS ===== */}
-      <div className="relative z-10 space-y-20 sm:space-y-24">
+      <div className="relative z-10 mt-20 space-y-24 sm:mt-24 sm:space-y-28">
         {CERTIFICATE_CATEGORIES.map((category, index) => {
           const Icon = category.icon;
           return (
             <motion.div
               key={category.id}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.7, delay: index * 0.08 }}
+              transition={{ duration: 0.75, ease: EASE, delay: index * 0.06 }}
             >
               {/* Category heading */}
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10">
+              <div className="shell mb-9 sm:mb-11">
                 <div className="flex items-center gap-4 sm:gap-5">
-                  <div
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: `${category.color.replace(')', ' / 0.1)')}`,
-                      border: `1px solid ${category.color.replace(')', ' / 0.2)')}`,
-                      color: category.color,
-                    }}
-                  >
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
-                  </div>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[hsl(var(--accent)/0.2)] bg-[hsl(var(--accent)/0.08)] sm:h-14 sm:w-14">
+                    <Icon className="h-6 w-6 text-[hsl(var(--accent))] sm:h-7 sm:w-7" />
+                  </span>
 
-                  <div className="min-w-0">
-                    <h3
-                      className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight"
-                      style={{ color: 'hsl(var(--foreground))' }}
-                    >
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display text-xl font-semibold leading-tight tracking-tight text-foreground sm:text-2xl md:text-3xl">
                       {category.title}
                     </h3>
-                    <p
-                      className="text-xs sm:text-sm mt-1"
-                      style={{ color: 'hsl(var(--muted-foreground))' }}
-                    >
+                    <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
                       {category.subtitle}
                     </p>
                   </div>
 
-                  <div className="hidden sm:flex items-center gap-4 flex-1 ml-2">
-                    <div
-                      className="h-px flex-1"
-                      style={{
-                        background: `linear-gradient(90deg, ${category.color.replace(
-                          ')',
-                          ' / 0.3)'
-                        )}, transparent)`,
-                      }}
-                    />
-                    <span
-                      className="text-xs font-mono px-3 py-1.5 rounded-full whitespace-nowrap"
-                      style={{
-                        background: category.color.replace(')', ' / 0.08)'),
-                        color: category.color,
-                        border: `1px solid ${category.color.replace(')', ' / 0.15)')}`,
-                      }}
-                    >
-                      {category.images.length.toString().padStart(2, '0')}{' '}
-                      Certificates
-
+                  <div className="hidden flex-1 items-center gap-4 sm:flex">
+                    <span className="h-px flex-1 bg-[hsl(var(--border))]" />
+                    <span className="chip chip-accent whitespace-nowrap">
+                      {category.images.length.toString().padStart(2, '0')} Certificates
                     </span>
                   </div>
                 </div>
@@ -329,14 +201,6 @@ const CertificatesSection = () => {
         })}
       </div>
 
-      {/* Bottom gradient */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          background: `linear-gradient(to top, hsl(var(--background)), transparent)`,
-        }}
-      />
-
       {/* ===== LIGHTBOX ===== */}
       <AnimatePresence>
         {lightbox && (
@@ -351,9 +215,9 @@ const CertificatesSection = () => {
             aria-modal="true"
             aria-label={`${lightbox.label} certificate preview`}
             style={{
-              background: 'hsl(0 0% 0% / 0.88)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
+              background: 'hsl(0 0% 0% / 0.9)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
             }}
           >
             <motion.div
@@ -361,36 +225,28 @@ const CertificatesSection = () => {
               initial={{ scale: 0.94, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.94, opacity: 0, y: 12 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              transition={{ duration: 0.3, ease: EASE }}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <span
-                  className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] truncate"
-                  style={{ color: 'hsl(var(--accent))' }}
-                >
+              <div className="mb-3 flex items-center justify-between gap-4">
+                <span className="truncate font-mono text-xs uppercase tracking-[0.2em] text-[hsl(var(--accent))] sm:text-sm">
                   {lightbox.label}
                 </span>
                 <button
                   type="button"
                   onClick={closeLightbox}
                   aria-label="Close certificate preview"
-                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300"
-                  style={{
-                    color: 'hsl(var(--foreground))',
-                    background: 'hsl(var(--muted) / 0.5)',
-                    border: '1px solid hsl(var(--border))',
-                  }}
+                  className="icon-btn h-10 w-10 shrink-0 text-foreground"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
               <div
-                className="relative w-full rounded-xl overflow-hidden"
+                className="relative w-full overflow-hidden rounded-2xl"
                 style={{
                   border: '1px solid hsl(var(--accent) / 0.25)',
-                  boxShadow: '0 40px 80px -20px rgba(0,0,0,0.8)',
+                  boxShadow: '0 40px 90px -20px rgba(0,0,0,0.85)',
                 }}
               >
                 <Image
@@ -399,7 +255,7 @@ const CertificatesSection = () => {
                   width={1650}
                   height={1275}
                   sizes="100vw"
-                  className="w-full h-auto"
+                  className="h-auto w-full"
                   priority
                 />
               </div>

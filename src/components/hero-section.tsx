@@ -1,371 +1,273 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
+import { useRef } from 'react';
 import { ArrowRight, Play, Github, Linkedin, Mail } from 'lucide-react';
+import { EASE } from './ui/Reveal';
+
+const SOCIALS = [
+  { icon: Github, href: 'https://github.com/Abdullah-JUTT-cloud', label: 'GitHub' },
+  {
+    icon: Linkedin,
+    href: 'https://www.linkedin.com/in/muhammad-abdullah-757aa2287/',
+    label: 'LinkedIn',
+  },
+  { icon: Mail, href: 'mailto:abdullahjuttjutt910@gmail.com', label: 'Email' },
+];
 
 const HeroSection = () => {
-  const scrollToSection = (selector: string) => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const ref = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
-  const scrollToExpertise = () => scrollToSection('#expertise');
-  const scrollToIntro = () => scrollToSection('#intro');
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+
+  // Subtle parallax on the portrait + orb
+  const orbY = useTransform(scrollYProgress, [0, 1], ['0%', reduceMotion ? '0%' : '26%']);
+  const portraitY = useTransform(scrollYProgress, [0, 1], ['0%', reduceMotion ? '0%' : '10%']);
+
+  const scrollToSection = (selector: string) => {
+    document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section
+      ref={ref}
       id="home"
-      className="min-h-screen flex items-center relative overflow-hidden"
-      style={{
-        background: `linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(var(--background)) 40%, hsl(0 0% 5%) 100%)`,
-      }}
+      className="relative min-h-svh flex items-center overflow-hidden pt-28 pb-24 sm:pt-32 sm:pb-28"
     >
-      {/* Background grid */}
+      <div className="grid-backdrop" aria-hidden />
+
+      {/* Abstract gradient orb sitting behind the portrait */}
+      <motion.div
+        aria-hidden
+        style={{ y: orbY }}
+        className="orb right-[-18%] top-[6%] h-[34rem] w-[34rem] sm:h-[42rem] sm:w-[42rem]"
+      >
+        <div
+          className="h-full w-full rounded-full opacity-[0.5]"
+          style={{
+            background:
+              'conic-gradient(from 200deg at 50% 50%, hsl(var(--accent) / 0.5), hsl(var(--primary) / 0.35), transparent 62%, hsl(var(--accent) / 0.35))',
+          }}
+        />
+      </motion.div>
       <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px),
-            linear-gradient(hsl(var(--accent)) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-        }}
+        aria-hidden
+        className="orb left-[-20%] bottom-[-10%] h-[26rem] w-[26rem] opacity-40"
+        style={{ background: 'hsl(var(--primary) / 0.35)' }}
       />
 
-      {/* Large gradient orbs */}
-      <div
-        className="absolute top-20 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-[0.04]"
-        style={{ background: 'hsl(var(--accent))' }}
-      />
-      <div
-        className="absolute bottom-20 -right-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-[0.04]"
-        style={{ background: 'hsl(var(--primary))' }}
-      />
-
-      {/* Floating accent line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: `linear-gradient(90deg, transparent, hsl(var(--accent) / 0.2), transparent)`,
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 sm:py-24 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="order-2 lg:order-1"
-          >
-            {/* Status badge */}
+      <div className="shell relative z-10 w-full">
+        <div className="grid lg:grid-cols-12 gap-y-14 lg:gap-x-12 items-center">
+          {/* ---------- Copy ---------- */}
+          <div className="lg:col-span-7 order-2 lg:order-1">
+            {/* Availability badge */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="inline-flex items-center gap-2 mb-8"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.15 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--foreground)/0.03)] px-4 py-2 mb-9"
             >
-              <div className="relative flex h-2.5 w-2.5">
-                <span
-                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ backgroundColor: '#22c55e' }}
-                />
-                <span
-                  className="relative inline-flex rounded-full h-2.5 w-2.5"
-                  style={{ backgroundColor: '#22c55e' }}
-                />
-              </div>
-              <span
-                className="text-xs sm:text-sm font-mono tracking-wider"
-                style={{ color: 'hsl(var(--muted-foreground))' }}
-              >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              <span className="font-mono text-[0.72rem] tracking-[0.14em] uppercase text-muted-foreground">
                 Available for opportunities
               </span>
             </motion.div>
 
-            {/* Name */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-6"
-            >
-              <span style={{ color: 'hsl(var(--foreground))' }}>Abdullah</span>
-              <br />
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Jutt
-              </span>
-            </motion.h1>
+            {/* Wordmark */}
+            <h1 className="wordmark text-[clamp(3.4rem,14vw,10rem)]">
+              {['Abdullah', 'Jutt'].map((word, i) => (
+                <span key={word} className="block overflow-hidden">
+                  <motion.span
+                    className={`block ${i === 1 ? 'text-[hsl(var(--accent))]' : 'text-foreground'}`}
+                    initial={{ y: '110%' }}
+                    animate={{ y: '0%' }}
+                    transition={{ duration: 0.95, ease: EASE, delay: 0.2 + i * 0.09 }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
 
             {/* Roles */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap items-center gap-3 mb-6"
+              transition={{ duration: 0.7, ease: EASE, delay: 0.5 }}
+              className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2"
             >
-              <span
-                className="text-sm sm:text-base font-mono uppercase tracking-[0.15em]"
-                style={{ color: 'hsl(var(--muted-foreground))' }}
-              >
+              <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.22em] text-muted-foreground">
                 Software Engineer
               </span>
-              <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: 'hsl(var(--accent))' }}
-              />
-              <span
-                className="text-sm sm:text-base font-mono uppercase tracking-[0.15em]"
-                style={{ color: 'hsl(var(--accent))' }}
-              >
+              <span className="h-1 w-1 rounded-full bg-[hsl(var(--accent))]" />
+              <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
                 Full Stack Developer
               </span>
             </motion.div>
 
-            {/* Description */}
+            {/* Tagline */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="text-sm sm:text-base leading-relaxed max-w-lg mb-8"
-              style={{ color: 'hsl(var(--muted-foreground))' }}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.6 }}
+              className="mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground"
             >
-              Architecting end-to-end applications with zero tolerance for inefficiency — only clean, scalable, and battle-tested systems. Delivering solutions built to scale and dominate in production.
+              Architecting end-to-end applications with zero tolerance for
+              inefficiency — only clean, scalable, and battle-tested systems.
+              Delivering solutions built to scale and dominate in production.
             </motion.p>
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="flex flex-wrap gap-4 mb-10"
+              transition={{ duration: 0.7, ease: EASE, delay: 0.7 }}
+              className="mt-10 flex flex-wrap items-center gap-4"
             >
-              <motion.button
-                onClick={scrollToExpertise}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-medium transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                  color: 'hsl(var(--background))',
-                }}
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+              <button
+                type="button"
+                onClick={() => scrollToSection('#work')}
+                className="btn btn-solid group"
               >
                 View Portfolio
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
 
-              <motion.button
-                onClick={scrollToIntro}
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-medium transition-all duration-300"
-                style={{
-                  background: 'hsl(var(--accent) / 0.06)',
-                  border: '1px solid hsl(var(--accent) / 0.2)',
-                  color: 'hsl(var(--foreground))',
-                }}
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.45)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px hsl(var(--accent) / 0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.2)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+              <button
+                type="button"
+                onClick={() => scrollToSection('#intro')}
+                className="btn btn-ghost group"
               >
-                <span
-                  className="flex items-center justify-center w-5 h-5 rounded-full"
-                  style={{ background: 'hsl(var(--accent) / 0.15)' }}
-                >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[hsl(var(--accent)/0.14)]">
                   <Play
-                    className="w-2.5 h-2.5 ml-[1px]"
-                    style={{ color: 'hsl(var(--accent))' }}
+                    className="ml-[1px] h-2.5 w-2.5 text-[hsl(var(--accent))]"
                     fill="currentColor"
                   />
                 </span>
                 Watch My Intro
-              </motion.button>
+              </button>
             </motion.div>
 
-            {/* Social links */}
+            {/* Socials */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex items-center gap-4"
+              transition={{ duration: 0.7, ease: EASE, delay: 0.85 }}
+              className="mt-12 flex items-center gap-3"
             >
-              <span
-                className="text-xs font-mono uppercase tracking-wider"
-                style={{ color: 'hsl(var(--muted-foreground) / 0.5)' }}
-              >
+              <span className="font-mono text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground/50">
                 Find me
               </span>
-              <div
-                className="h-px w-6"
-                style={{ background: 'hsl(var(--border))' }}
-              />
-              {[
-                { icon: Github, href: 'https://github.com/Abdullah-JUTT-cloud', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://www.linkedin.com/in/muhammad-abdullah-757aa2287/', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:abdullahjuttjutt910@gmail.com', label: 'Email' },
-              ].map((social) => (
-                <motion.a
+              <span className="h-px w-8 bg-[hsl(var(--border))]" />
+              {SOCIALS.map((social) => (
+                <a
                   key={social.label}
                   href={social.href}
                   target={social.href.startsWith('http') ? '_blank' : undefined}
                   rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                  style={{
-                    background: 'hsl(var(--accent) / 0.06)',
-                    border: '1px solid hsl(var(--accent) / 0.1)',
-                    color: 'hsl(var(--muted-foreground))',
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.3)';
-                    e.currentTarget.style.color = 'hsl(var(--accent))';
-                    e.currentTarget.style.boxShadow = '0 4px 15px hsl(var(--accent) / 0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'hsl(var(--accent) / 0.1)';
-                    e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
+                  className="icon-btn"
                 >
-                  <social.icon className="w-4 h-4" />
-                </motion.a>
+                  <social.icon className="h-4 w-4" />
+                </a>
               ))}
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right - Portrait */}
+          {/* ---------- Portrait ---------- */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            style={{ y: portraitY }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="order-1 lg:order-2 flex justify-center lg:justify-end"
+            transition={{ duration: 1.1, ease: EASE, delay: 0.25 }}
+            className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Glow behind portrait */}
-              <div
-                className="absolute inset-0 blur-3xl opacity-15 rounded-full scale-110"
-                style={{
-                  background: `radial-gradient(circle, hsl(var(--accent) / 0.5), transparent 70%)`,
-                }}
-              />
+              {/* Rotating ring behind the portrait */}
+              {!reduceMotion && (
+                <motion.div
+                  aria-hidden
+                  className="absolute -inset-8 rounded-full border border-dashed border-[hsl(var(--accent)/0.18)]"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
+                />
+              )}
 
-              {/* Portrait container */}
-              <motion.div
-                className="relative w-[280px] h-[340px] sm:w-[320px] sm:h-[400px] lg:w-[400px] lg:h-[500px]"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.4 }}
-              >
-                {/* Decorative border frame */}
+              <div className="relative w-[16rem] sm:w-[20rem] lg:w-[23rem] aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-[hsl(var(--border))]">
+                <Image
+                  src="/me.jpeg"
+                  alt="Abdullah Jutt - Full Stack Developer"
+                  fill
+                  sizes="(max-width: 640px) 16rem, (max-width: 1024px) 20rem, 23rem"
+                  className="object-cover"
+                  priority
+                />
                 <div
-                  className="absolute inset-0 rounded-2xl"
+                  aria-hidden
+                  className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, hsl(var(--accent) / 0.3), hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.3))`,
-                    padding: '2px',
+                    background:
+                      'linear-gradient(to top, hsl(var(--background) / 0.7) 0%, transparent 45%)',
                   }}
-                >
-                  <div
-                    className="w-full h-full rounded-2xl"
-                    style={{ background: 'hsl(var(--background))' }}
-                  />
-                </div>
+                />
+              </div>
 
-                {/* Image */}
-                <div className="absolute inset-[3px] rounded-2xl overflow-hidden">
-                  <Image
-                    src="/me.jpeg"
-                    alt="Abdullah Jutt - Full Stack Developer"
-                    fill
-                    className="object-cover"
-                    priority
+              {/* Floating accent dots */}
+              {!reduceMotion && (
+                <>
+                  <motion.span
+                    aria-hidden
+                    className="absolute -right-3 top-8 h-6 w-6 rounded-full bg-[hsl(var(--accent))] opacity-80"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
                   />
-                  {/* Bottom gradient overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, hsl(var(--background) / 0.6) 0%, transparent 40%)`,
+                  <motion.span
+                    aria-hidden
+                    className="absolute -left-2 bottom-14 h-3.5 w-3.5 rounded-full bg-[hsl(var(--primary))] opacity-70"
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{
+                      duration: 4.2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: 1,
                     }}
                   />
-                </div>
-
-                {/* Floating accent elements */}
-                <motion.div
-                  className="absolute -top-3 -right-3 w-6 h-6 sm:w-8 sm:h-8 rounded-full"
-                  style={{
-                    background: 'linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)))',
-                    opacity: 0.8,
-                  }}
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <motion.div
-                  className="absolute -bottom-2 -left-2 w-4 h-4 sm:w-5 sm:h-5 rounded-full"
-                  style={{
-                    background: 'hsl(var(--accent))',
-                    opacity: 0.5,
-                  }}
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                />
-
-
-              </motion.div>
+                </>
+              )}
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 sm:bottom-10"
+      <motion.button
+        type="button"
+        onClick={() => scrollToSection('#intro')}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.4 }}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
+        aria-label="Scroll to next section"
       >
-        <motion.div
-          className="flex flex-col items-center gap-2 cursor-pointer"
-          onClick={scrollToExpertise}
-          whileHover={{ y: -2 }}
-        >
-          <span
-            className="text-[10px] font-mono uppercase tracking-[0.2em]"
-            style={{ color: 'hsl(var(--muted-foreground) / 0.5)' }}
-          >
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
+        <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground/50">
+          Scroll
+        </span>
+        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-[hsl(var(--accent)/0.3)] pt-1.5">
+          <motion.span
+            className="h-1.5 w-1 rounded-full bg-[hsl(var(--accent))]"
+            animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-5 h-8 rounded-full flex items-start justify-center pt-1.5"
-            style={{ border: '1.5px solid hsl(var(--accent) / 0.3)' }}
-          >
-            <motion.div
-              className="w-1 h-1.5 rounded-full"
-              style={{ backgroundColor: 'hsl(var(--accent))' }}
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          />
+        </span>
+      </motion.button>
     </section>
   );
 };

@@ -1,13 +1,15 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Terminal } from 'lucide-react';
+import { Menu, X, Terminal } from 'lucide-react';
 import { NAV_ITEMS } from '@/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { scrollToSection } from '@/utils/scrollUtils';
+import { EASE } from './ui/Reveal';
+
+const pad = (n: number) => String(n + 1).padStart(2, '0');
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +20,18 @@ const Navigation = () => {
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const handleNavClick = (href: string) => {
     scrollToSection(href);
@@ -40,226 +48,161 @@ const Navigation = () => {
     setIsOpen(false);
   };
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <>
-      {/* Scroll Progress Bar */}
+      {/* Scroll progress */}
       <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]">
         <motion.div
-          className="h-full origin-left"
-          style={{
-            background:
-              'linear-gradient(90deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 50%, hsl(var(--accent)) 100%)',
-            scaleX: scrollProgress / 100,
-          }}
-          transition={{ type: 'spring', stiffness: 100, damping: 30 }}
+          className="h-full origin-left bg-[hsl(var(--accent))]"
+          style={{ scaleX: scrollProgress / 100 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 30 }}
         />
       </div>
 
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+      <motion.header
+        initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="fixed top-[2px] left-0 right-0 z-50 transition-all duration-500"
+        transition={{ duration: 0.7, ease: EASE }}
+        className="fixed top-[2px] left-0 right-0 z-50 transition-colors duration-500"
         style={{
-          background: scrolled
-            ? 'hsl(var(--background) / 0.85)'
-            : 'hsl(var(--background) / 0.4)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled
-            ? '1px solid hsl(var(--border) / 0.15)'
-            : '1px solid transparent',
+          background: scrolled ? 'hsl(var(--background) / 0.82)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(18px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(18px)' : 'none',
+          borderBottom: `1px solid ${
+            scrolled ? 'hsl(var(--border) / 0.6)' : 'transparent'
+          }`,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-18">
-            {/* Logo */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
+        <div className="shell">
+          <div className="flex h-16 sm:h-20 items-center justify-between">
+            {/* Wordmark */}
+            <button
+              type="button"
               onClick={() => handleNavClick('#home')}
-              className="font-mono font-bold text-base sm:text-lg"
-              style={{ color: 'hsl(var(--accent))' }}
+              className="font-mono text-sm sm:text-base font-medium tracking-tight text-foreground"
             >
-              <span className="hidden xs:inline">Abdullah</span>
-              <span className="xs:hidden">A</span>
-              <span style={{ color: 'hsl(var(--foreground))' }}>.Jutt</span>
+              <span className="text-[hsl(var(--accent))]">A</span>
+              <span className="hidden xs:inline">bdullah</span>
+              <span className="text-muted-foreground">.Jutt</span>
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 1.2, repeat: Infinity }}
-                style={{ color: 'hsl(var(--accent))' }}
+                transition={{ duration: 1.3, repeat: Infinity }}
+                className="text-[hsl(var(--accent))]"
               >
                 _
               </motion.span>
-            </motion.button>
+            </button>
 
-            {/* Desktop Navigation & Actions */}
-            <div className="hidden lg:flex items-center gap-3">
-              <nav
-                className="flex items-center gap-1"
-                role="navigation"
-                aria-label="Main navigation"
+            {/* Desktop nav — numbered section markers */}
+            <nav
+              className="hidden lg:flex items-center gap-1"
+              aria-label="Main navigation"
+            >
+              {NAV_ITEMS.map((item, index) => {
+                const isActive = activeSection === item.name;
+                return (
+                  <button
+                    key={item.name}
+                    type="button"
+                    onClick={() => handleNavClick(item.href)}
+                    aria-label={`Navigate to ${item.name} section`}
+                    className={`group relative rounded-full px-3 py-2 font-mono text-[0.7rem] tracking-[0.12em] transition-colors duration-300 ${
+                      isActive
+                        ? 'text-[hsl(var(--accent))]'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <span className="opacity-45 mr-1.5">{pad(index)}</span>
+                    <span className="opacity-45 mr-1">//</span>
+                    <span className="uppercase">{item.name}</span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="navPill"
+                        className="absolute inset-0 -z-10 rounded-full bg-[hsl(var(--accent)/0.1)] ring-1 ring-[hsl(var(--accent)/0.25)]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleReboot}
+                title="Replay System Boot Sequence"
+                aria-label="Replay System Boot Sequence"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-[hsl(var(--accent)/0.3)] bg-[hsl(var(--accent)/0.08)] px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[hsl(var(--accent))] transition-colors hover:bg-[hsl(var(--accent)/0.16)]"
               >
+                <Terminal className="h-3.5 w-3.5" />
+                Reboot
+              </button>
+
+              <button
+                type="button"
+                onClick={handleReboot}
+                aria-label="Replay System Boot Sequence"
+                className="sm:hidden icon-btn h-10 w-10 text-[hsl(var(--accent))]"
+              >
+                <Terminal className="h-4 w-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsOpen((v) => !v)}
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isOpen}
+                className="lg:hidden icon-btn h-10 w-10 text-foreground"
+              >
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile overlay menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden fixed inset-x-0 top-[calc(4rem+2px)] bottom-0 z-40 overflow-y-auto border-t border-[hsl(var(--border))] bg-[hsl(var(--background))]"
+            >
+              <nav className="shell py-8" aria-label="Mobile navigation">
                 {NAV_ITEMS.map((item, index) => {
                   const isActive = activeSection === item.name;
                   return (
                     <motion.button
                       key={item.name}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.08 }}
+                      type="button"
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: index * 0.04, ease: EASE }}
                       onClick={() => handleNavClick(item.href)}
-                      aria-label={`Navigate to ${item.name} section`}
-                      className="relative px-2 xl:px-3 py-2 rounded-lg text-sm font-mono transition-all duration-300"
-                      style={{
-                        color: isActive
-                          ? 'hsl(var(--accent))'
-                          : 'hsl(var(--muted-foreground))',
-                        backgroundColor: isActive
-                          ? 'hsl(var(--accent) / 0.08)'
-                          : 'transparent',
-                      }}
-                      whileHover={{ y: -1 }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.color = 'hsl(var(--foreground))';
-                          e.currentTarget.style.backgroundColor = 'hsl(var(--accent) / 0.04)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }
-                      }}
+                      className={`flex w-full items-baseline gap-4 border-b border-[hsl(var(--border))] py-5 text-left ${
+                        isActive ? 'text-[hsl(var(--accent))]' : 'text-foreground'
+                      }`}
                     >
-                      <span className="uppercase tracking-wide xl:tracking-wider text-[11px] xl:text-xs">
+                      <span className="font-mono text-[0.7rem] opacity-45">
+                        {pad(index)} //
+                      </span>
+                      <span className="wordmark text-3xl capitalize">
                         {item.name}
                       </span>
-
-                      {/* Active dot indicator */}
-                      {isActive && (
-                        <motion.div
-                          layoutId="navDot"
-                          className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                          style={{ backgroundColor: 'hsl(var(--accent))' }}
-                          initial={false}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 400,
-                            damping: 25,
-                          }}
-                        />
-                      )}
                     </motion.button>
                   );
                 })}
               </nav>
-
-              {/* Replay Boot Sequence Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleReboot}
-                title="Replay System Boot Sequence"
-                aria-label="Replay System Boot Sequence"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#4dd0d0]/30 bg-[#4dd0d0]/10 hover:bg-[#4dd0d0]/20 text-[#4dd0d0] text-xs font-mono transition-all ml-2 cursor-pointer"
-              >
-                <Terminal className="w-3.5 h-3.5" />
-                <span className="uppercase tracking-wider text-[11px]">Reboot</span>
-              </motion.button>
-            </div>
-
-            {/* Mobile menu button & Replay icon */}
-            <div className="lg:hidden flex items-center gap-2">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleReboot}
-                title="Replay System Boot Sequence"
-                aria-label="Replay System Boot Sequence"
-                className="w-10 h-10 rounded-xl flex items-center justify-center border border-[#4dd0d0]/30 bg-[#4dd0d0]/10 text-[#4dd0d0] transition-colors"
-              >
-                <Terminal className="h-4 w-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300"
-                style={{
-                  color: 'hsl(var(--foreground))',
-                  background: isOpen ? 'hsl(var(--accent) / 0.08)' : 'transparent',
-                  border: isOpen ? '1px solid hsl(var(--accent) / 0.15)' : '1px solid transparent',
-                }}
-              >
-                {isOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </motion.button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="lg:hidden overflow-hidden"
-              >
-                <div
-                  className="py-3 space-y-1 border-t"
-                  style={{ borderColor: 'hsl(var(--border) / 0.1)' }}
-                >
-                  {NAV_ITEMS.map((item, index) => {
-                    const isActive = activeSection === item.name;
-                    return (
-                      <motion.button
-                        key={item.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                        onClick={() => handleNavClick(item.href)}
-                        aria-label={`Navigate to ${item.name} section`}
-                        className="block w-full text-left px-4 py-3 rounded-xl text-sm font-mono transition-all duration-300"
-                        style={{
-                          color: isActive
-                            ? 'hsl(var(--accent))'
-                            : 'hsl(var(--muted-foreground))',
-                          backgroundColor: isActive
-                            ? 'hsl(var(--accent) / 0.08)'
-                            : 'transparent',
-                        }}
-                      >
-                        <div className="flex items-center gap-3">
-                          {isActive && (
-                            <div
-                              className="w-1.5 h-1.5 rounded-full"
-                              style={{ backgroundColor: 'hsl(var(--accent))' }}
-                            />
-                          )}
-                          <span className="uppercase tracking-wider text-xs">
-                            {item.name}
-                          </span>
-                        </div>
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
     </>
   );
 };
