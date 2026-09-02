@@ -1,63 +1,25 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
-import SiteNav from '@/components/site-nav';
-import SiteFooter from '@/components/site-footer';
+import { ThemeProvider } from '@/components/theme-provider';
+import Navigation from '@/components/navigation';
 import { StructuredData } from '@/components/StructuredData';
 import WhatsAppButton from '@/components/whatsapp-button';
 
-/* Self-hosted variable fonts — zero third-party requests, no layout shift */
-const fraunces = localFont({
-  src: [
-    {
-      path: '../fonts/fraunces-latin-opsz-normal.woff2',
-      style: 'normal',
-      weight: '100 900',
-    },
-    {
-      path: '../fonts/fraunces-latin-opsz-italic.woff2',
-      style: 'italic',
-      weight: '100 900',
-    },
-  ],
-  variable: '--font-fraunces',
-  display: 'swap',
-});
-
-const inter = localFont({
-  src: '../fonts/inter-latin-wght-normal.woff2',
-  style: 'normal',
-  weight: '100 900',
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const jetbrains = localFont({
-  src: '../fonts/jetbrains-mono-latin-wght-normal.woff2',
-  style: 'normal',
-  weight: '100 800',
-  variable: '--font-jetbrains',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://muhammadabdullahportfolio-khaki.vercel.app'),
-  title: {
-    default: 'Muhammad Abdullah — Full-Stack Engineer',
-    template: '%s — Muhammad Abdullah',
-  },
+  title: 'Muhammad Abdullah - Full Stack Engineer',
   description:
-    'Full-stack engineer building production web & mobile systems with React, Next.js, Node.js, and Spring Boot — with a security-first mindset. Based in Lahore, Pakistan.',
+    'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
   keywords: [
     'Full Stack Engineer',
     'React',
     'Next.js',
     'TypeScript',
     'Node.js',
-    'Spring Boot',
     'MongoDB',
-    'Ethical Hacking',
-    'Cybersecurity',
+    'Web Development',
+    'Frontend Developer',
+    'Backend Developer',
     'Software Engineer',
     'Portfolio',
     'Pakistan',
@@ -73,33 +35,29 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://muhammadabdullahportfolio-khaki.vercel.app',
-    title: 'Muhammad Abdullah — Full-Stack Engineer',
+    title: 'Muhammad Abdullah - Full Stack Engineer',
     description:
-      'Full-stack engineer building production web & mobile systems — with a security-first mindset.',
+      'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB. Building responsive, high-performance web applications.',
     siteName: 'Muhammad Abdullah Portfolio',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Muhammad Abdullah — Full-Stack Engineer',
+        alt: 'Muhammad Abdullah - Full Stack Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammad Abdullah — Full-Stack Engineer',
+    title: 'Muhammad Abdullah - Full Stack Engineer',
     description:
-      'Full-stack engineer building production systems with a security-first mindset.',
+      'Full Stack Engineer skilled in React.js, Next.js, TypeScript, Node.js, and MongoDB.',
     images: ['/og-image.jpg'],
   },
-};
-
-export const viewport = {
-  themeColor: '#110e08',
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
+  verification: {
+    google: 'your-google-verification-code',
+  },
 };
 
 export default function RootLayout({
@@ -108,21 +66,39 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* Display: Sora · Body: Inter · Mono: JetBrains Mono */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
         <StructuredData />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        <SiteNav />
-        <div className="content-frame">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navigation />
           <main role="main">{children}</main>
-          <SiteFooter />
-        </div>
-        <WhatsAppButton />
+          <WhatsAppButton />
+        </ThemeProvider>
       </body>
     </html>
   );
