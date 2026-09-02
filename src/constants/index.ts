@@ -26,15 +26,125 @@ import {
 import { SiFiverr, SiUpwork, SiFreelancer } from 'react-icons/si';
 
 export const NAV_ITEMS = [
-  { name: 'home', href: '#home' },
-  { name: 'intro', href: '#intro' },
-  { name: 'expertise', href: '#expertise' },
-  { name: 'work', href: '#work' },
-  { name: 'security', href: '#security' },
-  { name: 'experience', href: '#experience' },
-  { name: 'education', href: '#education' },
-  { name: 'certificates', href: '#certificates' },
-  { name: 'contact', href: '#contact' },
+  { name: 'Home', href: '/', index: '01' },
+  { name: 'Work', href: '/work', index: '02' },
+  { name: 'Security', href: '/security', index: '03' },
+  { name: 'Credentials', href: '/credentials', index: '04' },
+  { name: 'Contact', href: '/#contact', index: '05' },
+] as const;
+
+/* ============================================================
+   CASE STUDIES — problem → approach → outcome framing.
+   All facts sourced from the original site content; no invented
+   metrics, clients, or results.
+   ============================================================ */
+
+export type CaseStudy = {
+  title: string;
+  category: string;
+  image: string;
+  link: string;
+  outcome: string;
+  problem: string;
+  approach: string;
+  stack: readonly string[];
+  group: 'production' | 'lab';
+  selected?: boolean;
+};
+
+export const CASE_STUDIES: readonly CaseStudy[] = [
+  {
+    title: 'MedAlerto',
+    category: 'Healthcare SaaS',
+    image: '/p1.png',
+    link: 'https://medalerto.me/',
+    outcome: 'Live in production at medalerto.me',
+    problem:
+      'Healthcare workflows are slow and fragmented — missed follow-ups, forgotten patients, and chaotic doctor schedules.',
+    approach:
+      'A multi-entity platform with distinct patient and provider roles: REST API with JWT role-level access control, input-validation and structured error-handling middleware, deployed with Docker and isolated service boundaries on cloud infrastructure.',
+    stack: ['REST API', 'JWT · RBAC', 'Docker', 'Cloud'],
+    group: 'production',
+    selected: true,
+  },
+  {
+    title: 'Enterprise Banking System',
+    category: 'Full-Stack Finance',
+    image: '/p3.png',
+    link: 'https://enterpriselevelbankingsystem.vercel.app/login',
+    outcome: 'Deployed and publicly accessible',
+    problem:
+      'Banking software has zero tolerance for loose ends — accounts, transactions, and access all demand strict correctness.',
+    approach:
+      'An enterprise-style banking system built full-stack, with authenticated, login-gated flows from the first screen onward.',
+    stack: ['Full-Stack', 'Authentication', 'Finance'],
+    group: 'production',
+    selected: true,
+  },
+  {
+    title: 'HOMEIGO',
+    category: 'Real Estate Platform',
+    image: '/p2.png',
+    link: 'https://homeigo-fullstack-project-1.onrender.com/listings',
+    outcome: 'Live listings platform, deployed on Render',
+    problem:
+      'Real-estate browsing needs listings, detail views, and account flows working together in one place.',
+    approach:
+      'A MERN build — MongoDB, Express, React, Node — with authentication and a scalable backend behind the listings experience.',
+    stack: ['MongoDB', 'Express', 'React', 'Node.js'],
+    group: 'production',
+    selected: true,
+  },
+  {
+    title: 'Chatify',
+    category: 'Real-Time Messaging',
+    image: '/p5.png',
+    link: 'https://chatify-v8u2.onrender.com/login',
+    outcome: 'Deployed real-time messaging app',
+    problem: 'Chat is only useful if messages arrive the instant they are sent.',
+    approach:
+      'A full-stack real-time messaging application with account login and live message delivery.',
+    stack: ['Real-Time', 'Full-Stack', 'Auth'],
+    group: 'production',
+    selected: true,
+  },
+  {
+    title: 'Lazarev.agency Rebuild',
+    category: 'Front-End Craft',
+    image: '/p4.png',
+    link: 'https://beamish-cajeta-b009d1.netlify.app/',
+    outcome: 'Front-end rebuild, live on Netlify',
+    problem:
+      'Award-level agency sites live or die on motion, layout precision, and detail.',
+    approach:
+      'Recreated the Lazarev.agency experience front-end — layout, interactions, and scroll-driven motion.',
+    stack: ['Front-End', 'Animation'],
+    group: 'lab',
+  },
+  {
+    title: 'Sudoku',
+    category: 'Puzzle Game',
+    image: '/p6.png',
+    link: 'https://sudukoreact.vercel.app/',
+    outcome: 'Playable in the browser',
+    problem: 'Sudoku is pure logic — a clean fit for algorithmic thinking inside a UI.',
+    approach:
+      'An interactive Sudoku game built with React — board state, validation, and gameplay handled client-side.',
+    stack: ['React', 'Game Logic'],
+    group: 'lab',
+  },
+  {
+    title: 'Chess',
+    category: 'Strategy Game',
+    image: '/p7.png',
+    link: 'https://github.com/Abdullah-JUTT-cloud/Chess_java',
+    outcome: 'Open-source on GitHub',
+    problem:
+      'Chess is the classic object-oriented design exercise: pieces, rules, and board state.',
+    approach: 'A chess game implemented in Java with an object-oriented design.',
+    stack: ['Java', 'OOP'],
+    group: 'lab',
+  },
 ] as const;
 
 
